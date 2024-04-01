@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
       initialBinding: MyBinding(),
       theme: ThemeData(
         scaffoldBackgroundColor: TColors.background,
-        cardTheme: CardTheme(
-          color: TColors.background
-        ),
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: RouteHelper.getLandingPage(),

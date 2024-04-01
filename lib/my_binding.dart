@@ -1,9 +1,11 @@
-import 'package:get/get_instance/src/bindings_interface.dart';
+import 'package:get/get.dart';
+
+
+import 'controllers/home_controller.dart';
 
 class MyBinding extends Bindings {
   @override
   void dependencies() {
-    // Bind your controller
-
+     Get.put(HomeController());
   }
 }

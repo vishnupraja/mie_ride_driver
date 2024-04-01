@@ -91,7 +91,7 @@ class _LandingPageState extends State<LandingPage> {
               padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
               child: InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (builder) => BottomNavigationBarWithCards()));
+                  Get.toNamed(RouteHelper.getBottomPage());
                 },
                 child: Card(
                   elevation: 2,
