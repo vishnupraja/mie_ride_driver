@@ -30,7 +30,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 50,),
               customAppbar(TTexts.AccountText),
@@ -47,19 +47,21 @@ class _SignupScreen2State extends State<SignupScreen2> {
                   Text(TTexts.createAccount,
                     style: FontsFamily.ExtraBold.copyWith(
                         color: TColors.textPrimary,
-                        fontSize: 15
+                        fontSize: 15,
+                        letterSpacing: 2
                     ),
                   ),
                   SizedBox(height: 20,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10.0),
-                    child: Card(
-                      elevation: 5,
-                      color: TColors.textWhite,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),
-                          side: BorderSide(
-                              color: Colors.black.withOpacity(0.1)
-                          ),),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15.0),
+                      decoration: BoxDecoration(
+
+                          color: TColors.background,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow:TWidget.boxShadow
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
                         child: Column(
@@ -72,20 +74,10 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             ),
                             SizedBox(height: 20,),
                             Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 0.1,
-                                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                                    )],
-                                  color: TColors.background
-                              ),
+                              decoration: TWidget.bBoxDecoration,
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
+                                  padding: EdgeInsets.symmetric( horizontal: 20),
                                   dropdownColor: TColors.white,
                                   hint: Padding(
                                     padding: const EdgeInsets.only(left: 10),
@@ -132,8 +124,8 @@ class _SignupScreen2State extends State<SignupScreen2> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Card(
-                                  elevation: 2,
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
                                   child: Container(
                                     width: Get.width/1.7,
                                     child: Padding(
@@ -163,8 +155,8 @@ class _SignupScreen2State extends State<SignupScreen2> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Card(
-                                  elevation: 2,
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
                                   child: Container(
                                     width: Get.width/1.7,
                                     child: Padding(
@@ -194,8 +186,8 @@ class _SignupScreen2State extends State<SignupScreen2> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Card(
-                                  elevation: 2,
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
                                   child: Container(
                                     width: Get.width/1.7,
                                     child: Padding(

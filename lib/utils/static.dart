@@ -28,16 +28,51 @@ Widget customAppbar(String text){
             ),
           ),
         ),
-        SizedBox(width: Get.width/4.4,),
-        Text(text,
-          style: FontsFamily.ExtraBold.copyWith(
-              color: TColors.textPrimary,
-              fontSize: 20
+        Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(text,
+              style: FontsFamily.ExtraBold.copyWith(
+                  color: TColors.textPrimary,
+                  fontSize: 25,
+                letterSpacing: 5
+              ),
+            ),
           ),
         ),
       ],
     );
     }
+
+Widget customContainer(String text,String image,VoidCallback callback){
+  return InkWell(
+    onTap: (){
+     callback();
+    },
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      height: 50,
+      decoration: TWidget.bShadow,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(text,
+              style: FontsFamily.ExtraBold.copyWith(
+                  color: TColors.textPrimary,
+                  fontSize: TSizes.fontSizeMd,
+                  letterSpacing: 1
+              ),
+            ),
+            Image.asset(image,height: TSizes.iconMd,width: TSizes.iconMd,)
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 
 class CustomField extends StatelessWidget {
@@ -64,19 +99,7 @@ class CustomField extends StatelessWidget {
         width: context.width,
         padding: const EdgeInsets.only(left: 10),
         margin: const EdgeInsets.only(top: 5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              10,
-            ),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: 8,
-                color: Color.fromRGBO(0, 0, 0, 0.16),
-              )],
-          color: TColors.background
-        ),
+        decoration: TWidget.bBoxDecoration,
         child: TextFormField(
           controller: textEditingController,
           obscureText: ishide,
@@ -101,13 +124,13 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
     onTap: (){
       callback();
     },
-    child: Card(
-      elevation: 3,
+    child: Container(
+      decoration: TWidget.bBoxDecoration,
       child: Container(
         width: Get.width/2,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -117,7 +140,7 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
                   color: TColors.textPrimary
                 ),
                 ),
-               Image.asset(image,height: 20,width: 20,)
+               Image.asset(image,height: 25,width: 25,)
               ],
             ),
           ),
@@ -154,5 +177,99 @@ void clearData()async{
     SharedPreferences sp = await SharedPreferences.getInstance();
   await sp.clear();
 }
+
+}
+
+class TWidget{
+
+  static final   boxShadow=[ BoxShadow(
+    color: Colors.black.withOpacity(0.3),
+    blurRadius: 10.0,
+  ),];
+// border side
+
+  static final borderSide=BorderSide(
+    color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+    width: 10, // Adjust border width
+  );
+
+  static final borderRadiusOnly=BorderRadius.only(
+      bottomLeft: Radius.circular(TSizes.borderRadiusLg),
+      bottomRight: Radius.circular(TSizes.borderRadiusLg),
+      topRight: Radius.circular(TSizes.borderRadiusLg),
+      topLeft: Radius.circular(TSizes.borderRadiusLg),
+
+  );
+
+  static final borderRadius=Radius.circular(TSizes.borderRadiusLg);
+
+
+  static final boxDecoration=BoxDecoration(
+      color: TColors.background,
+      borderRadius: TWidget.borderRadiusOnly,
+      border: Border(
+          bottom: TWidget.borderSide,
+          left: TWidget.borderSide,
+          right: TWidget.borderSide,
+          top: TWidget.borderSide
+      ),
+      boxShadow:TWidget.boxShadow
+  );
+
+
+  static final bBoxDecoration=BoxDecoration(
+      color: TColors.background,
+      borderRadius: BorderRadius.circular(50),
+      border: Border(
+          top: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          bottom: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          left: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          right: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          )
+      ),
+      boxShadow:[ BoxShadow(
+        color: Colors.black.withOpacity(0.3),
+        blurRadius: 5.0,
+      ),]
+  );
+
+  static final bShadow = BoxDecoration(
+      color: TColors.background,
+      borderRadius: BorderRadius.circular(20),
+      border: Border(
+          top: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          bottom: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          left: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          ),
+          right: BorderSide(
+            color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+            width: 1, // Adjust border width
+          )
+      ),
+      boxShadow:[ BoxShadow(
+        color: Colors.black.withOpacity(0.3),
+        blurRadius: 5.0,
+      ),]
+  );
+
 
 }

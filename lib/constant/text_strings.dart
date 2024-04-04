@@ -9,23 +9,13 @@ class TTexts {
   static const String createAccount = "CREATE NEW ACCOUNT";
   static const String createAccountSmallText = "Create new account";
   static const String loginText = "Login account";
-  static const String Currency = "CAD";
+  static const String Currency = "\$";
+  static const String CurrencyCanada = "\$CAD";
   static const String countryCode = "US";
 
 
 
-  // -- OnBoarding Texts
-  static const String onBoardingTitle1 = "Choose your product";
-  static const String onBoardingTitle2 = "Select Payment Method";
-  static const String onBoardingTitle3 = "Deliver at your door step";
-
-
-  static const String onBoardingSubTitle1 = "Welcome to a World of Limitless Choices - Your Perfect Product Awaits!";
-  static const String onBoardingSubTitle2 = "For Seamless Transactions, Choose Your Payment Path - Your Convenience, Our Priority!";
-  static const String onBoardingSubTitle3 = "From Our Doorstep to Yours - Swift, Secure, and Contactless Delivery!";
-
-
-  // -- Authentication Forms
+  // -- Signup Forms
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String email = "Enter email address";
@@ -37,7 +27,9 @@ class TTexts {
   static const String selectVehicleText = "Select vehicle";
   static const String drivingLicenceText = "Driving licence";
   static const String signupButton2Text = "Sign up";
+  static const String loginButtonText = "Login account";
   static const String signupPrivacyText = "By Continuing, You Agree To The \n Terms & Conditions Of The MieRide app";
+
 
 
   static const String appName = "MIE RIDE";
@@ -45,34 +37,85 @@ class TTexts {
   static const String earningText = "Ready to turn miles into monev?\nLog in now and start earning!";
 
 
-
-  static const String newPassword = "New Password";
-  static const String resetPassword = "RESET PASSWORD";
-  static const String reMemberPassword = "Remembered your password?";
-  static const String username = "Username";
-  static const String rememberMe = "Remember Me";
-  static const String forgetPassword = "Forgot Password?";
-  static const String signIn = "Sign In";
+  //====================bottombar text --------------------
 
 
-  static String USER_NAME = "USER_NAME";
-  static String USER_EMAIL = "USER_EMAIL";
-  static String MOBILE_NUMBER = "MOBILE_NUMBER";
-  static String USER_LASTNAME = "USER_LASTNAME";
-  static String USER_IMAGE = "USER_IMAGE";
-  static String USER_BIRTH = "USER_BIRTH";
-  static String USER_LOCATION = "USER_LOCATION";
-  static String USER_CITY = "USER_CITY";
-  static String USER_COUNTRY = "USER_COUNTRY";
-  static String USER_COUNTRY_CODE = "USER_COUNTRY_CODE";
-  static String USER_COUNTRY_FLAG = "USER_COUNTRY_FLAG";
+  static const String Home = "Home";
+  static const String wallet = "Wallet";
+  static const String booking = "My Booking";
+  static const String notification = "Notification";
+  static const String account = "Account";
+
+
+  //====================homescreen text --------------------
+
+  static const String RevenueText = "Today's\nRevenue";
+  static const String DRattingText = "Driver\nRating";
+  static const String RouteText = "Share Route";
+  static const String AvailabilityText = "Share\nAvailability";
+  static const String adText = "place ad here";
+
+//====================accountScreen text --------------------
+
+  static const String ProfileText = "Profile";
+  static const String MyRidesText = "My Rides";
+  static const String SpreadText = "Spread the word";
+  static const String ExclusiveText = "Exclusive Deals Zone";
+  static const String NewsfeedText = "News feed";
+  static const String SupportServicesText = "Support Services";
+  static const String RideSupportText = "Ride Support Chat";
+  static const String SignOutText = "Sign Out";
+
+
+  //====================accountScreen text --------------------
+
+  static const String WalletText = "Wallet";
+  static const String TotalBalanceText = "Total Balance";
+  static const String AccountDetailsText = "Account details";
+  static const String HistoryText = "Account details";
+  static const String SubmitText = "Submit";
 
 
 
+  //====================bookingScreen text --------------------
+
+  static const String IDText = "ID";
+  static const String RideTypeText = "Ride Type";
+  static const String FinalCostText = "Final Cost";
+  static const String RideStartTimeText = "Ride start time";
+  static const String PickupText = "Pickup";
+  static const String aPickupText = "4258 brampton";
+  static const String DropOffText = "Drop off";
+  static const String aDropOffText = "4258 brampton";
+  static const String BPickupText = "Pickup Start";
+  static const String BookingsText = "Bookings";
+
+//====================notificationScreen text --------------------
+
+  static const String notificationText = "Notifications";
+  static const String   RideCompleteText = "Ride complete";
+  static const String   sRideCompleteText = "Booking #12 has been successfully complete";
+  static const String   startRideText = "Driver started ride";
+  static const String   arriveText = "Driver is arriving";
+  static const String   BookingAcceptedText = "Booking accepted";
 
 
+  static const String   totalRideText = "Total Rides";
+  static const String   EarningText = "Earnings";
+  static const String   CompletedText = "Completed";
 
 
+  //====================shareRouteScreen text --------------------
+
+
+  static const String   ShareRouteText = "Share route";
+  static const String   StartPointText = "Start point";
+  static const String   EndPointText = "End point";
+  static const String   StartTimeText = "Start time";
+  static const String   ReachTimeText = "Reach time";
+  static const String   SelectTimeText = "Select time";
+  static const String   SelectDateText = "Select date";
+  static const String   SeatsAvailableText = "Seats available";
 
 }
 

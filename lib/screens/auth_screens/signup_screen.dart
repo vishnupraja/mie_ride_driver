@@ -55,23 +55,25 @@ class _SignupScreenState extends State<SignupScreen> {
                   Text(TTexts.createAccount,
                     style: FontsFamily.ExtraBold.copyWith(
                         color: TColors.textPrimary,
-                        fontSize: 15
+                        fontSize: 18,
+                      letterSpacing: 2
                     ),
                   ),
                   SizedBox(height: 20,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 10.0),
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          side: BorderSide(
-                              color: Colors.black.withOpacity(0.1)
-                          ),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15.0),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15.0),
+                     decoration: BoxDecoration(
+
+                         color: TColors.background,
+                         borderRadius: BorderRadius.circular(15),
+                         boxShadow:TWidget.boxShadow
+                     ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomField(
                               hintText: TTexts.firstName,
@@ -92,16 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 width: context.width,
                                 margin: EdgeInsets.only(top: 5),
                                 padding: EdgeInsets.only(left: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: TColors.background,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 0.1,
-                                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                                    )],
-                                ),
+                                decoration: TWidget.bBoxDecoration,
                                 child: Center(
                                   child: IntlPhoneField(
                                     controller: phoneCtr,
@@ -170,13 +163,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20,),
+                            SizedBox(height: 25,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Card(
-                                  elevation: 2,
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                     child: Center(
@@ -208,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 40),
                 child: CustomButton(TTexts.signupButton1Text,BUTTON_IMAGE, () {
                   Get.toNamed(RouteHelper.getSignupPage2());
                 }),

@@ -9,6 +9,7 @@ import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
+import '../../route_helper/Route_Helper.dart';
 import '../../utils/static.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,11 +38,8 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Card(
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
+            Container(
+              decoration: TWidget.boxDecoration,
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Image.asset(LANDING_IMAGE,height: height/3,width: width/1.7 ,),
@@ -76,17 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: context.width,
                 margin: EdgeInsets.only(top: 5),
                 padding: EdgeInsets.only(left: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color:  TColors.background,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 10,
-                      spreadRadius: 8,
-                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                    )],
-                ),
+                decoration: TWidget.bBoxDecoration,
                 child: Center(
                   child: IntlPhoneField(
                     controller: phoneCtr,
@@ -152,16 +140,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(color: TColors.textPrimary),
+            Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Forgot Password",
+                    style: TextStyle(color: TColors.textPrimary),
+                  ),
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 40),
+              child: CustomButton(TTexts.loginButtonText,BUTTON_IMAGE, () {
+                Get.offNamed(RouteHelper.getBottomPage());
+              }),
+            )
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:mie_ride_driver/constant/colors.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/constant/sizes.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
+import 'package:mie_ride_driver/utils/static.dart';
 
 
 import '../../constant/image_string/image_string.dart';
@@ -28,14 +29,8 @@ class _LandingPageState extends State<LandingPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Card(
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(
-                  color: Colors.black.withOpacity(0.1)
-                )
-              ),
+            Container(
+              decoration: TWidget.boxDecoration,
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Image.asset(LANDING_IMAGE,height: height/3,width: width/1.7 ,),
@@ -63,22 +58,22 @@ class _LandingPageState extends State<LandingPage> {
               ) ,
             ),
             SizedBox(height: 20,),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: InkWell(
                 onTap: (){
                   Get.toNamed(RouteHelper.getSignupPage());
                 },
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child: Container(
+                  decoration: TWidget.bBoxDecoration,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Center(
                       child: Text(TTexts.createAccountSmallText,
                         style:FontsFamily.ExtraBold.copyWith(
                           color: TColors.textPrimary,
-                          fontSize: TSizes.fontSizeSm,
+                          fontSize: TSizes.fontSizeLg,
                         ) ,
                       ),
                     ),
@@ -93,16 +88,15 @@ class _LandingPageState extends State<LandingPage> {
                 onTap: (){
                   Get.toNamed(RouteHelper.getBottomPage());
                 },
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child: Container(
+                  decoration: TWidget.bBoxDecoration,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Center(
                       child: Text(TTexts.loginText,
                         style:FontsFamily.ExtraBold.copyWith(
                           color: TColors.textPrimary,
-                          fontSize: TSizes.fontSizeSm,
+                          fontSize: TSizes.fontSizeLg,
                         ) ,
                       ),
                     ),
