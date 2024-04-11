@@ -132,25 +132,30 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: Get.height/4,
                       width: Get.width/2.5,
-                      decoration: TWidget.bShadow,
+                      decoration: TWidget.bBoxDecoration,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 70,
-                            width: 70,
-                            decoration: BoxDecoration(
-                                color: TColors.background,
-                                borderRadius: TWidget.borderRadiusOnly,
-                                border: Border.all(
-                                    color: TColors.buttonPrimary,
-                                    width: 5
-                                ),
-                                boxShadow:TWidget.boxShadow
-                            ),
-                            child: Center(
-                              child: Icon(Icons.check_circle,color: TColors.buttonPrimary,),
+                          InkWell(
+                            onTap:(){
+                              Get.toNamed(RouteHelper.getShareAvailabilityPage());
+                            },
+                            child: Container(
+                              height: 70,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                  color: TColors.background,
+                                  borderRadius: TWidget.borderRadiusOnly,
+                                  border: Border.all(
+                                      color: TColors.buttonPrimary,
+                                      width: 5
+                                  ),
+                                  boxShadow:TWidget.boxShadow
+                              ),
+                              child: Center(
+                                child: Icon(Icons.check_circle,color: TColors.buttonPrimary,),
+                              ),
                             ),
                           ),
                           SizedBox(height:TSizes.sm,),

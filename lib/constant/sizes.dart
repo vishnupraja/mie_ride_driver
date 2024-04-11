@@ -15,8 +15,9 @@ class TSizes {
 
   // Font sizes
   static const double fontSizeSm = 10.0;
-  static const double fontSizeMd = 16.0;
+  static const double fontSizeMd = 15.0;
   static const double fontSizeLg = 18.0;
+  static const double fontSizeELg = 20.0;
 
   // Button sizes
   static const double buttonHeight = 18.0;

@@ -22,7 +22,7 @@ class TTexts {
   static const String phoneNo = "Enter Mobile Number";
   static const String password = "Enter Password";
   static const String profilePhotoText = "Upload profile photo";
-  static const String signupButton1Text = "Move to next";
+  static const String signupButton1Text = "Move to next step";
   static const String vehicleNumberText = "Enter vehicle number";
   static const String selectVehicleText = "Select vehicle";
   static const String drivingLicenceText = "Driving licence";
@@ -61,6 +61,7 @@ class TTexts {
   static const String MyRidesText = "My Rides";
   static const String SpreadText = "Spread the word";
   static const String ExclusiveText = "Exclusive Deals Zone";
+  static const String DealsZoneText = "Exclusive Deals\n Zone";
   static const String NewsfeedText = "News feed";
   static const String SupportServicesText = "Support Services";
   static const String RideSupportText = "Ride Support Chat";
@@ -72,7 +73,7 @@ class TTexts {
   static const String WalletText = "Wallet";
   static const String TotalBalanceText = "Total Balance";
   static const String AccountDetailsText = "Account details";
-  static const String HistoryText = "Account details";
+  static const String HistoryText = "History";
   static const String SubmitText = "Submit";
 
 
@@ -116,6 +117,54 @@ class TTexts {
   static const String   SelectTimeText = "Select time";
   static const String   SelectDateText = "Select date";
   static const String   SeatsAvailableText = "Seats available";
+
+//====================shareAvailabilityScreen text --------------------
+
+  static const String   ShareAvailabilityText = "Share\navailability";
+  static const String   FromText = "From";
+  static const String   ToText = "TO";
+  static const String   SelectStartCityText = "Select start city";
+  static const String   SelectDropCityText = "Select drop city";
+
+
+//====================accountDetailsScreen text --------------------
+
+
+  static const String   InteractEText = "InteractE-Transfer";
+  static const String   DirectDepositText = "Direct Deposit Details";
+  static const String   BankNameText = "Bank name";
+  static const String   TransitNumberText = "Transit number";
+  static const String   InstitutionNumberText = "Institution number";
+  static const String   UploadDirectDepositText = "Upload Direct Deposit Form";
+  static const String   SaveChangesText = "Save changes";
+
+//====================profileScreen text --------------------
+
+  static const String   PersonalText = "Personal";
+  static const String   CarDetailsText = "Car details";
+  static const String   oldPassText = "Enter old Password";
+  static const String   newPassText = "Enter new Password";
+  static const String   rNewPassText = "Re-enter Password";
+
+  //====================SpreadScreen text --------------------
+
+  static const String   ExpandText = "Expand the circle\nof connection!";
+  static const String   inviteText = "Share our personalized invite link\nand bring your friends on board\nto join the community";
+  static const String   linkText = "HTTPS://PORTAL.MIERIDE.CA/AP/INVITe U.PHP";
+  static const String   bInviteText = "Invite";
+
+
+  //====================SupportScreen text --------------------
+
+  static const String   ContactFormText = "Contact form";
+  static const String   FAQText = "FAQ";
+  static const String   TermsConditionsText = "Terms and conditions";
+  static const String   PrivacyText = "Privacy terms";
+  static const String   DeleteAccountText = "Delete account";
+  static const String   ContactSupportText = "Contact support";
+  static const String   WriteSupportText = "Write support";
+  static const String   AddMessageText = "Add message";
+  static const String   SendMessageText = "Send message";
 
 }
 

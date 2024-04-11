@@ -39,19 +39,20 @@ class _SignupScreenState extends State<SignupScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 30,),
               customAppbar(TTexts.AccountText),
               Column(
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                   Text(TTexts.STEPText,
-                    style: FontsFamily.Extralight.copyWith(
+                    style: FontsFamily.ExtraBold.copyWith(
                         color: TColors.textPrimary,
-                        fontSize: 20
+                        fontSize: 15
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                   Text(TTexts.createAccount,
                     style: FontsFamily.ExtraBold.copyWith(
                         color: TColors.textPrimary,
@@ -59,11 +60,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       letterSpacing: 2
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15.0),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
                      decoration: BoxDecoration(
 
                          color: TColors.background,
@@ -97,16 +98,18 @@ class _SignupScreenState extends State<SignupScreen> {
                                 decoration: TWidget.bBoxDecoration,
                                 child: Center(
                                   child: IntlPhoneField(
+                                    flagsButtonMargin: EdgeInsets.only(top: 3.0),
                                     controller: phoneCtr,
                                     textInputAction: TextInputAction.next,
                                     showDropdownIcon: false,
                                     autovalidateMode: AutovalidateMode.disabled,
                                     /*disableLengthCheck: true,*/
                                     initialCountryCode: TTexts.countryCode,
-                                    decoration: const InputDecoration(
+                                    decoration:  InputDecoration(
                                         counterText: "",
                                         hintStyle:
-                                        TextStyle(color: TColors.textSecondary, fontSize: 12),
+                                        FontsFamily.ExtraBold.copyWith(
+                                            color: TColors.textSecondary, fontSize: 15),
                                         hintText: TTexts.phoneNo,
                                         focusedBorder: InputBorder.none,
                                         border: InputBorder.none,
@@ -165,8 +168,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             SizedBox(height: 25,),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   decoration: TWidget.bBoxDecoration,
@@ -188,8 +191,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                     borderRadius: BorderRadius.circular(30)
                                   ),
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                      child: Image.asset(USER_IMAGE,height: 50,))
+                                    borderRadius: BorderRadius.circular(50),
+                                      child: Image.asset(USER_IMAGE,height: 50,width: 50,fit: BoxFit.cover,))
                                 ),
                               ],
                             ),
@@ -200,11 +203,14 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 40),
-                child: CustomButton(TTexts.signupButton1Text,BUTTON_IMAGE, () {
-                  Get.toNamed(RouteHelper.getSignupPage2());
-                }),
+              Container(
+                margin: EdgeInsets.symmetric(vertical:10),
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                child: Center(
+                  child: CustomButton(TTexts.signupButton1Text,BUTTON_IMAGE, () {
+                    Get.toNamed(RouteHelper.getSignupPage2());
+                  }),
+                ),
               )
             ],
           ),

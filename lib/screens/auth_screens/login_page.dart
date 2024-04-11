@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     var width = Get.width;
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 80),
+        padding: EdgeInsets.only(top: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -42,10 +42,10 @@ class _LoginPageState extends State<LoginPage> {
               decoration: TWidget.boxDecoration,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Image.asset(LANDING_IMAGE,height: height/3,width: width/1.7 ,),
+                child: Image.asset(LANDING_IMAGE,height: height/4,width: width/2.0 ,),
               ),
             ),
-            SizedBox(height: 30.0,),
+            SizedBox(height: 20.0,),
             Text("MIE RIDE",
               style:FontsFamily.bropames.copyWith(
                 color: TColors.textPrimary,
@@ -77,16 +77,17 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: TWidget.bBoxDecoration,
                 child: Center(
                   child: IntlPhoneField(
+                    flagsButtonMargin: EdgeInsets.only(top: 3.0),
                     controller: phoneCtr,
                     textInputAction: TextInputAction.next,
                     showDropdownIcon: false,
                     autovalidateMode: AutovalidateMode.disabled,
                     /*disableLengthCheck: true,*/
                     initialCountryCode: TTexts.countryCode,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                         counterText: "",
                         hintStyle:
-                        TextStyle(color: TColors.textSecondary, fontSize: 12),
+                        FontsFamily.ExtraBold.copyWith(color: TColors.textSecondary, fontSize: 15),
                         hintText: TTexts.phoneNo,
                         focusedBorder: InputBorder.none,
                         border: InputBorder.none,
@@ -116,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 35,vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 35,),
               child: CustomField(
                 hintText: TTexts.password,
                 textInputType: TextInputType.visiblePassword,
@@ -154,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
               child: CustomButton(TTexts.loginButtonText,BUTTON_IMAGE, () {
                 Get.offNamed(RouteHelper.getBottomPage());
               }),

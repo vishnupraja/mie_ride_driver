@@ -29,19 +29,19 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               width: Get.width,
-              decoration: TWidget.bShadow,
+              decoration: TWidget.bBoxDecoration,
               child: Column(
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.bBoxDecoration,
                     child: Row(
                       children: [
                         Text(TTexts.StartPointText,
                           style: FontsFamily.ExtraBold.copyWith(
                               color: TColors.textSecondary,
-                              fontSize: TSizes.fontSizeSm
+                              fontSize: TSizes.fontSizeMd
                           ),),
                         SizedBox(width: 20,),
                         Expanded(
@@ -59,13 +59,13 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.bBoxDecoration,
                     child: Row(
                       children: [
                         Text(TTexts.EndPointText,
                           style: FontsFamily.ExtraBold.copyWith(
                               color: TColors.textSecondary,
-                              fontSize: TSizes.fontSizeSm
+                              fontSize: TSizes.fontSizeMd
                           ),),
                         SizedBox(width: 20,),
                         Expanded(
@@ -85,7 +85,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.symmetric(vertical: 20),
               width: Get.width,
-              decoration: TWidget.bShadow,
+              decoration: TWidget.bBoxDecoration,
               child: Column(
                 children: [
                   Padding(
@@ -95,12 +95,12 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                         Container(
                           height: 40,
                           width: 120,
-                          decoration: TWidget.bShadow,
+                          decoration: TWidget.bBoxDecoration,
                           child: Center(
                             child: Text(TTexts.StartTimeText,
                               style: FontsFamily.ExtraBold.copyWith(
                                   color: TColors.textPrimary,
-                                  fontSize: TSizes.fontSizeSm
+                                  fontSize: TSizes.fontSizeMd
                               ),),
                           ),
                         ),
@@ -111,12 +111,12 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                             child: Container(
                               height: 40,
                               width: 120,
-                              decoration: TWidget.bShadow,
+                              decoration: TWidget.bBoxDecoration,
                               child: Center(
                                 child: Text(TTexts.ReachTimeText,
                                   style: FontsFamily.ExtraBold.copyWith(
                                       color: TColors.textPrimary,
-                                      fontSize: TSizes.fontSizeSm
+                                      fontSize: TSizes.fontSizeMd
                                   ),),
                               ),
                             ),
@@ -129,13 +129,13 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.bBoxDecoration,
                     child: Row(
                       children: [
                         Text(TTexts.SelectTimeText,
                           style: FontsFamily.ExtraBold.copyWith(
                               color: TColors.textSecondary,
-                              fontSize: TSizes.fontSizeSm
+                              fontSize: TSizes.fontSizeMd
                           ),),
                         SizedBox(width: 20,),
                         Expanded(
@@ -153,13 +153,13 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.bBoxDecoration,
                     child: Row(
                       children: [
                         Text(TTexts.SelectDateText,
                           style: FontsFamily.ExtraBold.copyWith(
                               color: TColors.textSecondary,
-                              fontSize: TSizes.fontSizeSm
+                              fontSize: TSizes.fontSizeMd
                           ),),
                         SizedBox(width: 20,),
                         Expanded(
@@ -181,16 +181,16 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                  decoration: TWidget.bShadow,
+                  decoration: TWidget.bBoxDecoration,
                   child: Center(
                     child: Text(TTexts.SeatsAvailableText,
                       style: FontsFamily.ExtraBold.copyWith(
                           color: TColors.textPrimary,
-                          fontSize: TSizes.fontSizeSm
+                          fontSize: TSizes.fontSizeMd
                       ),),
                   ),
                 ),
-                SizedBox(width: 50,),
+                SizedBox(width: 20,),
                Row(
                  children: [
                    InkWell(
@@ -201,7 +201,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                        margin: EdgeInsets.only(left: 10,right: 20),
                        height: 40,
                        width: 40,
-                       decoration: TWidget.bShadow,
+                       decoration: TWidget.bBoxDecoration,
                        child: Center(
                          child: Icon(
                            Icons.remove, color: TColors.textPrimary, size: 15,),
@@ -211,7 +211,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                    Container(
                      height: 40,
                      width: 40,
-                     decoration: TWidget.bShadow,
+                     decoration: TWidget.bBoxDecoration,
                      child: Center(
                        child: Obx(() {
                          return Text(Get
@@ -233,7 +233,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                        margin: EdgeInsets.only(left: 20,right: 10),
                        height: 40,
                        width: 40,
-                       decoration: TWidget.bShadow,
+                       decoration: TWidget.bBoxDecoration,
                        child: Center(
                          child: Icon(
                            Icons.add, color: TColors.textPrimary, size: 15,),

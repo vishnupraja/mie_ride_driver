@@ -86,7 +86,7 @@ class _LandingPageState extends State<LandingPage> {
               padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
               child: InkWell(
                 onTap: (){
-                  Get.toNamed(RouteHelper.getBottomPage());
+                  Get.toNamed(RouteHelper.getLoginPage());
                 },
                 child: Container(
                   decoration: TWidget.bBoxDecoration,

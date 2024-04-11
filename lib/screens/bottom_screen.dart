@@ -4,7 +4,7 @@ import 'package:mie_ride_driver/constant/text_strings.dart';
 import 'package:mie_ride_driver/controllers/home_controller.dart';
 import 'package:mie_ride_driver/screens/home_screens/account_tab_screen.dart';
 import 'package:mie_ride_driver/screens/home_screens/home_page.dart';
-import 'package:mie_ride_driver/screens/home_screens/wallet_screen.dart';
+import 'package:mie_ride_driver/screens/wallet_screen/wallet_screen.dart';
 import 'package:mie_ride_driver/utils/static.dart';
 import '../constant/colors.dart';
 import '../constant/font_family.dart';
@@ -39,16 +39,17 @@ class _BottomNavigationBarWithCardsState
       return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: TColors.background,
-          body: _pages[controller.selectedIndex.value],
+          body: HomePage(),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: Container(
             height: 80,
             width: 80,
             child: FloatingActionButton(child: Image.asset(
               LANDING_IMAGE,height: 40,width: 40,
-              color: controller.selectedIndex.value != 2?TColors.buttonPrimary:null,
+              color: TColors.buttonPrimary,
             ), onPressed: () {
-              controller.selectedIndex.value = 2;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BookingScreen()));
+
             },shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
               side: BorderSide(
@@ -101,7 +102,7 @@ class _BottomNavigationBarWithCardsState
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              controller.selectedIndex.value = 0;
+                              /*controller.selectedIndex.value = 0;*/
                             },
                             child: Column(
                               children: [
@@ -110,8 +111,8 @@ class _BottomNavigationBarWithCardsState
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(Icons.home_filled,
-                                      color: controller.selectedIndex.value != 0?
-                                      TColors.buttonPrimary:null,
+                                      color: /*controller.selectedIndex.value != 0?*/
+                                      TColors.buttonPrimary/*:null*/,
                                     ),
                                   ),
                                 ),
@@ -127,7 +128,9 @@ class _BottomNavigationBarWithCardsState
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              controller.selectedIndex.value = 1;
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => WalletScreen()));
+
+                             /* controller.selectedIndex.value = 1;*/
                             },
                             child: Column(
                               children: [
@@ -136,8 +139,8 @@ class _BottomNavigationBarWithCardsState
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(Icons.wallet,
-                                      color: controller.selectedIndex.value != 1?
-                                      TColors.buttonPrimary:null,
+                                      color: /*controller.selectedIndex.value != 1?*/
+                                      TColors.buttonPrimary/*:null*/,
                                     ),
                                   ),
                                 ),
@@ -167,7 +170,9 @@ class _BottomNavigationBarWithCardsState
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              controller.selectedIndex.value = 3;
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+                             /* controller.selectedIndex.value = 3;*/
                             },
                             child: Column(
                               children: [
@@ -176,8 +181,8 @@ class _BottomNavigationBarWithCardsState
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(Icons.notifications_active ,
-                                      color: controller.selectedIndex.value != 3?
-                                      TColors.buttonPrimary:null,
+                                      color: /*controller.selectedIndex.value != 3?*/
+                                      TColors.buttonPrimary/*:null*/,
                                     ),
                                   ),
                                 ),
@@ -193,7 +198,8 @@ class _BottomNavigationBarWithCardsState
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              controller.selectedIndex.value = 4;
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
+                             /* controller.selectedIndex.value = 4;*/
                             },
                             child: Column(
                               children: [

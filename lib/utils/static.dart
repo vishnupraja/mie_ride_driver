@@ -7,6 +7,7 @@ import '../constant/colors.dart';
 
 Widget customAppbar(String text){
    return Row(
+     mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InkWell(
           onTap: (){
@@ -28,15 +29,14 @@ Widget customAppbar(String text){
             ),
           ),
         ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(text,
-              style: FontsFamily.ExtraBold.copyWith(
-                  color: TColors.textPrimary,
-                  fontSize: 25,
-                letterSpacing: 5
-              ),
+        SizedBox(width: Get.width/6,),
+        Align(
+          alignment: Alignment.center,
+          child: Text(text,
+            textAlign: TextAlign.center,
+            style: FontsFamily.ExtraBold.copyWith(
+                color: TColors.textPrimary,
+                fontSize: 25,
             ),
           ),
         ),
@@ -53,7 +53,7 @@ Widget customContainer(String text,String image,VoidCallback callback){
       margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
       padding: EdgeInsets.symmetric(horizontal: 12),
       height: 50,
-      decoration: TWidget.bShadow,
+      decoration: TWidget.bBoxDecoration,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,6 +78,7 @@ Widget customContainer(String text,String image,VoidCallback callback){
 class CustomField extends StatelessWidget {
   String hintText;
   Widget? icon;
+  double size;
   final bool ishide;
   TextInputType? textInputType;
   TextEditingController? textEditingController;
@@ -88,6 +89,7 @@ class CustomField extends StatelessWidget {
      this.textInputType,
      this.textEditingController,
      this.ishide = false,
+     this.size = 15.0
    });
 
   @override
@@ -100,19 +102,25 @@ class CustomField extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10),
         margin: const EdgeInsets.only(top: 5),
         decoration: TWidget.bBoxDecoration,
-        child: TextFormField(
-          controller: textEditingController,
-          obscureText: ishide,
-          keyboardType: textInputType,
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              hintText: hintText,
-              suffixIcon: icon,
-              hintStyle: FontsFamily.ExtraBold.copyWith(
-                  color: TColors.textSecondary, fontSize: TSizes.fontSizeSm
-              ),)
+        child: Center(
+          child: TextFormField(
+            style: FontsFamily.ExtraBold.copyWith(
+                color: TColors.textPrimary,
+                fontSize: TSizes.fontSizeMd
+            ),
+            controller: textEditingController,
+            obscureText: ishide,
+            keyboardType: textInputType,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                hintText: hintText,
+                suffixIcon: icon,
+                hintStyle: FontsFamily.ExtraBold.copyWith(
+                    color: TColors.textSecondary, fontSize: size
+                ),)
+          ),
         ),
       ),
     );
@@ -127,7 +135,7 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
     child: Container(
       decoration: TWidget.bBoxDecoration,
       child: Container(
-        width: Get.width/2,
+        width: Get.width/1.4,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
@@ -140,7 +148,7 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
                   color: TColors.textPrimary
                 ),
                 ),
-               Image.asset(image,height: 25,width: 25,)
+              image == ""?SizedBox(): Image.asset(image,height: 25,width: 25,)
               ],
             ),
           ),
@@ -219,7 +227,7 @@ class TWidget{
 
   static final bBoxDecoration=BoxDecoration(
       color: TColors.background,
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(12),
       border: Border(
           top: BorderSide(
             color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
@@ -272,4 +280,13 @@ class TWidget{
   );
 
 
+
+
+}
+
+class CountryEntity {
+  final String name;
+  final String code;
+
+  CountryEntity(this.name, this.code);
 }

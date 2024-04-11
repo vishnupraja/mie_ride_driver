@@ -23,18 +23,9 @@ class _BookingScreenState extends State<BookingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 50,),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text(TTexts.BookingsText,
-                style: FontsFamily.ExtraBold.copyWith(
-                    color: TColors.textPrimary,
-                    fontSize: 25,
-                    letterSpacing: 5
-                ),
-              ),
-            ),
             SizedBox(height: 20,),
+            customAppbar(TTexts.BookingsText),
+            SizedBox(height: 10,),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.only(bottom: 50),
@@ -49,91 +40,95 @@ class _BookingScreenState extends State<BookingScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         padding: EdgeInsets.symmetric(vertical: 15),
                         width: Get.width,
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.bBoxDecoration,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    height: 30,
-                                    width: 80,
-                                    decoration: TWidget.bShadow,
-                                    child: Center(
+                                  Expanded(
+                                    child: Container(
+                                      height: 30,
+                                      decoration: TWidget.bBoxDecoration,
+                                      child: Center(
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(TTexts.IDText,
+                                              style: FontsFamily.ExtraBold.copyWith(
+                                                  color: TColors.textPrimary,
+                                                  fontSize: TSizes.fontSizeSm
+                                              ),),
+                                            Text("113",
+                                              style: FontsFamily.ExtraBold.copyWith(
+                                                  color: TColors.info,
+                                                  fontSize: TSizes.fontSizeSm
+                                              ),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 5,),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                                      height: 30,
+                                      decoration: TWidget.bBoxDecoration,
                                       child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text(TTexts.IDText,
+                                          Text(TTexts.RideTypeText,
                                             style: FontsFamily.ExtraBold.copyWith(
                                                 color: TColors.textPrimary,
-                                                fontSize: TSizes.fontSizeSm
+                                                fontSize: 8.0
                                             ),),
-                                          Text("113",
+                                          SizedBox(width: 1,),
+                                          Text("Sharing",
                                             style: FontsFamily.ExtraBold.copyWith(
                                                 color: TColors.info,
-                                                fontSize: TSizes.fontSizeSm
+                                                fontSize: 8.0
                                             ),)
                                         ],
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                    height: 30,
-                                    decoration: TWidget.bShadow,
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(TTexts.RideTypeText,
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.textPrimary,
-                                              fontSize: TSizes.fontSizeSm
-                                          ),),
-                                        SizedBox(width: 20,),
-                                        Text("Sharing",
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.info,
-                                              fontSize: TSizes.fontSizeSm
-                                          ),)
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                                    height: 30,
-                                    decoration: TWidget.bShadow,
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text(TTexts.FinalCostText,
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.textPrimary,
-                                              fontSize: TSizes.fontSizeSm
-                                          ),),
-                                        SizedBox(width: 20,),
-                                        Text("${TTexts.Currency} 30",
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.textPrimary,
-                                              fontSize: TSizes.fontSizeSm
-                                          ),)
-                                      ],
+                                  SizedBox(width: 5,),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 5),
+                                      height: 30,
+                                      decoration: TWidget.bBoxDecoration,
+                                      child: Row(
+                                        children: [
+                                          Text(TTexts.FinalCostText,
+                                            style: FontsFamily.ExtraBold.copyWith(
+                                                color: TColors.textPrimary,
+                                                fontSize: 8.0
+                                            ),),
+                                          SizedBox(width: 10,),
+                                          Text("${TTexts.Currency} 30",
+                                            style: FontsFamily.ExtraBold.copyWith(
+                                                color: TColors.textPrimary,
+                                                fontSize: 8.0
+                                            ),)
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
                               ),
                               SizedBox(height: 20,),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: 5.0),
                                     height: 30,
-                                    decoration: TWidget.bShadow,
+                                    decoration: TWidget.bBoxDecoration,
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -143,26 +138,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                               color: TColors.textPrimary,
                                               fontSize: TSizes.fontSizeSm
                                           ),),
-                                        SizedBox(width: 10,),
+                                        SizedBox(width: 5,),
                                         Text("11:30 PM",
                                           style: FontsFamily.ExtraBold.copyWith(
                                               color: TColors.info,
-                                              fontSize: TSizes.fontSizeSm
-                                          ),)
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 10,),
-                                  Flexible(
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(calenderImage,height: 20,width: 20,),
-                                        SizedBox(width: 10,),
-                                        Text("2023/12/13",
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.info,
-                                              fontSize: TSizes.fontSizeSm
+                                              fontSize: 8
                                           ),)
                                       ],
                                     ),
@@ -172,12 +152,27 @@ class _BookingScreenState extends State<BookingScreen> {
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Image.asset(timeImage,height: 20,width: 20,),
-                                        SizedBox(width: 10,),
+                                        Image.asset(calenderImage,height: 15,width: 15,),
+                                        SizedBox(width: 5,),
+                                        Text("2023/12/13",
+                                          style: FontsFamily.ExtraBold.copyWith(
+                                              color: TColors.info,
+                                              fontSize: 8
+                                          ),)
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 5,),
+                                  Flexible(
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(timeImage,height: 15,width: 15,),
+                                        SizedBox(width: 5,),
                                         Text("4:30 PM",
                                           style: FontsFamily.ExtraBold.copyWith(
                                               color: TColors.info,
-                                              fontSize: TSizes.fontSizeSm
+                                              fontSize: 8
                                           ),)
                                       ],
                                     ),
@@ -187,7 +182,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               SizedBox(height: 20,),
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 15),
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.bBoxDecoration,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 30),
                                   child: Row(
@@ -214,7 +209,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               SizedBox(height: 20,),
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 15),
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.bBoxDecoration,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 30),
                                   child: Row(
@@ -244,7 +239,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 child: Container(
                                     height: 40,
                                     width: 150,
-                                    decoration: TWidget.bShadow,
+                                    decoration: TWidget.bBoxDecoration  ,
                                     child: Center(
                                       child: Text(TTexts.BPickupText,
                                         style: FontsFamily.ExtraBold.copyWith(

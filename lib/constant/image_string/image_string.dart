@@ -22,3 +22,10 @@
   String flagImage = "assets/flag.png";
   String roundLocationImage = "assets/roundLocation.png";
   String endpointImage = "assets/endpointImage.png";
+  String historyDollerImage = "assets/historyDoller.png";
+  String SpreadImage = "assets/SpreadImage.png";
+  String termConditionImage = "assets/termCondition.png";
+  String privacyImage = "assets/privacy.png";
+  String faqImage = "assets/faq.png";
+  String contactFormImage = "assets/contactForm.png";
+  String callImage = "assets/call.png";

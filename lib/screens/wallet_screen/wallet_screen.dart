@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
@@ -18,25 +19,16 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 50,),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text(TTexts.WalletText,
-                  style: FontsFamily.ExtraBold.copyWith(
-                      color: TColors.textPrimary,
-                      fontSize: 25,
-                      letterSpacing: 5
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 20,),
+           customAppbar(TTexts.WalletText),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 30),
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
@@ -66,9 +58,13 @@ class _WalletScreenState extends State<WalletScreen> {
                       ),
                     ),
                     SizedBox(height: 30,),
-                    customContainer(TTexts.AccountDetailsText, walletUserImage,(){}),
+                    customContainer(TTexts.AccountDetailsText, walletUserImage,(){
+                      Get.toNamed(RouteHelper.getAccountDetailPage());
+                    }),
                     SizedBox(height: 10,),
-                    customContainer(TTexts.HistoryText, walletHistoryImage,(){}),
+                    customContainer(TTexts.HistoryText, walletHistoryImage,(){
+                      Get.toNamed(RouteHelper.getHistoryPage());
+                    }),
 
                     SizedBox(height: 10,),
                     Padding(
@@ -80,8 +76,8 @@ class _WalletScreenState extends State<WalletScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

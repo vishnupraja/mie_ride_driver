@@ -8,14 +8,9 @@ import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
 import '../../utils/static.dart';
 
-class NotificationScreen extends StatefulWidget {
+class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
 
-  @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
-}
-
-class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +20,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 50,),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text(TTexts.notification,
-                style: FontsFamily.ExtraBold.copyWith(
-                    color: TColors.textPrimary,
-                    fontSize: 25,
-                    letterSpacing: 5
-                ),
-              ),
-            ),
+            customAppbar(TTexts.notification),
             SizedBox(height: 20,),
             Expanded(
               child: ListView.builder(
@@ -47,6 +33,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
                       padding: EdgeInsets.only(bottom: 10),
                       width: Get.width,
                       decoration: TWidget.bShadow,

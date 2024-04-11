@@ -32,23 +32,15 @@ class _SignupScreen2State extends State<SignupScreen2> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 33,),
               customAppbar(TTexts.AccountText),
               Column(
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                   Text(TTexts.STEPText2,
                     style: FontsFamily.Extralight.copyWith(
                         color: TColors.textPrimary,
-                        fontSize: 20
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Text(TTexts.createAccount,
-                    style: FontsFamily.ExtraBold.copyWith(
-                        color: TColors.textPrimary,
-                        fontSize: 15,
-                        letterSpacing: 2
+                        fontSize: 15
                     ),
                   ),
                   SizedBox(height: 20,),
@@ -79,19 +71,16 @@ class _SignupScreen2State extends State<SignupScreen2> {
                                 child: DropdownButton<String>(
                                   padding: EdgeInsets.symmetric( horizontal: 20),
                                   dropdownColor: TColors.white,
-                                  hint: Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      TTexts.selectVehicleText,
-                                      style: FontsFamily.ExtraBold.copyWith(
-                                          color: TColors.textSecondary, fontSize: 12
-                                      ),
+                                  hint: Text(
+                                    TTexts.selectVehicleText,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        color: TColors.textSecondary, fontSize: 15
                                     ),
                                   ),
                                   value: vehicle,
                                   icon: const Icon(
-                                    Icons.keyboard_arrow_down,
-                                    size: 25,
+                                    Icons.arrow_drop_down,
+                                    size: 30,
                                   ),
                                   isExpanded: true,
                                   items: vehicleList.map(
@@ -121,20 +110,47 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             ),
                             SizedBox(height: 20,),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
+                                  width: Get.width/1.7,
                                   decoration: TWidget.bBoxDecoration,
-                                  child: Container(
-                                    width: Get.width/1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                      child: Text(TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold.copyWith(
-                                            color: TColors.textSecondary,
-                                            fontSize: TSizes.fontSizeSm
-                                        ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 12),
+                                    child: Text(TTexts.drivingLicenceText,
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          color: TColors.textSecondary,
+                                          fontSize: TSizes.fontSizeMd
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30)
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Image.asset(USER_IMAGE,height: 50,width:50,fit: BoxFit.cover,))
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: Get.width/1.7,
+                                  decoration: TWidget.bBoxDecoration,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 12),
+                                    child: Text(TTexts.drivingLicenceText,
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          color: TColors.textSecondary,
+                                          fontSize: TSizes.fontSizeMd
                                       ),
                                     ),
                                   ),
@@ -152,20 +168,18 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             ),
                             SizedBox(height: 20,),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
+                                  width: Get.width/1.7,
                                   decoration: TWidget.bBoxDecoration,
-                                  child: Container(
-                                    width: Get.width/1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                      child: Text(TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold.copyWith(
-                                            color: TColors.textSecondary,
-                                            fontSize: TSizes.fontSizeSm
-                                        ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 12),
+                                    child: Text(TTexts.drivingLicenceText,
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          color: TColors.textSecondary,
+                                          fontSize: TSizes.fontSizeMd
                                       ),
                                     ),
                                   ),
@@ -177,38 +191,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
                                     ),
                                     child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
-                                        child: Image.asset(USER_IMAGE,height: 50,fit: BoxFit.cover,))
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20,),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: TWidget.bBoxDecoration,
-                                  child: Container(
-                                    width: Get.width/1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                      child: Text(TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold.copyWith(
-                                            color: TColors.textSecondary,
-                                            fontSize: TSizes.fontSizeSm
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30)
-                                    ),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.asset(USER_IMAGE,height: 50,fit: BoxFit.cover,))
+                                        child: Image.asset(USER_IMAGE,height: 50,width:50,fit: BoxFit.cover,))
                                 ),
                               ],
                             ),
