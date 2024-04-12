@@ -30,6 +30,7 @@ class _AccountDetailState extends State<AccountDetail> {
           children: [
             SizedBox(height: 30,),
             customAppbar(TTexts.AccountDetailsText),
+            SizedBox(height: 20,),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -38,7 +39,7 @@ class _AccountDetailState extends State<AccountDetail> {
                     padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
                     margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
                     width: Get.width,
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.bShadow,
                     child: Column(
                       children: [
                         Row(
@@ -82,7 +83,7 @@ class _AccountDetailState extends State<AccountDetail> {
                     padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
                     margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
                     width: Get.width,
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.bShadow,
                     child: Column(
                       children: [
                         Row(
@@ -172,7 +173,7 @@ class _AccountDetailState extends State<AccountDetail> {
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    height: 40,
+                    height: 50,
                     width: Get.width/2,
                     decoration: TWidget.bBoxDecoration,
                     child: Center(

@@ -180,7 +180,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   decoration: TWidget.bBoxDecoration,
                   child: Center(
                     child: Text(TTexts.SeatsAvailableText,
@@ -204,7 +204,8 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                        decoration: TWidget.bBoxDecoration,
                        child: Center(
                          child: Icon(
-                           Icons.remove, color: TColors.textPrimary, size: 15,),
+                           Icons.remove,
+                           color: TColors.textPrimary, size: 15,),
                        ),
                      ),
                    ),

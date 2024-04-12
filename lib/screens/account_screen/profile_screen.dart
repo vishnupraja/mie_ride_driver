@@ -46,496 +46,524 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Card(
+              color: TColors.background,
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                    )
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text(TTexts.ProfileText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: GetBuilder<ProfileController>(builder: (controller) {
-        return Padding(
+        return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
             children: [
-              SizedBox(height: TSizes.xl,),
-              customAppbar(TTexts.ProfileText),
-              SizedBox(height: TSizes.xl,),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 20),
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        decoration: TWidget.bShadow,
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    controller.changeScreen.value =
-                                        TTexts.PersonalText;
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(vertical: 15),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    decoration: TWidget.bShadow,
-                                    child: Center(
-                                      child: Obx(() {
-                                        return Text(TTexts.PersonalText,
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              fontSize: 13,
-                                              color: controller.changeScreen.value != TTexts.PersonalText?TColors.textPrimary:TColors.info
-                                          ),);
-                                      }),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 10, vertical: 20),
+                margin: EdgeInsets.symmetric(
+                    horizontal: 10, vertical: 10),
+                decoration: TWidget.bShadow,
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            controller.changeScreen.value =
+                                TTexts.PersonalText;
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 15),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            decoration: TWidget.bShadow,
+                            child: Center(
+                              child: Obx(() {
+                                return Text(TTexts.PersonalText,
+                                  style: FontsFamily.ExtraBold.copyWith(
+                                      fontSize: 13,
+                                      color: controller.changeScreen.value != TTexts.PersonalText?TColors.textPrimary:TColors.info
+                                  ),);
+                              }),
+                            ),
+                          ),
+                        ),
+
+                        InkWell(
+                          onTap: () {
+                            controller.changeScreen.value =
+                                TTexts.CarDetailsText;
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 15),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            decoration: TWidget.bShadow,
+                            child: Center(
+                              child: Obx(() {
+                                return Text(TTexts.CarDetailsText,
+                                  style: FontsFamily.ExtraBold.copyWith(
+                                      fontSize: 13,
+                                      color: controller.changeScreen
+                                          .value !=
+                                          TTexts.CarDetailsText
+                                          ? TColors.textPrimary
+                                          : TColors.info
+                                  ),);
+                              }),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 20,),
+                    Obx(() {
+                      return Visibility(
+                          visible: controller.changeScreen.value ==
+                              TTexts.PersonalText,
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .center,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Card(
+                                        elevation: 2,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius
+                                                .circular(30)
+                                        ),
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius
+                                                .circular(30),
+                                            child: Image.asset(
+                                              USER_IMAGE, height: 50,
+                                              width: 50,
+                                              fit: BoxFit.cover,))
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: CustomField(
+                                      size: TSizes.fontSizeMd,
+                                      hintText: TTexts.firstName,
+                                      icon: Icon(
+                                        Icons.person,
+                                        color: TColors.info,),
+                                      textInputType: TextInputType.text,
+                                      textEditingController: fNameCtr,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10,),
+                              CustomField(
+                                size: TSizes.fontSizeMd,
+                                hintText: TTexts.lastName,
+                                icon: Icon(
+                                  Icons.person, color: TColors.info,),
+                                textInputType: TextInputType.text,
+                                textEditingController: fNameCtr,
+                              ),
+                              CustomField(
+                                size: TSizes.fontSizeMd,
+                                hintText: TTexts.email,
+                                icon: Icon(
+                                  Icons.email_sharp,
+                                  color: TColors.info,),
+                                textInputType: TextInputType
+                                    .emailAddress,
+                                textEditingController: emailCtr,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Container(
+                                  height: 50,
+                                  width: context.width,
+                                  margin: EdgeInsets.only(top: 5),
+                                  padding: EdgeInsets.only(left: 10),
+                                  decoration: TWidget.bBoxDecoration,
+                                  child: Center(
+                                    child: IntlPhoneField(
+                                      flagsButtonMargin: EdgeInsets
+                                          .only(
+                                          top: 3.0),
+                                      controller: phoneCtr,
+                                      textInputAction: TextInputAction
+                                          .next,
+                                      showDropdownIcon: false,
+                                      autovalidateMode: AutovalidateMode
+                                          .disabled,
+                                      /*disableLengthCheck: true,*/
+                                      initialCountryCode: TTexts
+                                          .countryCode,
+                                      decoration: InputDecoration(
+                                          counterText: "",
+                                          hintStyle: FontsFamily
+                                              .ExtraBold
+                                              .copyWith(
+                                              color: TColors
+                                                  .textSecondary,
+                                              fontSize: TSizes
+                                                  .fontSizeMd
+                                          ),
+                                          hintText: TTexts.phoneNo,
+                                          focusedBorder: InputBorder
+                                              .none,
+                                          border: InputBorder.none,
+                                          enabledBorder: InputBorder
+                                              .none),
+                                      onChanged: (phone) {
+                                        setState(
+                                              () {
+                                            countryCode = phone
+                                                .countryCode;
+                                            print(countryCode);
+                                            countryFlag = phone
+                                                .countryISOCode;
+                                            log("${countryFlag}");
+                                          },
+                                        );
+                                      },
+                                      onCountryChanged: (country) {
+                                        setState(
+                                              () {
+                                            countryCode = '${country
+                                                .dialCode}';
+                                            print(countryCode);
+                                            countryFlag = country.code;
+                                            print(countryFlag);
+                                          },
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
-
-                                InkWell(
+                              ),
+                              CustomField(
+                                size: TSizes.fontSizeMd,
+                                hintText: TTexts.password,
+                                textInputType: TextInputType
+                                    .visiblePassword,
+                                textEditingController: passwordCtr,
+                                ishide: isHide,
+                                icon: InkWell(
                                   onTap: () {
-                                    controller.changeScreen.value =
-                                        TTexts.CarDetailsText;
+                                    setState(() {
+                                      isHide = !isHide;
+                                    });
                                   },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(vertical: 15),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 15, vertical: 10),
-                                    decoration: TWidget.bShadow,
-                                    child: Center(
-                                      child: Obx(() {
-                                        return Text(TTexts.CarDetailsText,
-                                          style: FontsFamily.ExtraBold.copyWith(
-                                              fontSize: 13,
-                                              color: controller.changeScreen
-                                                  .value !=
-                                                  TTexts.CarDetailsText
-                                                  ? TColors.textPrimary
-                                                  : TColors.info
-                                          ),);
-                                      }),
+                                  child: isHide
+                                      ? Icon(
+                                    Icons.visibility_off_outlined,
+                                    color: TColors.info,
+                                  )
+                                      : Icon(
+                                    Icons.visibility_outlined,
+                                    color: TColors.info,
+                                  ),
+                                ),
+                              ),
+                              CustomField(
+                                size: TSizes.fontSizeMd,
+                                hintText: TTexts.password,
+                                textInputType: TextInputType
+                                    .visiblePassword,
+                                textEditingController: nPasswordCtr,
+                                ishide: isNewHide,
+                                icon: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isNewHide = !isNewHide;
+                                    });
+                                  },
+                                  child: isNewHide
+                                      ? Icon(
+                                    Icons.visibility_off_outlined,
+                                    color: TColors.info,
+                                  )
+                                      : Icon(
+                                    Icons.visibility_outlined,
+                                    color: TColors.info,
+                                  ),
+                                ),
+                              ),
+                              CustomField(
+                                size: TSizes.fontSizeMd,
+                                hintText: TTexts.password,
+                                textInputType: TextInputType
+                                    .visiblePassword,
+                                textEditingController: rNewPasswordCtr,
+                                ishide: isRNewHide,
+                                icon: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isRNewHide = !isRNewHide;
+                                    });
+                                  },
+                                  child: isRNewHide
+                                      ? Icon(
+                                    Icons.visibility_off_outlined,
+                                    color: TColors.info,
+                                  )
+                                      : Icon(
+                                    Icons.visibility_outlined,
+                                    color: TColors.info,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ));
+                    }),
+
+                    Obx(() {
+                      return Visibility(
+                        visible: controller.changeScreen.value ==
+                            TTexts.CarDetailsText,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.vehicleNumberText,
+                              textInputType: TextInputType.text,
+                              textEditingController: vehicleNumber,
+                            ),
+                            SizedBox(height: 20,),
+                            Container(
+                              decoration: TWidget.bBoxDecoration,
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  dropdownColor: TColors.background,
+                                  hint: Text(
+                                    TTexts.selectVehicleText,
+                                    style: FontsFamily.ExtraBold
+                                        .copyWith(
+                                      color: TColors.textSecondary,
+                                      fontSize: TSizes.fontSizeMd,
                                     ),
                                   ),
-                                )
+                                  value: vehicle,
+                                  icon: const Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 30,
+                                  ),
+                                  isExpanded: true,
+                                  items: vehicleList.map(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                                color: TColors
+                                                    .textPrimary),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (value) {
+                                    setState(
+                                          () {
+                                        vehicle = value;
+                                        print("vehicle===>$vehicle");
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center,
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
+                                  child: Container(
+                                    width: Get.width / 1.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets
+                                          .symmetric(
+                                          horizontal: 15, vertical: 10),
+                                      child: Text(
+                                        TTexts.drivingLicenceText,
+                                        style: FontsFamily.ExtraBold
+                                            .copyWith(
+                                          color: TColors
+                                              .textSecondary,
+                                          fontSize: TSizes.fontSizeMd,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30)
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30),
+                                        child: Image.asset(
+                                          USER_IMAGE, height: 50,
+                                          width: 50,
+                                          fit: BoxFit.cover,))
+                                ),
                               ],
                             ),
                             SizedBox(height: 20,),
-                            Obx(() {
-                              return Visibility(
-                                  visible: controller.changeScreen.value ==
-                                      TTexts.PersonalText,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .center,
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Card(
-                                              elevation: 2,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius
-                                                      .circular(30)
-                                              ),
-                                              child: ClipRRect(
-                                                  borderRadius: BorderRadius
-                                                      .circular(30),
-                                                  child: Image.asset(
-                                                    USER_IMAGE, height: 50,
-                                                    width: 50,
-                                                    fit: BoxFit.cover,))
-                                          ),
-                                          SizedBox(width: 10,),
-                                          Expanded(
-                                            child: CustomField(
-                                              size: TSizes.fontSizeMd,
-                                              hintText: TTexts.firstName,
-                                              icon: Icon(
-                                                Icons.person,
-                                                color: TColors.info,),
-                                              textInputType: TextInputType.text,
-                                              textEditingController: fNameCtr,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10,),
-                                      CustomField(
-                                        size: TSizes.fontSizeMd,
-                                        hintText: TTexts.lastName,
-                                        icon: Icon(
-                                          Icons.person, color: TColors.info,),
-                                        textInputType: TextInputType.text,
-                                        textEditingController: fNameCtr,
-                                      ),
-                                      CustomField(
-                                        size: TSizes.fontSizeMd,
-                                        hintText: TTexts.email,
-                                        icon: Icon(
-                                          Icons.email_sharp,
-                                          color: TColors.info,),
-                                        textInputType: TextInputType
-                                            .emailAddress,
-                                        textEditingController: emailCtr,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 10),
-                                        child: Container(
-                                          height: 50,
-                                          width: context.width,
-                                          margin: EdgeInsets.only(top: 5),
-                                          padding: EdgeInsets.only(left: 10),
-                                          decoration: TWidget.bBoxDecoration,
-                                          child: Center(
-                                            child: IntlPhoneField(
-                                              flagsButtonMargin: EdgeInsets
-                                                  .only(
-                                                  top: 3.0),
-                                              controller: phoneCtr,
-                                              textInputAction: TextInputAction
-                                                  .next,
-                                              showDropdownIcon: false,
-                                              autovalidateMode: AutovalidateMode
-                                                  .disabled,
-                                              /*disableLengthCheck: true,*/
-                                              initialCountryCode: TTexts
-                                                  .countryCode,
-                                              decoration: InputDecoration(
-                                                  counterText: "",
-                                                  hintStyle: FontsFamily
-                                                      .ExtraBold
-                                                      .copyWith(
-                                                      color: TColors
-                                                          .textSecondary,
-                                                      fontSize: TSizes
-                                                          .fontSizeMd
-                                                  ),
-                                                  hintText: TTexts.phoneNo,
-                                                  focusedBorder: InputBorder
-                                                      .none,
-                                                  border: InputBorder.none,
-                                                  enabledBorder: InputBorder
-                                                      .none),
-                                              onChanged: (phone) {
-                                                setState(
-                                                      () {
-                                                    countryCode = phone
-                                                        .countryCode;
-                                                    print(countryCode);
-                                                    countryFlag = phone
-                                                        .countryISOCode;
-                                                    log("${countryFlag}");
-                                                  },
-                                                );
-                                              },
-                                              onCountryChanged: (country) {
-                                                setState(
-                                                      () {
-                                                    countryCode = '${country
-                                                        .dialCode}';
-                                                    print(countryCode);
-                                                    countryFlag = country.code;
-                                                    print(countryFlag);
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      CustomField(
-                                        size: TSizes.fontSizeMd,
-                                        hintText: TTexts.password,
-                                        textInputType: TextInputType
-                                            .visiblePassword,
-                                        textEditingController: passwordCtr,
-                                        ishide: isHide,
-                                        icon: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isHide = !isHide;
-                                            });
-                                          },
-                                          child: isHide
-                                              ? Icon(
-                                            Icons.visibility_off_outlined,
-                                            color: TColors.info,
-                                          )
-                                              : Icon(
-                                            Icons.visibility_outlined,
-                                            color: TColors.info,
-                                          ),
-                                        ),
-                                      ),
-                                      CustomField(
-                                        size: TSizes.fontSizeMd,
-                                        hintText: TTexts.password,
-                                        textInputType: TextInputType
-                                            .visiblePassword,
-                                        textEditingController: nPasswordCtr,
-                                        ishide: isNewHide,
-                                        icon: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isNewHide = !isNewHide;
-                                            });
-                                          },
-                                          child: isNewHide
-                                              ? Icon(
-                                            Icons.visibility_off_outlined,
-                                            color: TColors.info,
-                                          )
-                                              : Icon(
-                                            Icons.visibility_outlined,
-                                            color: TColors.info,
-                                          ),
-                                        ),
-                                      ),
-                                      CustomField(
-                                        size: TSizes.fontSizeMd,
-                                        hintText: TTexts.password,
-                                        textInputType: TextInputType
-                                            .visiblePassword,
-                                        textEditingController: rNewPasswordCtr,
-                                        ishide: isRNewHide,
-                                        icon: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              isRNewHide = !isRNewHide;
-                                            });
-                                          },
-                                          child: isRNewHide
-                                              ? Icon(
-                                            Icons.visibility_off_outlined,
-                                            color: TColors.info,
-                                          )
-                                              : Icon(
-                                            Icons.visibility_outlined,
-                                            color: TColors.info,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ));
-                            }),
-
-                            Obx(() {
-                              return Visibility(
-                                visible: controller.changeScreen.value ==
-                                    TTexts.CarDetailsText,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomField(
-                                      size: TSizes.fontSizeMd,
-                                      hintText: TTexts.vehicleNumberText,
-                                      textInputType: TextInputType.text,
-                                      textEditingController: vehicleNumber,
-                                    ),
-                                    SizedBox(height: 20,),
-                                    Container(
-                                      decoration: TWidget.bBoxDecoration,
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownButton<String>(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          dropdownColor: TColors.background,
-                                          hint: Text(
-                                            TTexts.selectVehicleText,
-                                            style: FontsFamily.ExtraBold
-                                                .copyWith(
-                                              color: TColors.textSecondary,
-                                              fontSize: TSizes.fontSizeMd,
-                                            ),
-                                          ),
-                                          value: vehicle,
-                                          icon: const Icon(
-                                            Icons.arrow_drop_down,
-                                            size: 30,
-                                          ),
-                                          isExpanded: true,
-                                          items: vehicleList.map(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    value,
-                                                    style: TextStyle(
-                                                        color: TColors
-                                                            .textPrimary),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ).toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                  () {
-                                                vehicle = value;
-                                                print("vehicle===>$vehicle");
-                                              },
-                                            );
-                                          },
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center,
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
+                                  child: Container(
+                                    width: Get.width / 1.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets
+                                          .symmetric(
+                                          horizontal: 15, vertical: 10),
+                                      child: Text(
+                                        TTexts.drivingLicenceText,
+                                        style: FontsFamily.ExtraBold
+                                            .copyWith(
+                                          color: TColors
+                                              .textSecondary,
+                                          fontSize: TSizes.fontSizeMd,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20,),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      children: [
-                                        Container(
-                                          decoration: TWidget.bBoxDecoration,
-                                          child: Container(
-                                            width: Get.width / 1.7,
-                                            child: Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  horizontal: 15, vertical: 10),
-                                              child: Text(
-                                                TTexts.drivingLicenceText,
-                                                style: FontsFamily.ExtraBold
-                                                    .copyWith(
-                                                  color: TColors
-                                                      .textSecondary,
-                                                  fontSize: TSizes.fontSizeMd,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Card(
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30)
-                                            ),
-                                            child: ClipRRect(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30),
-                                                child: Image.asset(
-                                                  USER_IMAGE, height: 50,
-                                                  width: 50,
-                                                  fit: BoxFit.cover,))
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 20,),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      children: [
-                                        Container(
-                                          decoration: TWidget.bBoxDecoration,
-                                          child: Container(
-                                            width: Get.width / 1.7,
-                                            child: Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  horizontal: 15, vertical: 10),
-                                              child: Text(
-                                                TTexts.drivingLicenceText,
-                                                style: FontsFamily.ExtraBold
-                                                    .copyWith(
-                                                  color: TColors
-                                                      .textSecondary,
-                                                  fontSize: TSizes.fontSizeMd,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Card(
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30)
-                                            ),
-                                            child: ClipRRect(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30),
-                                                child: Image.asset(
-                                                  USER_IMAGE, height: 50,
-                                                  width: 50,
-                                                  fit: BoxFit.cover,))
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 20,),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .center,
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween,
-                                      children: [
-                                        Container(
-                                          decoration: TWidget.bBoxDecoration,
-                                          child: Container(
-                                            width: Get.width / 1.7,
-                                            child: Padding(
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  horizontal: 15, vertical: 10),
-                                              child: Text(
-                                                TTexts.drivingLicenceText,
-                                                style: FontsFamily.ExtraBold
-                                                    .copyWith(
-                                                  color: TColors
-                                                      .textSecondary,
-                                                  fontSize: TSizes.fontSizeMd,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Card(
-                                            elevation: 2,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30)
-                                            ),
-                                            child: ClipRRect(
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    30),
-                                                child: Image.asset(
-                                                  USER_IMAGE, height: 50,
-                                                  width: 50,
-                                                  fit: BoxFit.cover,))
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              );
-                            }),
-
+                                Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30)
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30),
+                                        child: Image.asset(
+                                          USER_IMAGE, height: 50,
+                                          width: 50,
+                                          fit: BoxFit.cover,))
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center,
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                Container(
+                                  decoration: TWidget.bBoxDecoration,
+                                  child: Container(
+                                    width: Get.width / 1.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets
+                                          .symmetric(
+                                          horizontal: 15, vertical: 10),
+                                      child: Text(
+                                        TTexts.drivingLicenceText,
+                                        style: FontsFamily.ExtraBold
+                                            .copyWith(
+                                          color: TColors
+                                              .textSecondary,
+                                          fontSize: TSizes.fontSizeMd,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30)
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30),
+                                        child: Image.asset(
+                                          USER_IMAGE, height: 50,
+                                          width: 50,
+                                          fit: BoxFit.cover,))
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 40),
-                        child: CustomButton(
-                            TTexts.SubmitText, BUTTON_IMAGE, () {
+                      );
+                    }),
 
-                        }),
-                      )
-                    ],
-                  ),
+                  ],
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 20),
+                child: CustomButton(
+                    TTexts.SubmitText, BUTTON_IMAGE, () {
+
+                }),
               )
             ],
           ),

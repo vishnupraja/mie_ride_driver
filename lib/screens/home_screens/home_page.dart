@@ -132,7 +132,29 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: Get.height/4,
                       width: Get.width/2.5,
-                      decoration: TWidget.bBoxDecoration,
+                      decoration: BoxDecoration(
+                        color: TColors.background,
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border(
+                            bottom: TWidget.borderSide,
+                            left: TWidget.borderSide,
+                            right: TWidget.borderSide,
+                            top: TWidget.borderSide
+                        ),
+                        boxShadow: [ BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 10), // Upper shadow
+                        ),
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: -5,
+                            blurRadius: 7,
+                            offset: Offset(0, -10), // Lower shadow
+                          ),
+                        ],
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -179,7 +201,29 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         height: Get.height/4,
                         width: Get.width/2.5,
-                        decoration: TWidget.bShadow,
+                        decoration:  BoxDecoration(
+                          color: TColors.background,
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border(
+                              bottom: TWidget.borderSide,
+                              left: TWidget.borderSide,
+                              right: TWidget.borderSide,
+                              top: TWidget.borderSide
+                          ),
+                          boxShadow: [ BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 10), // Upper shadow
+                          ),
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: -5,
+                              blurRadius: 7,
+                              offset: Offset(0, -10), // Lower shadow
+                            ),
+                          ],
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,

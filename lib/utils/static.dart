@@ -14,6 +14,7 @@ Widget customAppbar(String text){
             Get.back();
           },
           child: Card(
+            color: TColors.background,
             elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -53,7 +54,7 @@ Widget customContainer(String text,String image,VoidCallback callback){
       margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
       padding: EdgeInsets.symmetric(horizontal: 12),
       height: 50,
-      decoration: TWidget.bBoxDecoration,
+      decoration: TWidget.bShadow,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,7 +136,7 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
     child: Container(
       decoration: TWidget.bBoxDecoration,
       child: Container(
-        width: Get.width/1.4,
+        width: Get.width/1.8,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
@@ -197,7 +198,7 @@ class TWidget{
 // border side
 
   static final borderSide=BorderSide(
-    color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+    color: Colors.white.withOpacity(0.1), // Adjust border color and opacity
     width: 10, // Adjust border width
   );
 
@@ -221,7 +222,19 @@ class TWidget{
           right: TWidget.borderSide,
           top: TWidget.borderSide
       ),
-      boxShadow:TWidget.boxShadow
+      boxShadow: [ BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: Offset(0, 10), // Upper shadow
+      ),
+    BoxShadow(
+      color: Colors.grey.withOpacity(0.5),
+      spreadRadius: -5,
+      blurRadius: 7,
+      offset: Offset(0, -10), // Lower shadow
+    ),
+    ],
   );
 
 
@@ -254,7 +267,7 @@ class TWidget{
 
   static final bShadow = BoxDecoration(
       color: TColors.background,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(15),
       border: Border(
           top: BorderSide(
             color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
@@ -273,10 +286,20 @@ class TWidget{
             width: 1, // Adjust border width
           )
       ),
-      boxShadow:[ BoxShadow(
-        color: Colors.black.withOpacity(0.3),
-        blurRadius: 5.0,
-      ),]
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: Offset(0, 3), // Upper shadow
+      ),
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: -5,
+        blurRadius: 7,
+        offset: Offset(0, -3), // Lower shadow
+      ),
+    ],
   );
 
 

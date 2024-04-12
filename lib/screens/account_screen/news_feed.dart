@@ -43,8 +43,8 @@ class NewsFeed extends StatelessWidget {
                     ),
                     SizedBox(height: 20,),
                     Container(
-                      height: 200,
-                      width: Get.width/2,
+                      height: 180,
+                      width: Get.width/1.4,
                       decoration: TWidget.boxDecoration,
                     )
                   ],

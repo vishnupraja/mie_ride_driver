@@ -40,7 +40,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         padding: EdgeInsets.symmetric(vertical: 15),
                         width: Get.width,
-                        decoration: TWidget.bBoxDecoration,
+                        decoration: TWidget.bShadow,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
@@ -104,6 +104,8 @@ class _BookingScreenState extends State<BookingScreen> {
                                       height: 30,
                                       decoration: TWidget.bBoxDecoration,
                                       child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           Text(TTexts.FinalCostText,
                                             style: FontsFamily.ExtraBold.copyWith(
@@ -113,7 +115,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           SizedBox(width: 10,),
                                           Text("${TTexts.Currency} 30",
                                             style: FontsFamily.ExtraBold.copyWith(
-                                                color: TColors.textPrimary,
+                                                color: TColors.buttonPrimary,
                                                 fontSize: 8.0
                                             ),)
                                         ],

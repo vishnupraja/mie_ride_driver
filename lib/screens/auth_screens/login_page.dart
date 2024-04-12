@@ -9,6 +9,7 @@ import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
+import '../../myApp.dart';
 import '../../route_helper/Route_Helper.dart';
 import '../../utils/static.dart';
 class LoginPage extends StatefulWidget {
@@ -42,26 +43,34 @@ class _LoginPageState extends State<LoginPage> {
               decoration: TWidget.boxDecoration,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Image.asset(LANDING_IMAGE,height: height/4,width: width/2.0 ,),
+                child: Image.asset(LANDING_IMAGE,height: height/3,width: width/2 ,),
               ),
             ),
             SizedBox(height: 20.0,),
-            Text("MIE RIDE",
-              style:FontsFamily.bropames.copyWith(
-                color: TColors.textPrimary,
-                fontSize: 35,
-              ) ,
+            Container(
+              height: 40,
+              child: Text("MIE RIDE",
+                style:FontsFamily.bropames.copyWith(
+                  color: TColors.textPrimary,
+                  fontSize: 40,
+                  letterSpacing: 1
+                ) ,
+              ),
             ),
-            Text("DRIVER",
-              style:FontsFamily.bropames.copyWith(
-                color: TColors.info,
-                fontSize: 35,
-              ) ,
+            Container(
+              height: 40,
+              child: Text("DRIVER",
+                style:FontsFamily.bropames.copyWith(
+                  color: TColors.buttonPrimary,
+                  fontSize: 40,
+                    letterSpacing: 1
+                ) ,
+              ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Text("Unlock your journey with ease",
               textAlign: TextAlign.center,
-              style: FontsFamily.ExtraBold.copyWith(
+              style: FontsFamily.Extralight.copyWith(
                 color: TColors.textPrimary,
                 fontSize: TSizes.fontSizeMd,
               ) ,

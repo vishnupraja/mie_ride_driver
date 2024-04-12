@@ -130,7 +130,7 @@ class TTexts {
 //====================accountDetailsScreen text --------------------
 
 
-  static const String   InteractEText = "InteractE-Transfer";
+  static const String   InteractEText = "Interac E-Transfer";
   static const String   DirectDepositText = "Direct Deposit Details";
   static const String   BankNameText = "Bank name";
   static const String   TransitNumberText = "Transit number";

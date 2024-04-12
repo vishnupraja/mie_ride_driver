@@ -23,6 +23,7 @@ class _HistoryState extends State<History> {
           children: [
             SizedBox(height: 30,),
             customAppbar(TTexts.HistoryText),
+            SizedBox(height: 10,),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
@@ -30,8 +31,8 @@ class _HistoryState extends State<History> {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                  return Container(
-                   margin: EdgeInsets.symmetric(vertical: 10),
-                   padding: EdgeInsets.all(10),
+                   margin: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                   padding: EdgeInsets.symmetric(vertical: 15,horizontal: 8),
                    decoration: TWidget.bShadow,
                    child: Row(
                       children: [

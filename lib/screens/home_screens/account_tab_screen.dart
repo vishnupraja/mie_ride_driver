@@ -19,16 +19,86 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Card(
+              color: TColors.background,
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                    )
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text(TTexts.AccountText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 50,),
-              customAppbar(TTexts.AccountText),
+            /*  Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: (){
+                    Get.back();
+                  },
+                  child: Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 2),
+                            child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                          )
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: Get.width/5,),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(TTexts.AccountText,
+                    textAlign: TextAlign.center,
+                    style: FontsFamily.ExtraBold.copyWith(
+                      color: TColors.textPrimary,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ],
+            ),*/
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Column(
                   children: [
                     customContainer(TTexts.ProfileText, userImage,(){
@@ -66,7 +136,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     }),
                     SizedBox(height: 10,),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
                       child: CustomButton(TTexts.SignOutText,BUTTON_IMAGE, () {
                        /* Get.offNamed(RouteHelper.getBottomPage());*/
                       }),

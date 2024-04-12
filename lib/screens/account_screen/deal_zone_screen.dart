@@ -13,18 +13,49 @@ class DealZone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                    )
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text(TTexts.DealsZoneText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
-          SizedBox(height: TSizes.xl,),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-              child: customAppbar(TTexts.DealsZoneText)),
           Expanded(child: ListView.builder(
             shrinkWrap: true,
               itemCount: 3,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                  margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                   padding: EdgeInsets.symmetric(  vertical: 10),
                   decoration: TWidget.bShadow,
                   child: Column(

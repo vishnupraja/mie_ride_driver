@@ -42,11 +42,15 @@ class _OngoingRideState extends State<OngoingRide> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                         Container(
-                           decoration: TWidget.bShadow,
+                         Card(
+                           elevation: 2,
+                           shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius
+                                   .circular(30)
+                           ),
                            child: Center(
                              child: ClipRRect(
-                               borderRadius: BorderRadius.circular(40),
+                               borderRadius: BorderRadius.circular(30),
                                  child: Image.asset(USER_IMAGE,height: 50,width: 50,fit: BoxFit.cover,)),
                            ),
                          ),

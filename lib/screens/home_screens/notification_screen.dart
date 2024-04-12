@@ -24,7 +24,7 @@ class NotificationScreen extends StatelessWidget {
             SizedBox(height: 20,),
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.only(bottom: 50),
+                padding: EdgeInsets.only(bottom: 20),
                 scrollDirection: Axis.vertical,
                 physics: AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,

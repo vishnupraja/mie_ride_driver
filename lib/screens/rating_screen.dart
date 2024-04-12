@@ -19,16 +19,69 @@ class _RatingScreenState extends State<RatingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                    )
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text("Ratings and Reviews",
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
         child: Column(
           children: [
-            SizedBox(height: Get.height/16,),
-            customAppbar("Ratings and Reviews"),
-            SizedBox(height: 30,),
             Container(
               padding: EdgeInsets.all(20),
-              decoration: TWidget.bBoxDecoration,
+              decoration: BoxDecoration(
+                color: TColors.background,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+                      width: 1, // Adjust border width
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // Upper shadow
+                  ),
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: -5,
+                    blurRadius: 7,
+                    offset: Offset(0, -3), // Lower shadow
+                  ),
+                ],
+              ),
               child: Text("3.8",
               style: FontsFamily.ExtraBold.copyWith(
                 fontSize: TSizes.fontSizeLg,
@@ -85,8 +138,12 @@ class _RatingScreenState extends State<RatingScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: TWidget.bShadow,
+                              Card(
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius
+                                        .circular(30)
+                                ),
                                 child: Center(
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(40),
@@ -95,7 +152,7 @@ class _RatingScreenState extends State<RatingScreen> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 12),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -148,7 +205,7 @@ class _RatingScreenState extends State<RatingScreen> {
                                             ),
                                           ),
                                           Container(
-                                            padding: EdgeInsets.all(2),
+                                            padding: EdgeInsets.all(3),
                                             decoration: TWidget.bShadow,
                                             child: Text("4.2",
                                               style: FontsFamily.ExtraBold.copyWith(

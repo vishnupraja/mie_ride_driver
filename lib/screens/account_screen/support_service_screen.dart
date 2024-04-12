@@ -14,53 +14,76 @@ class SupportService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            SizedBox(height: TSizes.appBarHeight,),
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: customAppbar(TTexts.SupportServicesText)),
-            Expanded(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40),
-                child: Column(
-                  children: [
-                    customContainer(TTexts.ContactFormText, contactFormImage,(){
-                      Get.toNamed(RouteHelper.getContactFormPage());
-                    }),
-                    SizedBox(height: 15,),
-                    customContainer(TTexts.FAQText, faqImage,(){
-                      Get.toNamed(RouteHelper.getFAQPage());
-                    }),
-                    SizedBox(height: 15,),
-                    customContainer(TTexts.TermsConditionsText, termConditionImage,(){
-                      Get.toNamed(RouteHelper.getTermConditionPage());
-                    }),
-                    SizedBox(height: 15,),
-                    customContainer(TTexts.PrivacyText, privacyImage,(){
-                      Get.toNamed(RouteHelper.getPrivacyPolicyPage());
-                    }),
-                    SizedBox(height: 50 ,),
-                   Center(
-                     child: Container(
-                       height: 50,
-                       width: 160,
-                       decoration: TWidget.bShadow,
-                       child: Center(
-                         child: Text(TTexts.DeleteAccountText,
-                         style: FontsFamily.ExtraBold.copyWith(
-                           fontSize: TSizes.fontSizeMd,
-                           color: TColors.acceptColor
-                         ),),
-                       ),
-                     ),
-                   )
-                  ],
+                padding: const EdgeInsets.all(5),
+                child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                    )
                 ),
               ),
             ),
+          ),
+        ),
+        title: Text(TTexts.SupportServicesText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            SizedBox(height: TSizes.xl,),
+            customContainer(TTexts.ContactFormText, contactFormImage,(){
+              Get.toNamed(RouteHelper.getContactFormPage());
+            }),
+            SizedBox(height: 15,),
+            customContainer(TTexts.FAQText, faqImage,(){
+              Get.toNamed(RouteHelper.getFAQPage());
+            }),
+            SizedBox(height: 15,),
+            customContainer(TTexts.TermsConditionsText, termConditionImage,(){
+              Get.toNamed(RouteHelper.getTermConditionPage());
+            }),
+            SizedBox(height: 15,),
+            customContainer(TTexts.PrivacyText, privacyImage,(){
+              Get.toNamed(RouteHelper.getPrivacyPolicyPage());
+            }),
+            SizedBox(height: 50 ,),
+                           Center(
+             child: Container(
+               height: 50,
+               width: 160,
+               decoration: TWidget.bShadow,
+               child: Center(
+                 child: Text(TTexts.DeleteAccountText,
+                 style: FontsFamily.ExtraBold.copyWith(
+                   fontSize: TSizes.fontSizeMd,
+                   color: TColors.acceptColor
+                 ),),
+               ),
+             ),
+                           ),
           ],
         ),
       ),

@@ -9,6 +9,7 @@ import 'package:mie_ride_driver/utils/static.dart';
 
 import '../../constant/image_string/image_string.dart';
 import '../../constant/text_strings.dart';
+import '../../myApp.dart';
 import '../bottom_screen.dart';
 
 class LandingPage extends StatefulWidget {
@@ -33,10 +34,11 @@ class _LandingPageState extends State<LandingPage> {
               decoration: TWidget.boxDecoration,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Image.asset(LANDING_IMAGE,height: height/3,width: width/1.7 ,),
+                child: Image(image: AssetImage(LANDING_IMAGE),
+                  height: MediaQuery.of(context).size.height/3,width: MediaQuery.of(context).size.width/2 ,),
               ),
             ),
-            SizedBox(height: 30.0,),
+            SizedBox(height: 40.0,),
             Text(TTexts.appName,
             style:FontsFamily.bropames.copyWith(
               color: TColors.textPrimary,
@@ -45,8 +47,8 @@ class _LandingPageState extends State<LandingPage> {
             ),
             Text(TTexts.appName2,
               style:FontsFamily.bropames.copyWith(
-                color: TColors.info,
-                fontSize: 40,
+                color: TColors.buttonPrimary,
+                fontSize: 35,
               ) ,
             ),
             SizedBox(height: 20,),
@@ -57,8 +59,7 @@ class _LandingPageState extends State<LandingPage> {
                 fontSize: TSizes.fontSizeMd,
               ) ,
             ),
-            SizedBox(height: 20,),
-
+            SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: InkWell(
