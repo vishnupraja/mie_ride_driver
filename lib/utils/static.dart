@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/constant/sizes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,7 +58,7 @@ Widget customContainer(String text,String image,VoidCallback callback){
       margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
       padding: EdgeInsets.symmetric(horizontal: 12),
       height: 50,
-      decoration: TWidget.bShadow,
+      decoration: TWidget.rShadow,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +106,7 @@ class CustomField extends StatelessWidget {
         width: context.width,
         padding: const EdgeInsets.only(left: 10),
         margin: const EdgeInsets.only(top: 5),
-        decoration: TWidget.bBoxDecoration,
+        decoration: TWidget.rShadow,
         child: Center(
           child: TextFormField(
             style: FontsFamily.ExtraBold.copyWith(
@@ -134,7 +138,7 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
       callback();
     },
     child: Container(
-      decoration: TWidget.bBoxDecoration,
+      decoration: TWidget.rShadow,
       child: Container(
         width: Get.width/1.8,
         child: Center(
@@ -161,6 +165,8 @@ Widget CustomButton(String text,String image ,VoidCallback callback){
 
 class MySharedPreferences{
 
+  String USER_ID = "USER_ID";
+  String Login_key = "Login_key";
 
   void setStringValue(String key,String value)async{
     SharedPreferences sp = await SharedPreferences.getInstance();
@@ -198,7 +204,7 @@ class TWidget{
 // border side
 
   static final borderSide=BorderSide(
-    color: Colors.white.withOpacity(0.1), // Adjust border color and opacity
+    color: Colors.white.withOpacity(0.3), // Adjust border color and opacity
     width: 10, // Adjust border width
   );
 
@@ -303,13 +309,146 @@ class TWidget{
   );
 
 
+  static final rShadow = BoxDecoration(
+      color: TColors.background,
+      borderRadius: BorderRadius.circular(15),
+    border: Border.all(color: TColors.background),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.3),
+        spreadRadius: 2,
+        blurRadius: 2,
+        offset: Offset(2, 2), // changes position of shadow
+      ),
+    ],
+  );
+
+
+  static final lShadow = BoxDecoration(
+      color: TColors.background,
+      borderRadius: BorderRadius.circular(15),
+
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 2,
+        blurRadius: 2,
+        offset: Offset(-2, 2), // Adjust these values
+      ),
+      BoxShadow(
+        color: TColors.background.withOpacity(0.5),
+        spreadRadius: 2,
+        blurRadius: 2,
+        offset: Offset(2, -2), // Adjust these values
+      ),
+    ],
+  );
+
+
 
 
 }
 
-class CountryEntity {
-  final String name;
-  final String code;
+class ImageHelper {
+  static Future<void> pickImage(ImageSource source, Function(File) setImageFile) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source,);
 
-  CountryEntity(this.name, this.code);
+    if (pickedFile != null) {
+      // Check if the picked file has a valid extension
+      final isValidExtension = ['png', 'jpg', 'jpeg'].contains(pickedFile.path.split('.').last.toLowerCase());
+      if (isValidExtension) {
+        setImageFile(File(pickedFile.path));
+      } else {
+        Get.back();
+        customSnackBar('Invalid file format. Please select a PNG, JPG, or JPEG file.');
+      }
+    } else {
+      // Handle cancel or no selection
+      Get.back();
+    }
+
+  }
+
+  static void showImagePickerBottomSheet(BuildContext context, Function(ImageSource, Function(File)) pickImage) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoTheme(
+            data: CupertinoThemeData(
+              brightness: Brightness.light, // You can change brightness here
+              primaryColor: TColors.background, // You can change primaryColor here
+              scaffoldBackgroundColor: TColors.background, // You can change background color here
+            ),
+        child:  CupertinoActionSheet(
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              onPressed: () {
+                pickImage(ImageSource.gallery, (file) {
+                  Navigator.pop(context);
+                });
+              },
+              child: Text('Gallery',style: FontsFamily.ExtraBold.copyWith(
+                color: TColors.textPrimary,
+                fontSize: 20
+              ),),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                pickImage(ImageSource.camera, (file) {
+                  Navigator.pop(context);
+                });
+              },
+              child: Text('Camera',style: FontsFamily.ExtraBold.copyWith(
+                  color: TColors.textPrimary,
+                  fontSize: 20
+              ),),
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Cancel',style: FontsFamily.ExtraBold.copyWith(
+                color: TColors.acceptColor,
+                fontSize: 20
+            ),),
+          ),
+        )
+        );
+      },
+    );
+  }
 }
+
+void customSnackBar(String message){
+  Get.showSnackbar(GetSnackBar(
+    backgroundColor: TColors.textPrimary,
+    borderRadius: 10,
+    duration: Duration(seconds: 2),
+    maxWidth: Get.width/1.1,
+    message: message,
+    snackPosition: SnackPosition.BOTTOM,
+    margin: EdgeInsets.only(bottom: 20),
+  ));
+}
+
+bool isValidEmail(String email) {
+  RegExp regex = RegExp(r'^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$');
+  return regex.hasMatch(email);
+}
+
+Widget loader(){
+  return Center(
+    child: Image.asset("assets/mierideloader.gif",height: 50,width: 50,),
+  );
+}
+
+
+
+
+
+
+
+
+

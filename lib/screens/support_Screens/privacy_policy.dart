@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/controllers/profile_Controller.dart';
+import 'package:mie_ride_driver/utils/static.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
-import '../../constant/sizes.dart';
-import '../../utils/static.dart';
+
 
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
@@ -13,6 +16,8 @@ class PrivacyPolicy extends StatefulWidget {
 }
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +25,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         elevation: 0,
         backgroundColor: TColors.background,
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Padding(
@@ -35,7 +40,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2),
-                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                      child: Icon(
+                        Icons.arrow_back_ios, color: TColors.textPrimary,
+                        size: 20,),
                     )
                 ),
               ),
@@ -51,12 +58,18 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(height: TSizes.appBarHeight,),
-        ],
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        height: Get.height / 1.2,
+        width: Get.width,
+        decoration: TWidget.rShadow,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Html(data: "${Get.find<ProfileController>().privacy}")
+            ]
+        ),
       ),
     );
-
   }
 }

@@ -1,16 +1,21 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mie_ride_driver/constant/text_strings.dart';
+import 'package:mie_ride_driver/controllers/auth_controller.dart';
+import 'package:mie_ride_driver/screens/loader.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
+
+
 import '../../myApp.dart';
-import '../../route_helper/Route_Helper.dart';
+
 import '../../utils/static.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,11 +28,10 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController passwordCtr = TextEditingController();
   TextEditingController phoneCtr = TextEditingController();
-
   bool isHide = true;
 
-  String countryCode = "US";
-  String countryFlag = "";
+  String countryCode = "";
+  String countryFlag = "US";
 
   @override
   Widget build(BuildContext context) {
@@ -83,20 +87,34 @@ class _LoginPageState extends State<LoginPage> {
                 width: context.width,
                 margin: EdgeInsets.only(top: 5),
                 padding: EdgeInsets.only(left: 10),
-                decoration: TWidget.bBoxDecoration,
+                decoration: TWidget.rShadow,
                 child: Center(
                   child: IntlPhoneField(
+                    style: FontsFamily.ExtraBold.copyWith(
+                        color: TColors.textPrimary,
+                        fontSize: TSizes.fontSizeMd
+                    ),
+                    dropdownTextStyle: FontsFamily.ExtraBold
+                        .copyWith(
+                        color: TColors.textPrimary,
+                        fontSize: TSizes.fontSizeMd
+                    ),
                     flagsButtonMargin: EdgeInsets.only(top: 3.0),
                     controller: phoneCtr,
                     textInputAction: TextInputAction.next,
                     showDropdownIcon: false,
                     autovalidateMode: AutovalidateMode.disabled,
-                    /*disableLengthCheck: true,*/
-                    initialCountryCode: TTexts.countryCode,
+                    initialCountryCode: TTexts.countryFlag,
                     decoration:  InputDecoration(
                         counterText: "",
-                        hintStyle:
-                        FontsFamily.ExtraBold.copyWith(color: TColors.textSecondary, fontSize: 15),
+                        hintStyle: FontsFamily
+                            .ExtraBold
+                            .copyWith(
+                            color: TColors
+                                .textSecondary,
+                            fontSize: TSizes
+                                .fontSizeMd
+                        ),
                         hintText: TTexts.phoneNo,
                         focusedBorder: InputBorder.none,
                         border: InputBorder.none,
@@ -166,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
               child: CustomButton(TTexts.loginButtonText,BUTTON_IMAGE, () {
-                Get.offNamed(RouteHelper.getBottomPage());
+                getData();
               }),
             )
           ],
@@ -174,4 +192,15 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  void getData()async{
+    if(phoneCtr.text.isEmpty){
+      customSnackBar("Please enter mobile number");
+    }else if(passwordCtr.text.isEmpty){
+      customSnackBar("Please enter your password");
+    }else{
+      Get.find<AuthController>().login(phoneCtr.text, passwordCtr.text, countryCode.toString());
+    }
+  }
+
 }

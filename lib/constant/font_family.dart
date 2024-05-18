@@ -10,7 +10,7 @@ class FontsFamily {
   TextStyle(fontFamily: _FONT_FAMILY, fontWeight: FontWeight.w500);
 
   static TextStyle Extralight =
-  TextStyle(fontFamily: FONT_FAMILY, fontWeight: FontWeight.w600);
+  TextStyle(fontFamily: FONT_FAMILY, fontWeight: FontWeight.w700);
 
   static TextStyle ExtraBold =
   TextStyle(fontFamily: FONT_FAMILY, fontWeight: FontWeight.w800);

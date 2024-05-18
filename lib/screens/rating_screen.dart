@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/colors.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/constant/sizes.dart';
+import 'package:mie_ride_driver/controllers/single_controller.dart';
 import 'package:mie_ride_driver/utils/static.dart';
 
 import '../constant/image_string/image_string.dart';
@@ -16,123 +17,134 @@ class RatingScreen extends StatefulWidget {
 }
 
 class _RatingScreenState extends State<RatingScreen> {
+
+  var controller = Get.find<SingleController>();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      controller.fetchRating("hello");
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: TColors.background,
-        leading: InkWell(
-          onTap: (){
-            Get.back();
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Card(
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
-                    )
+    return Obx(() {
+      var list = controller.ratingList.value!;
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: TColors.background,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 2),
+                        child: Icon(Icons.arrow_back_ios,
+                          color: TColors.textPrimary, size: 20,),
+                      )
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        title: Text("Ratings and Reviews",
-          textAlign: TextAlign.center,
-          style: FontsFamily.ExtraBold.copyWith(
-            color: TColors.textPrimary,
-            fontSize: 25,
+          title: Text("Ratings and Reviews",
+            textAlign: TextAlign.center,
+            style: FontsFamily.ExtraBold.copyWith(
+              color: TColors.textPrimary,
+              fontSize: 25,
+            ),
           ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: TColors.background,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
-                      width: 1, // Adjust border width
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: TColors.background,
+                  borderRadius: BorderRadius.circular(50),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 2,
+                      offset: Offset(-2, 2), // changes position of shadow
+                    ),
+                  ],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // Upper shadow
-                  ),
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: -5,
-                    blurRadius: 7,
-                    offset: Offset(0, -3), // Lower shadow
-                  ),
-                ],
+                child: Text(list.overallRating,
+                  style: FontsFamily.ExtraBold.copyWith(
+                      fontSize: TSizes.fontSizeLg,
+                      color: TColors.info
+                  ),),
               ),
-              child: Text("3.8",
-              style: FontsFamily.ExtraBold.copyWith(
-                fontSize: TSizes.fontSizeLg,
-                color: TColors.info
-              ),),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 30),
-              padding: EdgeInsets.symmetric(horizontal: 50,vertical: 10),
-              decoration: TWidget.bShadow,
-              child: RatingBarIndicator(
-                rating: 5,
-                itemBuilder: (context, index) => Icon(
-                  Icons.star,
-                  color: TColors.info,
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                decoration: TWidget.rShadow,
+                child: RatingBarIndicator(
+                    rating: double.parse(list.overallRating),
+                    itemBuilder: (context, index) =>
+                        Icon(
+                          Icons.star,
+                          color: TColors.info,
+                        ),
+                    itemCount: 5,
+                    itemSize: 25.0,
+                    unratedColor: Colors.amber.withAlpha(50),
+                    direction: Axis.horizontal,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0)
                 ),
-                itemCount: 5,
-                itemSize: 25.0,
-                unratedColor: Colors.amber.withAlpha(50),
-                direction:  Axis.horizontal,
-                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0)
               ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: TWidget.bShadow,
-              child: Column(
-                children: [
-                  chartRow(context, '5 star', double.parse("36"),Colors.green),
-                  chartRow(context, '4 star', double.parse("16"),Colors.green),
-                  chartRow(context, '3 star', double.parse("76"),Colors.green),
-                  chartRow(context, '2 star', double.parse("36"),Colors.green),
-                  chartRow(context, '1 star', double.parse("36"),Colors.green),
-                ],
+              SizedBox(height: 20,),
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: TWidget.rShadow,
+                child: Column(
+                  children: [
+                    chartRow(context, '5 star', double.parse(list.star5RatedPer), Colors.green),
+                    chartRow(
+                        context, '4 star', double.parse(list.star4RatedPer), Colors.green),
+                    chartRow(
+                        context, '3 star', double.parse(list.star3RatedPer), Colors.green),
+                    chartRow(
+                        context, '2 star', double.parse(list.star2RatedPer), Colors.green),
+                    chartRow(
+                        context, '1 star', double.parse(list.star1RatedPer), Colors.green),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20,),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 5,
-              shrinkWrap: true,
+              SizedBox(height: 20,),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: list.details.length,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  var lists = list.details[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       padding: EdgeInsets.symmetric(vertical: 15),
                       width: Get.width,
-                      decoration: TWidget.bShadow,
+                      decoration: TWidget.rShadow,
                       child: Column(
                         children: [
                           Row(
@@ -147,45 +159,68 @@ class _RatingScreenState extends State<RatingScreen> {
                                 child: Center(
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(40),
-                                      child: Image.asset(USER_IMAGE,height: 50,width: 50,fit: BoxFit.cover,)),
+                                      child:  FadeInImage.assetNetwork(
+                                        placeholder: 'assets/userload.gif',
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                        image: lists.image,
+                                        imageErrorBuilder: (c, o,
+                                            s) =>
+                                            Image.asset(
+                                              USER_IMAGE, height: 50,
+                                              width: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                      )),
                                 ),
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
                                         children: [
                                           Text("Sadhu",
-                                            style: FontsFamily.ExtraBold.copyWith(
+                                            style: FontsFamily.ExtraBold
+                                                .copyWith(
                                                 color: TColors.info,
                                                 fontSize: TSizes.fontSizeLg
                                             ),),
                                           RatingBarIndicator(
-                                              rating: 5,
-                                              itemBuilder: (context, index) => Icon(
-                                                Icons.star,
-                                                color: TColors.info,
-                                              ),
-                                              itemCount: 5,
-                                              itemSize: 15.0,
-                                              unratedColor: Colors.amber.withAlpha(50),
-                                              direction:  Axis.horizontal,
+                                            rating: double.parse(lists.userRatedToDriver),
+                                            itemBuilder: (context, index) =>
+                                                Icon(
+                                                  Icons.star,
+                                                  color: TColors.info,
+                                                ),
+                                            itemCount: 5,
+                                            itemSize: 15.0,
+                                            unratedColor: Colors.amber
+                                                .withAlpha(50),
+                                            direction: Axis.horizontal,
                                           ),
                                         ],
                                       ),
                                       Row(
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .center,
                                             children: [
-                                              Image.asset(calenderImage,height: 15,width: 15,),
+                                              Image.asset(
+                                                calenderImage, height: 15,
+                                                width: 15,),
                                               SizedBox(width: 10,),
-                                              Text("2023/12/13",
-                                                style: FontsFamily.ExtraBold.copyWith(
+                                              Text(lists.date,
+                                                style: FontsFamily.ExtraBold
+                                                    .copyWith(
                                                     fontSize: TSizes.fontSizeSm
                                                 ),)
                                             ],
@@ -193,22 +228,28 @@ class _RatingScreenState extends State<RatingScreen> {
                                           SizedBox(width: 10,),
                                           Flexible(
                                             child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment
+                                                  .center,
                                               children: [
-                                                Image.asset(timeImage,height: 15,width: 15,),
+                                                Image.asset(
+                                                  timeImage, height: 15,
+                                                  width: 15,),
                                                 SizedBox(width: 10,),
-                                                Text("4:30 PM",
-                                                  style: FontsFamily.ExtraBold.copyWith(
-                                                      fontSize: TSizes.fontSizeSm
+                                                Text(lists.time,
+                                                  style: FontsFamily.ExtraBold
+                                                      .copyWith(
+                                                      fontSize: TSizes
+                                                          .fontSizeSm
                                                   ),)
                                               ],
                                             ),
                                           ),
                                           Container(
                                             padding: EdgeInsets.all(3),
-                                            decoration: TWidget.bShadow,
-                                            child: Text("4.2",
-                                              style: FontsFamily.ExtraBold.copyWith(
+                                            decoration: TWidget.rShadow,
+                                            child: Text(lists.userRatedToDriver,
+                                              style: FontsFamily.ExtraBold
+                                                  .copyWith(
                                                   fontSize: TSizes.fontSizeMd,
                                                   color: TColors.info
                                               ),),
@@ -222,10 +263,10 @@ class _RatingScreenState extends State<RatingScreen> {
                             ],
                           ),
                           Container(
-                            width: Get.width/2,
-                            child: Text('"great driver"',
+                            width: Get.width / 2,
+                            child: Text('"${lists.userFeedbackToDriver}"',
                               style: FontsFamily.ExtraBold.copyWith(
-                                  fontSize: TSizes.fontSizeMd
+                                  fontSize: 13
                               ),),
                           )
                         ],
@@ -233,13 +274,15 @@ class _RatingScreenState extends State<RatingScreen> {
                     ),
                   );
                 },)
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget chartRow(BuildContext context, String label, double pct, Color color,) {
+  Widget chartRow(BuildContext context, String label, double pct,
+      Color color,) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
@@ -255,26 +298,28 @@ class _RatingScreenState extends State<RatingScreen> {
           Text("0"),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-            child:Stack(
+            child: Stack(
               children: [
                 Container(
                   width: Get.width * 0.50,
-                  height: 10,
-                  decoration: TWidget.bShadow,
+                  height: 12,
+                  decoration: TWidget.rShadow,
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: LinearProgressIndicator(
                         backgroundColor: TColors.background,
-                        value: pct/100,
-                        valueColor: AlwaysStoppedAnimation<Color>(TColors.background)),
+                        value: pct / 100,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            TColors.background)),
                   ),
                 ),
                 Positioned(
-                  left: (Get.width * 0.50) * (pct / 100) - 10, // Adjusting circle position based on progress
+                  left: (Get.width * 0.50) * (pct / 100) - 10,
+                  // Adjusting circle position based on progress
                   top: 0,
                   child: Container(
                     width: 20, // Width of the circle
-                    height: 10, // Height of the circle
+                    height: 12, // Height of the circle
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,

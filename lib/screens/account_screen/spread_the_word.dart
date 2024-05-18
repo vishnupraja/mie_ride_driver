@@ -19,6 +19,7 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff7f7f7),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: TColors.background,
@@ -61,31 +62,11 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
             Container(
               height: Get.height/2.5,
               width: Get.width/1.8,
-              decoration: TWidget.boxDecoration,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(SpreadImage,height: 70,width: 70,),
-                  SizedBox(height:TSizes.md,),
-                  Text(TTexts.SpreadText,
-                    textAlign: TextAlign.center,
-                    style: FontsFamily.ExtraBold.copyWith(
-                      color: TColors.textPrimary,
-                      fontSize: TSizes.fontSizeLg,
-                      letterSpacing: 1,
-                    ),),
-                  SizedBox(height:TSizes.md,),
-                  Text(TTexts.ExpandText,
-                    textAlign: TextAlign.center,
-                    style: FontsFamily.ExtraBold.copyWith(
-                        color: TColors.textPrimary,
-                        fontSize: TSizes.fontSizeMd
-                    ),)
-                ],
+              decoration: BoxDecoration(
+                  color: Color(0xFFf7f7f7),
+                  image: DecorationImage(image: AssetImage("assets/sp.png"),),
               ),
             ),
-            SizedBox(height: 30,),
             Text(TTexts.inviteText,
               textAlign: TextAlign.center,
               style: FontsFamily.ExtraBold.copyWith(

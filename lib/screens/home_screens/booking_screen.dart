@@ -115,7 +115,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                           SizedBox(width: 10,),
                                           Text("${TTexts.Currency} 30",
                                             style: FontsFamily.ExtraBold.copyWith(
-                                                color: TColors.buttonPrimary,
+                                                color: TColors.info,
                                                 fontSize: 8.0
                                             ),)
                                         ],
@@ -158,7 +158,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                         SizedBox(width: 5,),
                                         Text("2023/12/13",
                                           style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.info,
+                                              color: TColors.textPrimary,
                                               fontSize: 8
                                           ),)
                                       ],
@@ -169,11 +169,11 @@ class _BookingScreenState extends State<BookingScreen> {
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Image.asset(timeImage,height: 15,width: 15,),
+                                        Image.asset(timeImage,height: 15,width: 15,color: TColors.info),
                                         SizedBox(width: 5,),
                                         Text("4:30 PM",
                                           style: FontsFamily.ExtraBold.copyWith(
-                                              color: TColors.info,
+                                              color: TColors.textPrimary,
                                               fontSize: 8
                                           ),)
                                       ],

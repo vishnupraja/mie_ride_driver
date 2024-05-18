@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mie_ride_driver/controllers/profile_Controller.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
@@ -117,16 +119,21 @@ class _ContactFormState extends State<ContactForm> {
                   ),
                   SizedBox(height: 30,),
                   Center(
-                    child: Container(
-                      height: 50,
-                      width: 160,
-                      decoration: TWidget.bShadow,
-                      child: Center(
-                        child: Text(TTexts.SendMessageText,
-                          style: FontsFamily.ExtraBold.copyWith(
-                              fontSize: TSizes.fontSizeMd,
-                            color: TColors.info
-                          ),),
+                    child: InkWell(
+                      onTap: (){
+                        validation();
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 160,
+                        decoration: TWidget.bShadow,
+                        child: Center(
+                          child: Text(TTexts.SendMessageText,
+                            style: FontsFamily.ExtraBold.copyWith(
+                                fontSize: TSizes.fontSizeMd,
+                              color: TColors.info
+                            ),),
+                        ),
                       ),
                     ),
                   )
@@ -138,4 +145,21 @@ class _ContactFormState extends State<ContactForm> {
       ),
     );
   }
+
+  void validation()async{
+    if(nameCtr.text.isEmpty){
+      customSnackBar("Please enter name");
+    }else if(emailCtr.text.isEmpty){
+      customSnackBar("Please enter email address");
+    }else if(!isValidEmail(emailCtr.text)){
+      customSnackBar("Please enter valid email address");
+    }else if(subCtr.text.isEmpty){
+      customSnackBar("Please enter subject line");
+    }else if(msgCtr.text.isEmpty){
+      customSnackBar("Please enter your message");
+    }else{
+      Get.find<ProfileController>().writeSupport(nameCtr.text, emailCtr.text, subCtr.text, msgCtr.text);
+    }
+  }
+
 }

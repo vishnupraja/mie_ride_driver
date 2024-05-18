@@ -11,6 +11,7 @@ import 'package:mie_ride_driver/screens/auth_screens/signup_screen2.dart';
 import 'package:mie_ride_driver/screens/auth_screens/splash_screen.dart';
 import 'package:mie_ride_driver/screens/bottom_screen.dart';
 import 'package:mie_ride_driver/screens/account_screen/profile_screen.dart';
+import 'package:mie_ride_driver/screens/rating_screen.dart';
 import 'package:mie_ride_driver/screens/share_route_screen.dart';
 import 'package:mie_ride_driver/screens/support_Screens/faq_screen.dart';
 import 'package:mie_ride_driver/screens/support_Screens/privacy_policy.dart';
@@ -54,6 +55,7 @@ class RouteHelper {
   static String messageScreen = "/messageScreen";
   static String ongoingRide = "/ongoingRide";
   static String acceptRide = "/acceptRide";
+  static String rating = "/rating";
 
 
 
@@ -82,6 +84,7 @@ class RouteHelper {
   static String getMessageScreenPage() => messageScreen;
   static String getOngoingRidePage() => ongoingRide;
   static String getAcceptRidePage() =>  acceptRide;
+  static String getRatingPage() =>  rating;
 
   static List<GetPage> route = [
     
@@ -109,6 +112,7 @@ class RouteHelper {
     GetPage(name: messageScreen, page: () => MessageScreen()),
     GetPage(name: ongoingRide, page: () => OngoingRide()),
     GetPage(name: acceptRide, page: () => AcceptRide()),
+    GetPage(name: rating, page: () => RatingScreen()),
   ];
 
 

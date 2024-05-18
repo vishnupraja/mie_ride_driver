@@ -1,16 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/colors.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/constant/sizes.dart';
+import 'package:mie_ride_driver/controllers/permission_controller.dart';
+import 'package:mie_ride_driver/main.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 import 'package:mie_ride_driver/utils/static.dart';
-
-
-import '../../constant/image_string/image_string.dart';
 import '../../constant/text_strings.dart';
+import '../../controllers/profile_Controller.dart';
 import '../../myApp.dart';
-import '../bottom_screen.dart';
+import '../loader.dart';
+
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -20,10 +23,19 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
+  MySharedPreferences sp = MySharedPreferences();
+
+  @override
+  void initState() {
+    getData();
+    Get.find<PermissionController>().permissionHandle();
+    Get.find<PermissionController>().handleLocationPermission();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var height = Get.height;
-    var width = Get.width;
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: 80),
@@ -67,7 +79,7 @@ class _LandingPageState extends State<LandingPage> {
                   Get.toNamed(RouteHelper.getSignupPage());
                 },
                 child: Container(
-                  decoration: TWidget.bBoxDecoration,
+                  decoration: TWidget.rShadow,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Center(
@@ -90,7 +102,7 @@ class _LandingPageState extends State<LandingPage> {
                   Get.toNamed(RouteHelper.getLoginPage());
                 },
                 child: Container(
-                  decoration: TWidget.bBoxDecoration,
+                  decoration: TWidget.rShadow,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Center(
@@ -110,5 +122,20 @@ class _LandingPageState extends State<LandingPage> {
       ),
     );
   }
+
+  getData() {
+    Future.delayed(Duration.zero, () async {
+      LoadingDialog.show();
+      if (await sp.getBoolValue(sp.Login_key) != true) {
+        LoadingDialog.hide();
+      } else {
+        Timer(Duration(seconds: 1), () {
+          LoadingDialog.hide();
+          Get.offAllNamed(RouteHelper.getBottomPage());
+        });
+      }
+    });
+  }
+
 }
 

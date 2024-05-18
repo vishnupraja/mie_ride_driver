@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mie_ride_driver/controllers/wallete_controller.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
 import '../../utils/static.dart';
+
 class AccountDetail extends StatefulWidget {
   const AccountDetail({super.key});
 
@@ -21,176 +26,342 @@ class _AccountDetailState extends State<AccountDetail> {
   TextEditingController iNumber = TextEditingController();
   TextEditingController account = TextEditingController();
 
+  String email = "";
+  String deposit = "";
+
+  final controller = Get.find<WalletController>();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero,(){
+      controller.fetchBankDetails(() {
+
+        emailCtr.text = controller.emailCtr.value;
+        bName.text = controller.bName.value;
+        tNumber.text = controller.tNumber.value;
+        iNumber.text = controller.iNumber.value;
+        account.text = controller.account.value;
+        if (controller.type.value == "Direct_Deposite") {
+          deposit = controller.type.value;
+        } else {
+          email = controller.type.value;
+        }
+        setState(() {
+
+        });
+
+      });
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          children: [
-            SizedBox(height: 30,),
-            customAppbar(TTexts.AccountDetailsText),
-            SizedBox(height: 20,),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-                    margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                    width: Get.width,
-                    decoration: TWidget.bShadow,
-                    child: Column(
-                      children: [
-                        Row(
+    return Obx(() {
+      return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            children: [
+              SizedBox(height: 30,),
+              customAppbar(TTexts.AccountDetailsText),
+              SizedBox(height: 20,),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20,
+                            horizontal: 10),
+                        margin: EdgeInsets.symmetric(horizontal: 5,
+                            vertical: 5),
+                        width: Get.width,
+                        decoration: TWidget.bShadow,
+                        child: Column(
                           children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: TColors.background,
-                                borderRadius: TWidget.borderRadiusOnly,
-                                boxShadow: TWidget.boxShadow,
-                              ),
-                              child: Center(
-                                child: Icon(Icons.check_circle, color: TColors.textPrimary),
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(TTexts.InteractEText,
-                                  style: FontsFamily.ExtraBold.copyWith(
-                                      fontSize: TSizes.fontSizeELg,
-                                      color: TColors.textPrimary
-                                  ),),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        CustomField(
-                          size: TSizes.fontSizeMd,
-                          hintText: TTexts.email,
-                          textInputType: TextInputType.emailAddress,
-                          textEditingController: emailCtr,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-                    margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                    width: Get.width,
-                    decoration: TWidget.bShadow,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: TColors.background,
-                                borderRadius: TWidget.borderRadiusOnly,
-                                boxShadow: TWidget.boxShadow,
-                              ),
-                              child: Center(
-                                child: Icon(Icons.check_circle, color: TColors.rideCompleteColor),
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(TTexts.DirectDepositText,
-                                  style: FontsFamily.ExtraBold.copyWith(
-                                      fontSize: TSizes.fontSizeELg,
-                                      color: TColors.textPrimary
-                                  ),),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        CustomField(
-                          size: TSizes.fontSizeMd,
-                          hintText: TTexts.BankNameText,
-                          textInputType: TextInputType.text,
-                          textEditingController: bName,
-                        ),
-                        CustomField(
-                          size: TSizes.fontSizeMd,
-                          hintText: TTexts.TransitNumberText,
-                          textInputType: TextInputType.text,
-                          textEditingController: tNumber,
-                        ),
-                        CustomField(
-                          size: TSizes.fontSizeMd,
-                          hintText: TTexts.InstitutionNumberText,
-                          textInputType: TextInputType.text,
-                          textEditingController: iNumber,
-                        ),
-                        CustomField(
-                          size: TSizes.fontSizeMd,
-                          hintText: TTexts.AccountText,
-                          textInputType: TextInputType.text,
-                          textEditingController: account,
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              decoration: TWidget.bBoxDecoration,
-                              child: Container(
-                                width: Get.width/1.6,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-                                  child: Text(TTexts.UploadDirectDepositText,
-                                    style: FontsFamily.ExtraBold.copyWith(
-                                        color: TColors.textSecondary,
-                                        fontSize: TSizes.fontSizeMd
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      email = "Interac_Etransfer";
+                                      deposit = "";
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: TColors.background,
+                                      borderRadius: TWidget.borderRadiusOnly,
+                                      boxShadow: TWidget.boxShadow,
+                                    ),
+                                    child: Center(
+                                      child: Icon(Icons.check_circle,
+                                          color: email == "Interac_Etransfer" ? TColors
+                                              .rideCompleteColor : TColors
+                                              .textPrimary),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Card(
-                                elevation: 2,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50)
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(TTexts.InteractEText,
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          fontSize: TSizes.fontSizeELg,
+                                          color: TColors.textPrimary
+                                      ),),
+                                  ),
                                 ),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: Image.asset(USER_IMAGE,height: 50,width: 50,fit: BoxFit.cover,))
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.email,
+                              textInputType: TextInputType.emailAddress,
+                              textEditingController: emailCtr,
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 20,),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20,
+                            horizontal: 10),
+                        margin: EdgeInsets.symmetric(horizontal: 5,
+                            vertical: 5),
+                        width: Get.width,
+                        decoration: TWidget.bShadow,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      deposit = "Direct_Deposite";
+                                      email = "";
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: TColors.background,
+                                      borderRadius: TWidget.borderRadiusOnly,
+                                      boxShadow: TWidget.boxShadow,
+                                    ),
+                                    child: Center(
+                                      child: Icon(Icons.check_circle,
+                                          color: deposit == "Direct_Deposite"
+                                              ? TColors
+                                              .rideCompleteColor
+                                              : TColors
+                                              .textPrimary),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(TTexts.DirectDepositText,
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          fontSize: TSizes.fontSizeELg,
+                                          color: TColors.textPrimary
+                                      ),),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.BankNameText,
+                              textInputType: TextInputType.text,
+                              textEditingController: bName,
+                            ),
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.TransitNumberText,
+                              textInputType: TextInputType.text,
+                              textEditingController: tNumber,
+                            ),
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.InstitutionNumberText,
+                              textInputType: TextInputType.text,
+                              textEditingController: iNumber,
+                            ),
+                            CustomField(
+                              size: TSizes.fontSizeMd,
+                              hintText: TTexts.AccountText,
+                              textInputType: TextInputType.number,
+                              textEditingController: account,
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    _showImagePickerBottomSheet(context);
+                                  },
+                                  child: Container(
+                                    decoration: TWidget.bBoxDecoration,
+                                    child: Container(
+                                      width: Get.width / 1.6,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 15),
+                                        child: Text(
+                                          TTexts.UploadDirectDepositText,
+                                          style: FontsFamily.ExtraBold.copyWith(
+                                              color: TColors.textSecondary,
+                                              fontSize: TSizes.fontSizeMd
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: controller.formImageString.value ==
+                                        null ?
+                                    Image.asset(USER_IMAGE, height: 50,
+                                      width: 50,
+                                      fit: BoxFit.cover,) :
+                                    Image.file(File(
+                                        controller.formImageString.value!
+                                            .path), height: 50,
+                                      width: 50,
+                                      fit: BoxFit.cover,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      InkWell(
+                        onTap: (){
+                          validation();
+                        },
+                        child: Container(
+                          height: 50,
+                          width: Get.width / 2,
+                          decoration: TWidget.bBoxDecoration,
+                          child: Center(
+                            child: Text(TTexts.SaveChangesText,
+                              style: FontsFamily.ExtraBold.copyWith(
+                                  fontSize: TSizes.fontSizeMd,
+                                  color: TColors.textPrimary
+                              ),),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20,),
-                  Container(
-                    height: 50,
-                    width: Get.width/2,
-                    decoration: TWidget.bBoxDecoration,
-                    child: Center(
-                      child: Text(TTexts.SaveChangesText,
-                      style: FontsFamily.ExtraBold.copyWith(
-                        fontSize: TSizes.fontSizeMd,
-                        color: TColors.textPrimary
-                      ),),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
+
+  void validation() {
+    if(deposit == "Direct_Deposite"){
+      if(bName.text.isEmpty){
+        customSnackBar("Please enter bank name");
+      }else if(tNumber.text.isEmpty){
+        customSnackBar("Please enter transit number");
+      }else if(iNumber.text.isEmpty){
+        customSnackBar("Please enter institution number");
+      }else if(account.text.isEmpty){
+        customSnackBar("Please enter account number");
+      }else if(controller.formImageString.value == null){
+        customSnackBar("Please enter Direct deposit from");
+      }else{
+        controller.addAccountDetails(
+            deposit,
+            bName.text,
+            tNumber.text,
+            iNumber.text,
+            account.text,
+            "", () {
+          controller.fetchBankDetails(() {
+            emailCtr.text = controller.emailCtr.value;
+            bName.text = controller.bName.value;
+            tNumber.text = controller.tNumber.value;
+            iNumber.text = controller.iNumber.value;
+            account.text = controller.account.value;
+            if (controller.type.value == "Direct_Deposite") {
+              deposit = controller.type.value;
+            } else {
+              email = controller.type.value;
+            }
+            setState(() {
+
+            });
+          });
+        });
+      }
+
+    }else{
+      if(emailCtr.text.isEmpty){
+        customSnackBar("Please enter email address");
+      }else{
+        controller.addAccountDetails(
+            email,
+            "",
+            "",
+            "",
+            "",
+            emailCtr.text, () {
+          controller.fetchBankDetails(() {
+            emailCtr.text = controller.emailCtr.value;
+            bName.text = controller.bName.value;
+            tNumber.text = controller.tNumber.value;
+            iNumber.text = controller.iNumber.value;
+            account.text = controller.account.value;
+            if (controller.type.value == "Direct_Deposite") {
+              deposit = controller.type.value;
+            } else {
+              email = controller.type.value;
+            }
+            setState(() {
+
+            });
+          });
+        });
+      }
+
+    }
+
+  }
+
+  void _showImagePickerBottomSheet(BuildContext context) {
+    ImageHelper.showImagePickerBottomSheet(context, _pickImage);
+  }
+
+  void _pickImage(ImageSource source, Function(File) setImageFile) async {
+    ImageHelper.pickImage(source, (file) {
+      controller.formImageString.value = file;
+      Navigator.pop(context);
+    });
+  }
+
+
 }

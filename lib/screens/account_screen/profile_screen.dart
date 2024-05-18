@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mie_ride_driver/constant/colors.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
+import 'package:mie_ride_driver/controllers/auth_controller.dart';
 
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
@@ -34,14 +37,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isNewHide = true;
   bool isRNewHide = true;
 
-  String countryCode = TTexts.countryCode;
+  String countryCode = "";
   String countryFlag = "";
 
-
+  final controller = Get.find<ProfileController>();
 
   List<String> vehicleList = ["hero", "honda", "Bullet"];
 
-  var vehicle = null;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      Get.find<AuthController>().fetchCars();
+      controller.fetchProfile().then((value) {
+        if (value == "successfully") {
+          fNameCtr.text = TTexts.name;
+          lNameCtr.text = TTexts.lastN;
+          emailCtr.text = TTexts.Email;
+          phoneCtr.text = TTexts.Phone;
+          vehicleNumber.text = TTexts.vehicleN;
+          selectedCarId = TTexts.vehicle;
+          countryCode = TTexts.countryCode;
+          countryFlag = TTexts.countryFlag;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
         backgroundColor: TColors.background,
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Padding(
@@ -66,7 +88,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2),
-                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                      child: Icon(
+                        Icons.arrow_back_ios, color: TColors.textPrimary,
+                        size: 20,),
                     )
                 ),
               ),
@@ -82,7 +106,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         centerTitle: true,
       ),
-      body: GetBuilder<ProfileController>(builder: (controller) {
+      body: Obx(() {
+        if(controller.profileLoad.value){
+          return Center(child: SizedBox(),);
+        }else
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
@@ -92,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: 10, vertical: 20),
                 margin: EdgeInsets.symmetric(
                     horizontal: 10, vertical: 10),
-                decoration: TWidget.bShadow,
+                decoration: TWidget.rShadow,
                 child: Column(
                   children: [
                     Row(
@@ -108,13 +135,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             margin: EdgeInsets.symmetric(vertical: 15),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 10),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Center(
                               child: Obx(() {
                                 return Text(TTexts.PersonalText,
                                   style: FontsFamily.ExtraBold.copyWith(
                                       fontSize: 13,
-                                      color: controller.changeScreen.value != TTexts.PersonalText?TColors.textPrimary:TColors.info
+                                      color: controller.changeScreen.value !=
+                                          TTexts.PersonalText ? TColors
+                                          .textPrimary : TColors.info
                                   ),);
                               }),
                             ),
@@ -130,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             margin: EdgeInsets.symmetric(vertical: 15),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 10),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Center(
                               child: Obx(() {
                                 return Text(TTexts.CarDetailsText,
@@ -163,19 +192,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: Card(
-                                        elevation: 2,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius
-                                                .circular(30)
-                                        ),
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius
-                                                .circular(30),
-                                            child: Image.asset(
-                                              USER_IMAGE, height: 50,
-                                              width: 50,
-                                              fit: BoxFit.cover,))
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.status.value = "4";
+                                        _showImagePickerBottomSheet(context);
+                                      },
+                                      child: Card(
+                                          elevation: 2,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius
+                                                  .circular(30)
+                                          ),
+                                          child: ClipRRect(
+                                              borderRadius: BorderRadius
+                                                  .circular(30),
+                                              child: controller
+                                                  .profileImageString.value ==
+                                                  null ?
+                                              FadeInImage.assetNetwork(
+                                                placeholder: 'assets/userload.gif',
+                                                width: 50,
+                                                height: 50,
+                                                fit: BoxFit.cover,
+                                                image: profileImage,
+                                                imageErrorBuilder: (c, o,
+                                                    s) =>
+                                                    Image.asset(
+                                                      USER_IMAGE, height: 50,
+                                                      width: 50,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                              ) : Image.file(File(
+                                                  controller
+                                                      .profileImageString
+                                                      .value!
+                                                      .path), height: 50,
+                                                width: 50,
+                                                fit: BoxFit.cover,))
+                                      ),
                                     ),
                                   ),
                                   SizedBox(width: 10,),
@@ -199,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 icon: Icon(
                                   Icons.person, color: TColors.info,),
                                 textInputType: TextInputType.text,
-                                textEditingController: fNameCtr,
+                                textEditingController: lNameCtr,
                               ),
                               CustomField(
                                 size: TSizes.fontSizeMd,
@@ -218,12 +272,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   width: context.width,
                                   margin: EdgeInsets.only(top: 5),
                                   padding: EdgeInsets.only(left: 10),
-                                  decoration: TWidget.bBoxDecoration,
+                                  decoration: TWidget.rShadow,
                                   child: Center(
                                     child: IntlPhoneField(
-                                      flagsButtonMargin: EdgeInsets
-                                          .only(
-                                          top: 3.0),
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          color: TColors.textPrimary,
+                                          fontSize: TSizes.fontSizeMd
+                                      ),
+                                      dropdownTextStyle: FontsFamily.ExtraBold
+                                          .copyWith(
+                                          color: TColors.textPrimary,
+                                          fontSize: TSizes.fontSizeMd
+                                      ),
                                       controller: phoneCtr,
                                       textInputAction: TextInputAction
                                           .next,
@@ -231,8 +291,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       autovalidateMode: AutovalidateMode
                                           .disabled,
                                       /*disableLengthCheck: true,*/
-                                      initialCountryCode: TTexts
-                                          .countryCode,
+                                      initialCountryCode: countryFlag,
                                       decoration: InputDecoration(
                                           counterText: "",
                                           hintStyle: FontsFamily
@@ -278,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               CustomField(
                                 size: TSizes.fontSizeMd,
-                                hintText: TTexts.password,
+                                hintText: TTexts.oldPassText,
                                 textInputType: TextInputType
                                     .visiblePassword,
                                 textEditingController: passwordCtr,
@@ -302,7 +361,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               CustomField(
                                 size: TSizes.fontSizeMd,
-                                hintText: TTexts.password,
+                                hintText: TTexts.newPassText,
                                 textInputType: TextInputType
                                     .visiblePassword,
                                 textEditingController: nPasswordCtr,
@@ -326,7 +385,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               CustomField(
                                 size: TSizes.fontSizeMd,
-                                hintText: TTexts.password,
+                                hintText: TTexts.reNewPassword,
                                 textInputType: TextInputType
                                     .visiblePassword,
                                 textEditingController: rNewPasswordCtr,
@@ -367,75 +426,182 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             SizedBox(height: 20,),
                             Container(
-                              decoration: TWidget.bBoxDecoration,
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  dropdownColor: TColors.background,
-                                  hint: Text(
-                                    TTexts.selectVehicleText,
-                                    style: FontsFamily.ExtraBold
-                                        .copyWith(
-                                      color: TColors.textSecondary,
-                                      fontSize: TSizes.fontSizeMd,
+                              height: 50,
+                              decoration: TWidget.rShadow,
+                              child: Obx(() {
+                                if (Get
+                                    .find<AuthController>()
+                                    .vehicleLoading
+                                    .value) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),);
+                                } else {
+                                  return PopupMenuButton<String>(
+                                    color: TColors.background,
+                                    constraints: BoxConstraints.tightFor(
+                                        width: Get.width / 1.2),
+                                    offset: Offset(0, 40),
+                                    // Shift menu down by 40 pixels (adjust as needed)
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      decoration: BoxDecoration(
+                                        color: TColors.background,
+                                        // Add border for visual separation
+                                        borderRadius: BorderRadius.circular(
+                                            8.0), // Add border radius for rounded corners
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          Text(
+                                            selectedCarId != "" ? _getCarName(
+                                                selectedCarId!) : TTexts
+                                                .selectVehicleText,
+                                            style: FontsFamily.ExtraBold
+                                                .copyWith(
+                                              color: selectedCarId != ""
+                                                  ? TColors.textPrimary
+                                                  : TColors.textSecondary,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Icon(Icons.arrow_drop_down),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  value: vehicle,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 30,
-                                  ),
-                                  isExpanded: true,
-                                  items: vehicleList.map(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(
-                                                color: TColors
-                                                    .textPrimary),
+                                    itemBuilder: (BuildContext context) {
+                                      return Get
+                                          .find<AuthController>()
+                                          .vehicleList
+                                          .map((value) {
+                                        return PopupMenuItem<String>(
+                                          value: value['car_id'],
+                                          child: Container(
+                                            width: double.infinity,
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                value['car_name'],
+                                                style: TextStyle(
+                                                    color: TColors
+                                                        .textPrimary),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList();
+                                    },
+                                    onSelected: (String value) {
+                                      setState(() {
+                                        selectedCarId =
+                                            value; // Store the selected car ID
+                                        print(
+                                            "selectedCarId===>$selectedCarId");
+                                      });
+                                    },
+                                  );
+                                }
+                              }),
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center,
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    controller.status.value = "1";
+                                    _showImagePickerBottomSheet(context);
+                                  },
+                                  child: Container(
+                                    decoration: TWidget.rShadow,
+                                    child: Container(
+                                      width: Get.width / 1.7,
+                                      child: Padding(
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            horizontal: 15, vertical: 10),
+                                        child: Text(
+                                          "Change Driving licence",
+                                          style: FontsFamily.ExtraBold
+                                              .copyWith(
+                                            color: TColors
+                                                .textSecondary,
+                                            fontSize: TSizes.fontSizeMd,
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ).toList(),
-                                  onChanged: (value) {
-                                    setState(
-                                          () {
-                                        vehicle = value;
-                                        print("vehicle===>$vehicle");
-                                      },
-                                    );
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30)
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius
+                                            .circular(
+                                            30),
+                                        child: controller.licenceImageString
+                                            .value == null ?
+                                        FadeInImage.assetNetwork(
+                                          placeholder: 'assets/userload.gif',
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                          image: LImage,
+                                          imageErrorBuilder: (c, o, s) =>
+                                              Image.asset(
+                                                USER_IMAGE, height: 50,
+                                                width: 50,
+                                                fit: BoxFit.cover,
+                                              ),
+                                        ) : Image.file(File(
+                                            controller.licenceImageString
+                                                .value!
+                                                .path), height: 50,
+                                          width: 50,
+                                          fit: BoxFit.cover,)
+                                    )
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center,
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    controller.status.value = "2";
+                                    _showImagePickerBottomSheet(context);
                                   },
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20,),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              mainAxisAlignment: MainAxisAlignment
-                                  .spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: TWidget.bBoxDecoration,
                                   child: Container(
-                                    width: Get.width / 1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets
-                                          .symmetric(
-                                          horizontal: 15, vertical: 10),
-                                      child: Text(
-                                        TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold
-                                            .copyWith(
-                                          color: TColors
-                                              .textSecondary,
-                                          fontSize: TSizes.fontSizeMd,
+                                    decoration: TWidget.rShadow,
+                                    child: Container(
+                                      width: Get.width / 1.7,
+                                      child: Padding(
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            horizontal: 15, vertical: 10),
+                                        child: Text(
+                                          "Change Insurance",
+                                          style: FontsFamily.ExtraBold
+                                              .copyWith(
+                                            color: TColors
+                                                .textSecondary,
+                                            fontSize: TSizes.fontSizeMd,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -452,8 +618,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         borderRadius: BorderRadius
                                             .circular(
                                             30),
-                                        child: Image.asset(
-                                          USER_IMAGE, height: 50,
+                                        child: controller.insuranceImageString
+                                            .value == null ?
+                                        FadeInImage.assetNetwork(
+                                          placeholder: 'assets/userload.gif',
+                                          width: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                          image: IImage,
+                                          imageErrorBuilder: (c, o, s) =>
+                                              Image.asset(
+                                                USER_IMAGE, height: 50,
+                                                width: 50,
+                                                fit: BoxFit.cover,
+                                              ),
+                                        ) : Image.file(File(
+                                            controller.insuranceImageString
+                                                .value!
+                                                .path), height: 50,
                                           width: 50,
                                           fit: BoxFit.cover,))
                                 ),
@@ -466,21 +648,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment
                                   .spaceBetween,
                               children: [
-                                Container(
-                                  decoration: TWidget.bBoxDecoration,
+                                InkWell(
+                                  onTap: () {
+                                    controller.status.value = "3";
+                                    _showImagePickerBottomSheet(context);
+                                  },
                                   child: Container(
-                                    width: Get.width / 1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets
-                                          .symmetric(
-                                          horizontal: 15, vertical: 10),
-                                      child: Text(
-                                        TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold
-                                            .copyWith(
-                                          color: TColors
-                                              .textSecondary,
-                                          fontSize: TSizes.fontSizeMd,
+                                    decoration: TWidget.rShadow,
+                                    child: Container(
+                                      width: Get.width / 1.7,
+                                      child: Padding(
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            horizontal: 15, vertical: 10),
+                                        child: Text(
+                                          "Change ownership",
+                                          style: FontsFamily.ExtraBold
+                                              .copyWith(
+                                            color: TColors
+                                                .textSecondary,
+                                            fontSize: TSizes.fontSizeMd,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -497,53 +685,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         borderRadius: BorderRadius
                                             .circular(
                                             30),
-                                        child: Image.asset(
-                                          USER_IMAGE, height: 50,
+                                        child: controller.ownerImageString
+                                            .value == null ?
+                                        FadeInImage.assetNetwork(
+                                          placeholder: 'assets/userload.gif',
                                           width: 50,
-                                          fit: BoxFit.cover,))
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20,),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment
-                                  .center,
-                              mainAxisAlignment: MainAxisAlignment
-                                  .spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: TWidget.bBoxDecoration,
-                                  child: Container(
-                                    width: Get.width / 1.7,
-                                    child: Padding(
-                                      padding: const EdgeInsets
-                                          .symmetric(
-                                          horizontal: 15, vertical: 10),
-                                      child: Text(
-                                        TTexts.drivingLicenceText,
-                                        style: FontsFamily.ExtraBold
-                                            .copyWith(
-                                          color: TColors
-                                              .textSecondary,
-                                          fontSize: TSizes.fontSizeMd,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius
-                                            .circular(
-                                            30)
-                                    ),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius
-                                            .circular(
-                                            30),
-                                        child: Image.asset(
-                                          USER_IMAGE, height: 50,
+                                          height: 50,
+                                          fit: BoxFit.cover,
+                                          image: OImage,
+                                          imageErrorBuilder: (c, o, s) =>
+                                              Image.asset(
+                                                USER_IMAGE, height: 50,
+                                                width: 50,
+                                                fit: BoxFit.cover,
+                                              ),
+                                        ) : Image.file(File(
+                                            controller.ownerImageString.value!
+                                                .path), height: 50,
                                           width: 50,
                                           fit: BoxFit.cover,))
                                 ),
@@ -562,7 +720,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: 20, vertical: 20),
                 child: CustomButton(
                     TTexts.SubmitText, BUTTON_IMAGE, () {
-
+                  controller.fNameCtr.value = fNameCtr.text;
+                  controller.lNameCtr.value = lNameCtr.text;
+                  controller.emailCtr.value = emailCtr.text;
+                  controller.passwordCtr.value = nPasswordCtr.text;
+                  controller.phoneCtr.value = phoneCtr.text;
+                  valid();
                 }),
               )
             ],
@@ -571,4 +734,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }),
     );
   }
+
+  void _showImagePickerBottomSheet(BuildContext context) {
+    ImageHelper.showImagePickerBottomSheet(context, _pickImage);
+  }
+
+  void _pickImage(ImageSource source, Function(File) setImageFile) async {
+    ImageHelper.pickImage(source, (file) {
+      if (controller.status.value == "1") {
+        controller.licenceImageString.value = file;
+      } else if (controller.status.value == "2") {
+        controller.insuranceImageString.value = file;
+      } else if (controller.status.value == "3") {
+        controller.ownerImageString.value = file;
+      } else {
+        controller.profileImageString.value = file;
+      }
+      Navigator.pop(context);
+    });
+  }
+
+
+  String? selectedCarId = "";
+
+  String _getCarName(String carId) {
+    var car = Get
+        .find<AuthController>()
+        .vehicleList
+        .firstWhere((element) => element['car_id'] == carId, orElse: () => {});
+    return car.isNotEmpty
+        ? car['car_name']
+        : ''; // Return car name or empty string if not found
+  }
+
+  void valid() async {
+    if (passwordCtr.text.isNotEmpty) {
+      print("vi");
+      if (nPasswordCtr.text.isEmpty) {
+        customSnackBar("Please enter new password");
+      }
+      else if (rNewPasswordCtr.text.isEmpty) {
+        customSnackBar("Please Re-enter new password");
+      }
+      else if (nPasswordCtr.text != rNewPasswordCtr.text) {
+        customSnackBar("Password and Re-new password does not match");
+      }
+      else {
+
+        controller.updateProfile(vehicleNumber.text, selectedCarId.toString(),
+            countryCode.toString(), countryFlag.toString(), passwordCtr.text,context);
+        passwordCtr.text = "";
+        nPasswordCtr.text = "";
+        rNewPasswordCtr.text = "";
+      }
+    } else {
+      controller.updateProfile(
+          vehicleNumber.text, selectedCarId.toString(), countryCode.toString(),
+          countryFlag.toString(), passwordCtr.text,context);
+      passwordCtr.text = "";
+      nPasswordCtr.text = "";
+      rNewPasswordCtr.text = "";
+    }
+  }
+
+
 }

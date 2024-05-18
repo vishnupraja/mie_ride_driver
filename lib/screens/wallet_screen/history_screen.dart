@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
+import '../../controllers/wallete_controller.dart';
 import '../../utils/static.dart';
 class History extends StatefulWidget {
   const History({super.key});
@@ -14,6 +16,15 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+
+  var controller = Get.find<WalletController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.historyFetch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +80,26 @@ class _HistoryState extends State<History> {
                                 ],
                               ),
                               SizedBox(height: 8.0,),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 28),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Total base fare",
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          fontSize: 10,
+                                          color: TColors.textPrimary
+                                      ),),
+                                    Text("Bal:${TTexts.CurrencyCanada} 600",
+                                      style: FontsFamily.ExtraBold.copyWith(
+                                          fontSize: 10,
+                                          color: TColors.textPrimary
+                                      ),)
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 8.0,),
+
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [

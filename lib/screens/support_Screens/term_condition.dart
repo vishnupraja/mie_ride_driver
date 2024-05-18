@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/sizes.dart';
+import '../../controllers/profile_Controller.dart';
 import '../../utils/static.dart';
 
 class TermCondition extends StatefulWidget {
@@ -51,10 +53,17 @@ class _TermConditionState extends State<TermCondition> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(height: TSizes.appBarHeight,),
-        ],
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        height: Get.height / 1.2,
+        width: Get.width,
+        decoration: TWidget.rShadow,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Html(data: "${Get.find<ProfileController>().term}")
+            ]
+        ),
       ),
     );
 

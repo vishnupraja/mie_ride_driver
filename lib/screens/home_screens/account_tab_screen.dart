@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/image_string/image_string.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
-import 'package:mie_ride_driver/screens/rating_screen.dart';
-
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/text_strings.dart';
@@ -61,42 +59,6 @@ class _AccountScreenState extends State<AccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            /*  Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: (){
-                    Get.back();
-                  },
-                  child: Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 2),
-                            child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
-                          )
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: Get.width/5,),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(TTexts.AccountText,
-                    textAlign: TextAlign.center,
-                    style: FontsFamily.ExtraBold.copyWith(
-                      color: TColors.textPrimary,
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ],
-            ),*/
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Column(
@@ -125,20 +87,18 @@ class _AccountScreenState extends State<AccountScreen> {
                     customContainer("Message", chatImage,(){
                       Get.toNamed(RouteHelper.getMessageScreenPage());
                     }),
-                    customContainer("AcceptRide", chatImage,(){
+                    customContainer("Accept Ride", chatImage,(){
                       Get.toNamed(RouteHelper.getAcceptRidePage());
                     }),
-                    customContainer("onGoingRide", chatImage,(){
+                    customContainer("Ongoing Ride", chatImage,(){
                       Get.toNamed(RouteHelper.getOngoingRidePage());
-                    }),
-                    customContainer("Rating", chatImage,(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>RatingScreen()));
                     }),
                     SizedBox(height: 10,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
                       child: CustomButton(TTexts.SignOutText,BUTTON_IMAGE, () {
-                       /* Get.offNamed(RouteHelper.getBottomPage());*/
+                        show();
+
                       }),
                     )
                   ],
@@ -148,6 +108,34 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void show()async{
+    return  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sign Out'),
+          content: Text('Are you sure you want to sign out?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                MySharedPreferences sp = MySharedPreferences();
+                sp.clearData();
+                 Get.offAllNamed(RouteHelper.getLoginPage());
+              },
+              child: Text('Sign Out'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

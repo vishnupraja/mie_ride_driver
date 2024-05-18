@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/controllers/auth_controller.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 
 import '../../constant/colors.dart';
@@ -8,9 +9,14 @@ import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
 import '../../utils/static.dart';
-class SupportService extends StatelessWidget {
+class SupportService extends StatefulWidget {
   const SupportService({super.key});
 
+  @override
+  State<SupportService> createState() => _SupportServiceState();
+}
+
+class _SupportServiceState extends State<SupportService> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,23 +76,54 @@ class SupportService extends StatelessWidget {
               Get.toNamed(RouteHelper.getPrivacyPolicyPage());
             }),
             SizedBox(height: 50 ,),
-                           Center(
-             child: Container(
-               height: 50,
-               width: 160,
-               decoration: TWidget.bShadow,
-               child: Center(
-                 child: Text(TTexts.DeleteAccountText,
-                 style: FontsFamily.ExtraBold.copyWith(
-                   fontSize: TSizes.fontSizeMd,
-                   color: TColors.acceptColor
-                 ),),
+            Center(
+             child: InkWell(
+               onTap: (){
+                 show();
+               },
+               child: Container(
+                 height: 50,
+                 width: 160,
+                 decoration: TWidget.bShadow,
+                 child: Center(
+                   child: Text(TTexts.DeleteAccountText,
+                   style: FontsFamily.ExtraBold.copyWith(
+                     fontSize: TSizes.fontSizeMd,
+                     color: TColors.acceptColor
+                   ),),
+                 ),
                ),
              ),
                            ),
           ],
         ),
       ),
+    );
+  }
+
+  void show()async{
+    return  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Account'),
+          content: Text('Are you sure you want to delete account?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+              Get.find<AuthController>().deleteAccount();
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mie_ride_driver/controllers/single_controller.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
@@ -45,10 +47,10 @@ class _SupportChatState extends State<SupportChat> {
                               horizontal: 20),
                           dropdownColor: TColors.background,
                           hint: Text(
-                            TTexts.selectVehicleText,
+                            TTexts.selectRideText,
                             style: FontsFamily.ExtraBold
                                 .copyWith(
-                              color: TColors.textSecondary,
+                              color: TColors.info,
                               fontSize: TSizes.fontSizeMd,
                             ),
                           ),
@@ -56,6 +58,7 @@ class _SupportChatState extends State<SupportChat> {
                           icon: const Icon(
                             Icons.arrow_drop_down,
                             size: 30,
+                            color: TColors.info,
                           ),
                           isExpanded: true,
                           items: vehicleList.map(
@@ -92,7 +95,7 @@ class _SupportChatState extends State<SupportChat> {
                       textEditingController: subCtr,
                       size: TSizes.fontSizeMd,
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 50,),
                     Container(
                       decoration: TWidget.bShadow,
                       child: TextFormField(
@@ -102,7 +105,7 @@ class _SupportChatState extends State<SupportChat> {
                         ),
                         controller: msgCtr,
                         textInputAction:TextInputAction.done,
-                        maxLines: 8,
+                        maxLines: 15,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: TTexts.AddMessageText,
@@ -116,16 +119,21 @@ class _SupportChatState extends State<SupportChat> {
                     ),
                     SizedBox(height: 50,),
                     Center(
-                      child: Container(
-                        height: 50,
-                        width: 160,
-                        decoration: TWidget.bShadow,
-                        child: Center(
-                          child: Text(TTexts.SendMessageText,
-                            style: FontsFamily.ExtraBold.copyWith(
-                                fontSize: TSizes.fontSizeMd,
-                                color: TColors.info
-                            ),),
+                      child: InkWell(
+                        onTap: (){
+                          validation();
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 160,
+                          decoration: TWidget.bShadow,
+                          child: Center(
+                            child: Text(TTexts.SendMessageText,
+                              style: FontsFamily.ExtraBold.copyWith(
+                                  fontSize: TSizes.fontSizeMd,
+                                  color: TColors.info
+                              ),),
+                          ),
                         ),
                       ),
                     )
@@ -138,4 +146,17 @@ class _SupportChatState extends State<SupportChat> {
       ),
     );
   }
+
+  void validation(){
+    if(vehicle == null){
+      customSnackBar("Please select ride");
+    }else if(subCtr.text.isEmpty){
+      customSnackBar("Please enter your subject");
+    }else if(msgCtr.text.isEmpty){
+      customSnackBar("Please enter your message");
+    }else{
+      Get.find<SingleController>().rideSupportChat(subCtr.text, msgCtr.text, vehicle);
+    }
+  }
+
 }

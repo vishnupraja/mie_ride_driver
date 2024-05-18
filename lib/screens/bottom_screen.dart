@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/text_strings.dart';
 import 'package:mie_ride_driver/controllers/home_controller.dart';
+import 'package:mie_ride_driver/controllers/profile_Controller.dart';
 import 'package:mie_ride_driver/screens/home_screens/account_tab_screen.dart';
 import 'package:mie_ride_driver/screens/home_screens/home_page.dart';
 import 'package:mie_ride_driver/screens/wallet_screen/wallet_screen.dart';
-import 'package:mie_ride_driver/utils/static.dart';
 import '../constant/colors.dart';
 import '../constant/font_family.dart';
 import '../constant/image_string/image_string.dart';
@@ -24,19 +24,35 @@ class _BottomNavigationBarWithCardsState
     extends State<BottomNavigationBarWithCards> {
 
 
-  final List<Widget> _pages = [
-    HomePage(),
-    WalletScreen(),
-    BookingScreen(),
-    NotificationScreen(),
-    AccountScreen(),
-  ];
+
+
+  var loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loading = true;
+    Future.delayed(Duration.zero, () {
+      Get.find<ProfileController>().fetchProfile().then((value){
+        if (value == "successfully"){
+          loading = false;
+          setState(() {
+
+          });
+        }else{
+          loading = false;
+          setState(() {
+
+          });
+        }
+      });
+    });
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<HomeController>();
-    return Scaffold(
+    return loading == true?Container(color: TColors.background,):Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: TColors.background,
         body: HomePage(),
@@ -107,7 +123,18 @@ class _BottomNavigationBarWithCardsState
                           child: Column(
                             children: [
                               Container(
-                                decoration: TWidget.bBoxDecoration,
+                                decoration: BoxDecoration(
+                                    color: TColors.background,
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+                                      width: 1,
+                                    ),
+                                    boxShadow:[ BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 5.0,
+                                    ),]
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Image.asset(homeImage,height: 23,width: 23,
@@ -133,7 +160,18 @@ class _BottomNavigationBarWithCardsState
                           child: Column(
                             children: [
                               Container(
-                                decoration: TWidget.bBoxDecoration,
+                                decoration: BoxDecoration(
+                                    color: TColors.background,
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+                                      width: 1,
+                                    ),
+                                    boxShadow:[ BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 5.0,
+                                    ),]
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Image.asset(walletImage,height: 23,width: 23,
@@ -173,7 +211,18 @@ class _BottomNavigationBarWithCardsState
                           child: Column(
                             children: [
                               Container(
-                                decoration: TWidget.bBoxDecoration,
+                                decoration: BoxDecoration(
+                                    color: TColors.background,
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+                                      width: 1,
+                                    ),
+                                    boxShadow:[ BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 5.0,
+                                    ),]
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Icon(Icons.notifications_active ,
@@ -200,17 +249,34 @@ class _BottomNavigationBarWithCardsState
                           child: Column(
                             children: [
                               Container(
-                                decoration: TWidget.bBoxDecoration,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
+                                padding: EdgeInsets.all(2.0),
+                                decoration: BoxDecoration(
+                                    color: TColors.background,
                                     borderRadius: BorderRadius.circular(30),
-                                    child: Image.asset(USER_IMAGE,
-                                      fit: BoxFit.cover,
-                                      height: 25,
-                                      width: 25,
+                                    border: Border.all(
+                                      color: Colors.black.withOpacity(0.1), // Adjust border color and opacity
+                                      width: 1,
                                     ),
-                                  ),
+                                    boxShadow:[ BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 5.0,
+                                    ),]
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: 'assets/userload.gif',
+                                    width: 35,
+                                    height: 35,
+                                    fit: BoxFit.cover,
+                                    image: profileImage,
+                                    imageErrorBuilder: (c, o, s) =>
+                                        Image.asset(
+                                          USER_IMAGE, height: 35,
+                                          width: 35,
+                                          fit: BoxFit.cover,
+                                        ),
+                                  )
                                 ),
                               ),
                               SizedBox(height: 5.0,),

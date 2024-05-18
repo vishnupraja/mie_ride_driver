@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/controllers/wallete_controller.dart';
+import 'package:mie_ride_driver/main.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 
 import '../../constant/colors.dart';
@@ -8,6 +10,7 @@ import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
 import '../../utils/static.dart';
+
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
 
@@ -16,20 +19,32 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
+
+  final controller = Get.find<WalletController>();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      controller.walletFetch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff7f7f7),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: TColors.background,
+        backgroundColor: Color(0xfff7f7f7),
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Padding(
             padding: const EdgeInsets.all(5),
             child: Card(
-              color: TColors.background,
+              color: Color(0xfff7f7f7),
               elevation: 2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -39,7 +54,9 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: Center(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2),
-                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                      child: Icon(
+                        Icons.arrow_back_ios, color: TColors.textPrimary,
+                        size: 20,),
                     )
                 ),
               ),
@@ -56,58 +73,117 @@ class _WalletScreenState extends State<WalletScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20,),
             Container(
-              height: Get.height/3.2,
-              width: Get.width/2,
-              decoration: TWidget.boxDecoration,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(HOME_HAND_IMAGE,height: 70,width: 70,),
-                  SizedBox(height:TSizes.md,),
-                  Text(TTexts.TotalBalanceText,
-                    textAlign: TextAlign.center,
-                    style: FontsFamily.ExtraBold.copyWith(
-                      color: TColors.textPrimary,
-                      fontSize: TSizes.fontSizeLg,
-                      letterSpacing: 1,
-                    ),),
-                  SizedBox(height:TSizes.md,),
-                  Text("${TTexts.Currency} 200",
-                    style: FontsFamily.ExtraBold.copyWith(
-                        color: TColors.buttonPrimary,
-                        fontSize: TSizes.fontSizeLg
-                    ),)
-                ],
+              height: Get.height / 2.8,
+              width: Get.width / 1,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/shadow.png'))
+              ),
+              child: Center(
+                child:  Obx(() {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 130),
+                    child: Text(controller.balance.value == "0"
+                        ? "${TTexts.Currency} 0"
+                        : "${TTexts.Currency} ${controller.balance.value}",
+                      style: FontsFamily.ExtraBold.copyWith(
+                          color: TColors.buttonPrimary,
+                          fontSize: 30
+                      ),),
+                  );
+                }),
               ),
             ),
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: customContainer(TTexts.AccountDetailsText, walletUserImage,(){
-                Get.toNamed(RouteHelper.getAccountDetailPage());
-              }),
+              child: InkWell(
+                onTap: (){
+                  Get.toNamed(RouteHelper.getAccountDetailPage());
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Color(0xfff7f7f7),
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: TColors.background),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(2, 2), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(TTexts.AccountDetailsText,
+                          style: FontsFamily.ExtraBold.copyWith(
+                              color: TColors.textPrimary,
+                              fontSize: TSizes.fontSizeMd,
+                              letterSpacing: 1
+                          ),
+                        ),
+                        Image.asset(walletUserImage,height: TSizes.iconMd,width: TSizes.iconMd,)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: customContainer(TTexts.HistoryText, walletHistoryImage,(){
-                Get.toNamed(RouteHelper.getHistoryPage());
-              }),
-            ),
-
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 40),
-              child: CustomButton(TTexts.SubmitText,BUTTON_IMAGE, () {
-                /* Get.offNamed(RouteHelper.getBottomPage());*/
-              }),
+              child: InkWell(
+                onTap: (){
+                  Get.toNamed(RouteHelper.getHistoryPage());
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Color(0xfff7f7f7),
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: TColors.background),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(2, 2), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(TTexts.HistoryText,
+                          style: FontsFamily.ExtraBold.copyWith(
+                              color: TColors.textPrimary,
+                              fontSize: TSizes.fontSizeMd,
+                              letterSpacing: 1
+                          ),
+                        ),
+                        Image.asset(walletHistoryImage,height: TSizes.iconMd,width: TSizes.iconMd,)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

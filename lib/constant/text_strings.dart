@@ -11,7 +11,8 @@ class TTexts {
   static const String loginText = "Login account";
   static const String Currency = "\$";
   static const String CurrencyCanada = "\$CAD";
-  static const String countryCode = "US";
+  static  String countryFlag = "US";
+  static  String countryCode = "";
 
 
 
@@ -21,11 +22,18 @@ class TTexts {
   static const String email = "Enter email address";
   static const String phoneNo = "Enter Mobile Number";
   static const String password = "Enter Password";
+  static const String oldPassword = "Enter old Password";
+  static const String newPassword = "Enter new Password";
+  static const String reNewPassword = "Re-enter Password";
   static const String profilePhotoText = "Upload profile photo";
   static const String signupButton1Text = "Move to next step";
   static const String vehicleNumberText = "Enter vehicle number";
   static const String selectVehicleText = "Select vehicle";
+  static const String selectRideText = "Select Ride";
+  static const String selectDropText = "Select drop city";
   static const String drivingLicenceText = "Driving licence";
+  static const String OwnershipText = "Ownership Upload";
+  static const String InsuranceText = "Insurance Upload";
   static const String signupButton2Text = "Sign up";
   static const String loginButtonText = "Login account";
   static const String signupPrivacyText = "By Continuing, You Agree To The \n Terms & Conditions Of The MieRide app";
@@ -34,7 +42,7 @@ class TTexts {
 
   static const String appName = "MIE RIDE";
   static const String appName2 = "DRIVER";
-  static const String earningText = "Ready to turn miles into monev?\nLog in now and start earning!";
+  static const String earningText = "Ready to turn miles into money?\nLog in now and start earning!";
 
 
   //====================bottombar text --------------------
@@ -51,7 +59,7 @@ class TTexts {
 
   static const String RevenueText = "Today's\nRevenue";
   static const String DRattingText = "Driver\nRating";
-  static const String RouteText = "Share Route";
+  static const String RouteText = "Share\nRoute";
   static const String AvailabilityText = "Share\nAvailability";
   static const String adText = "place ad here";
 
@@ -96,7 +104,8 @@ class TTexts {
   static const String notificationText = "Notifications";
   static const String   RideCompleteText = "Ride complete";
   static const String   sRideCompleteText = "Booking #12 has been successfully complete";
-  static const String   startRideText = "Driver started ride";
+  static const String   startRideText = "Driver started the ride";
+  static const String   startRideText2 = "your driver started the ride";
   static const String   arriveText = "Driver is arriving";
   static const String   BookingAcceptedText = "Booking accepted";
 
@@ -165,6 +174,21 @@ class TTexts {
   static const String   WriteSupportText = "Write support";
   static const String   AddMessageText = "Add message";
   static const String   SendMessageText = "Send message";
+
+
+
+  /*---------------------save data ------------------------*/
+
+  static  String   name = "";
+  static  String   lastN = "";
+  static  String   Email = "";
+  static  String   Phone = "";
+  static  String   vehicleN = "";
+  static  String   vehicle = "";
+  static  String   licenceImage = "";
+  static  String   insuranceImage = "";
+  static  String   ownershipImage = "";
+  static  String   profileImage = "";
 
 }
 
