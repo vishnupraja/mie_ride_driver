@@ -29,13 +29,14 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               width: Get.width,
-              decoration: TWidget.bBoxDecoration,
+              decoration: TWidget.rShadow,
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.rShadow,
                     child: Row(
                       children: [
                         Text(TTexts.StartPointText,
@@ -57,9 +58,10 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.rShadow,
                     child: Row(
                       children: [
                         Text(TTexts.EndPointText,
@@ -85,39 +87,105 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.symmetric(vertical: 20),
               width: Get.width,
-              decoration: TWidget.bBoxDecoration,
+              decoration: TWidget.rShadow,
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
-                        Container(
-                          height: 40,
-                          width: 120,
-                          decoration: TWidget.bBoxDecoration,
-                          child: Center(
-                            child: Text(TTexts.StartTimeText,
-                              style: FontsFamily.ExtraBold.copyWith(
-                                  color: TColors.textPrimary,
-                                  fontSize: TSizes.fontSizeMd
-                              ),),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () {
+                              Get
+                                  .find<HomeController>()
+                                  .startTime
+                                  .value = "Start time";
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 20, right: 10),
+                              height: 20,
+                              width: 20,
+                              decoration: TWidget.rShadow,
+                              child: Center(
+                                child: Icon(
+                                  Icons.check_circle, color: Get
+                                    .find<HomeController>()
+                                    .startTime
+                                    .value == "Start time" ? TColors
+                                    .rideCompleteColor : TColors.textPrimary,
+                                  size: 15,),
+                              ),
+                            ),
+                          );
+                        }),
+                        GestureDetector(
+                          onTap: () {
+                            Get
+                                .find<HomeController>()
+                                .startTime
+                                .value = "Start time";
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 120,
+                            decoration: TWidget.rShadow,
+                            child: Center(
+                              child: Text(TTexts.StartTimeText,
+                                style: FontsFamily.ExtraBold.copyWith(
+                                    color: TColors.textPrimary,
+                                    fontSize: TSizes.fontSizeMd
+                                ),),
+                            ),
                           ),
                         ),
-                        SizedBox(width: 20,),
+                        SizedBox(width: 30,),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () {
+                              Get
+                                  .find<HomeController>()
+                                  .startTime
+                                  .value = "Reach time";
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 20,),
+                              height: 20,
+                              width: 20,
+                              decoration: TWidget.rShadow,
+                              child: Center(
+                                child: Icon(
+                                  Icons.check_circle, color: Get
+                                    .find<HomeController>()
+                                    .startTime
+                                    .value == "Reach time" ? TColors
+                                    .rideCompleteColor : TColors.textPrimary,
+                                  size: 15,),
+                              ),
+                            ),
+                          );
+                        }),
                         Expanded(
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Container(
-                              height: 40,
-                              width: 120,
-                              decoration: TWidget.bBoxDecoration,
-                              child: Center(
-                                child: Text(TTexts.ReachTimeText,
-                                  style: FontsFamily.ExtraBold.copyWith(
-                                      color: TColors.textPrimary,
-                                      fontSize: TSizes.fontSizeMd
-                                  ),),
+                            child: GestureDetector(
+                              onTap: () {
+                                Get
+                                    .find<HomeController>()
+                                    .startTime
+                                    .value = "Reach time";
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 120,
+                                decoration: TWidget.rShadow,
+                                child: Center(
+                                  child: Text(TTexts.ReachTimeText,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        color: TColors.textPrimary,
+                                        fontSize: TSizes.fontSizeMd
+                                    ),),
+                                ),
                               ),
                             ),
                           ),
@@ -127,9 +195,10 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.rShadow,
                     child: Row(
                       children: [
                         Text(TTexts.SelectTimeText,
@@ -137,23 +206,15 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                               color: TColors.textSecondary,
                               fontSize: TSizes.fontSizeMd
                           ),),
-                        SizedBox(width: 20,),
-                        Expanded(
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Image.asset(timeImage, height: 20,
-                                width: 20,
-                                color: TColors.textPrimary,)
-                          ),
-                        )
                       ],
                     ),
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
                     margin: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.rShadow,
                     child: Row(
                       children: [
                         Text(TTexts.SelectDateText,
@@ -181,7 +242,7 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  decoration: TWidget.bBoxDecoration,
+                  decoration: TWidget.rShadow,
                   child: Center(
                     child: Text(TTexts.SeatsAvailableText,
                       style: FontsFamily.ExtraBold.copyWith(
@@ -191,64 +252,65 @@ class _ShareRouteScreenState extends State<ShareRouteScreen> {
                   ),
                 ),
                 SizedBox(width: 20,),
-               Row(
-                 children: [
-                   InkWell(
-                     onTap: () {
-                       Get.find<HomeController>().decrement();
-                     },
-                     child: Container(
-                       margin: EdgeInsets.only(left: 10,right: 20),
-                       height: 40,
-                       width: 40,
-                       decoration: TWidget.bBoxDecoration,
-                       child: Center(
-                         child: Icon(
-                           Icons.remove,
-                           color: TColors.textPrimary, size: 15,),
-                       ),
-                     ),
-                   ),
-                   Container(
-                     height: 40,
-                     width: 40,
-                     decoration: TWidget.bBoxDecoration,
-                     child: Center(
-                       child: Obx(() {
-                         return Text(Get
-                             .find<HomeController>()
-                             .counter
-                             .toString(),
-                           style: FontsFamily.ExtraBold.copyWith(
-                               color: TColors.textPrimary,
-                               fontSize: TSizes.fontSizeMd
-                           ),);
-                       }),
-                     ),
-                   ),
-                   InkWell(
-                     onTap: () {
-                       Get.find<HomeController>().increment();
-                     },
-                     child: Container(
-                       margin: EdgeInsets.only(left: 20,right: 10),
-                       height: 40,
-                       width: 40,
-                       decoration: TWidget.bBoxDecoration,
-                       child: Center(
-                         child: Icon(
-                           Icons.add, color: TColors.textPrimary, size: 15,),
-                       ),
-                     ),
-                   )
-                 ],
-               )
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.find<HomeController>().decrement();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10, right: 20),
+                        height: 40,
+                        width: 40,
+                        decoration: TWidget.rShadow,
+                        child: Center(
+                          child: Icon(
+                            Icons.remove,
+                            color: TColors.textPrimary, size: 15,),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: TWidget.rShadow,
+                      child: Center(
+                        child: Obx(() {
+                          return Text(Get
+                              .find<HomeController>()
+                              .counter
+                              .toString(),
+                            style: FontsFamily.ExtraBold.copyWith(
+                                color: TColors.textPrimary,
+                                fontSize: TSizes.fontSizeMd
+                            ),);
+                        }),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.find<HomeController>().increment();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 10),
+                        height: 40,
+                        width: 40,
+                        decoration: TWidget.rShadow,
+                        child: Center(
+                          child: Icon(
+                            Icons.add, color: TColors.textPrimary, size: 15,),
+                        ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
             SizedBox(height: 20,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 40),
-              child: CustomButton(TTexts.SubmitText,BUTTON_IMAGE, () {
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 50, vertical: 40),
+              child: CustomButton(TTexts.SubmitText, BUTTON_IMAGE, () {
                 /* Get.offNamed(RouteHelper.getBottomPage());*/
               }),
             )

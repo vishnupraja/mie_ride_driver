@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: TColors.background,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -119,17 +119,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: 10, vertical: 20),
                 margin: EdgeInsets.symmetric(
                     horizontal: 10, vertical: 10),
-                decoration: TWidget.rShadow,
+                decoration:controller.changeScreen.value == TTexts.PersonalText?TWidget.lShadow:TWidget.rShadow,
                 child: Column(
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
-                            controller.changeScreen.value =
-                                TTexts.PersonalText;
+                            controller.changeScreen.value = TTexts.PersonalText;
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(vertical: 15),
@@ -150,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
 
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             controller.changeScreen.value =
                                 TTexts.CarDetailsText;
@@ -165,8 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 return Text(TTexts.CarDetailsText,
                                   style: FontsFamily.ExtraBold.copyWith(
                                       fontSize: 13,
-                                      color: controller.changeScreen
-                                          .value !=
+                                      color: controller.changeScreen.value !=
                                           TTexts.CarDetailsText
                                           ? TColors.textPrimary
                                           : TColors.info
@@ -192,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: InkWell(
+                                    child: GestureDetector(
                                       onTap: () {
                                         controller.status.value = "4";
                                         _showImagePickerBottomSheet(context);
@@ -342,7 +340,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     .visiblePassword,
                                 textEditingController: passwordCtr,
                                 ishide: isHide,
-                                icon: InkWell(
+                                icon: GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       isHide = !isHide;
@@ -366,7 +364,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     .visiblePassword,
                                 textEditingController: nPasswordCtr,
                                 ishide: isNewHide,
-                                icon: InkWell(
+                                icon: GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       isNewHide = !isNewHide;
@@ -390,7 +388,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     .visiblePassword,
                                 textEditingController: rNewPasswordCtr,
                                 ishide: isRNewHide,
-                                icon: InkWell(
+                                icon: GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       isRNewHide = !isRNewHide;
@@ -513,7 +511,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment
                                   .spaceBetween,
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     controller.status.value = "1";
                                     _showImagePickerBottomSheet(context);
@@ -581,7 +579,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment
                                   .spaceBetween,
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     controller.status.value = "2";
                                     _showImagePickerBottomSheet(context);
@@ -648,7 +646,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment
                                   .spaceBetween,
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     controller.status.value = "3";
                                     _showImagePickerBottomSheet(context);

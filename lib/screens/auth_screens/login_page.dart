@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                 textInputType: TextInputType.visiblePassword,
                 textEditingController: passwordCtr,
                 ishide: isHide,
-                icon: InkWell(
+                icon: GestureDetector(
                   onTap: () {
                     setState(() {
                       isHide = !isHide;

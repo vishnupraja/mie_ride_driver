@@ -31,7 +31,7 @@ class _FAQState extends State<FAQ> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: TColors.background,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },

@@ -17,30 +17,24 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColors.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: TColors.background,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: (){
             Get.back();
           },
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Card(
-              color: TColors.background,
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
-                    )
-                ),
-              ),
+          child: Container(
+            margin: EdgeInsets.all(10),
+            height: 30,
+            width: 30,
+            decoration: TWidget.rShadow,
+            child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                )
             ),
           ),
         ),
@@ -53,60 +47,86 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  children: [
-                    customContainer(TTexts.ProfileText, userImage,(){
-                      Get.toNamed(RouteHelper.getProfilePage());
-                    }),
-                    customContainer(TTexts.MyRidesText, carImage,(){
-                      Get.toNamed(RouteHelper.getMyRidePage());
-                    }),
-                    customContainer(TTexts.SpreadText, spreadImage,(){
-                      Get.toNamed(RouteHelper.getSpreadWordScreenPage());
-                    }),
-                    customContainer(TTexts.ExclusiveText, dealzoneImage,(){
-                      Get.toNamed(RouteHelper.getDealZonePage());
-                    }),
-                    customContainer(TTexts.NewsfeedText, newsImage,(){
-                      Get.toNamed(RouteHelper.getNewsFeedPage());
-                    }),
-                    customContainer(TTexts.SupportServicesText, supportImage,(){
-                      Get.toNamed(RouteHelper.getSupportServicePage());
-                    }),
-                    customContainer(TTexts.RideSupportText, chatImage,(){
-                      Get.toNamed(RouteHelper.getSupportChatPage());
-                    }),
-                    customContainer("Message", chatImage,(){
-                      Get.toNamed(RouteHelper.getMessageScreenPage());
-                    }),
-                    customContainer("Accept Ride", chatImage,(){
-                      Get.toNamed(RouteHelper.getAcceptRidePage());
-                    }),
-                    customContainer("Ongoing Ride", chatImage,(){
-                      Get.toNamed(RouteHelper.getOngoingRidePage());
-                    }),
-                    SizedBox(height: 10,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
-                      child: CustomButton(TTexts.SignOutText,BUTTON_IMAGE, () {
-                        show();
-
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    children: [
+                      customContainer(TTexts.ProfileText, userImage,(){
+                        Get.toNamed(RouteHelper.getProfilePage());
                       }),
-                    )
-                  ],
+                      customContainer(TTexts.MyRidesText, carImage,(){
+                        Get.toNamed(RouteHelper.getMyRidePage());
+                      }),
+                      customContainer(TTexts.SpreadText, spreadImage,(){
+                        Get.toNamed(RouteHelper.getSpreadWordScreenPage());
+                      }),
+                      customContainer(TTexts.ExclusiveText, dealzoneImage,(){
+                        Get.toNamed(RouteHelper.getDealZonePage());
+                      }),
+                      customContainer(TTexts.NewsfeedText, newsImage,(){
+                        Get.toNamed(RouteHelper.getNewsFeedPage());
+                      }),
+                      customContainer(TTexts.SupportServicesText, supportImage,(){
+                        Get.toNamed(RouteHelper.getSupportServicePage());
+                      }),
+                      customContainer(TTexts.RideSupportText, chatImage,(){
+                        Get.toNamed(RouteHelper.getSupportChatPage());
+                      }),
+                      customContainer("Message", chatImage,(){
+                        Get.toNamed(RouteHelper.getMessageScreenPage());
+                      }),
+                      customContainer("Accept Ride", chatImage,(){
+                        Get.toNamed(RouteHelper.getAcceptRidePage());
+                      }),
+                      customContainer("Ongoing Ride", chatImage,(){
+                        Get.toNamed(RouteHelper.getOngoingRidePage());
+                      }),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
+                        child:  GestureDetector(
+                          onTap: (){
+                            show();
+                          },
+                          child: Container(
+                            decoration: TWidget.rShadow,
+                            child: Container(
+                              width: Get.width/1.8,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(TTexts.SignOutText,
+                                        style: FontsFamily.ExtraBold.copyWith(
+                                            fontSize: 15,
+                                            color: TColors.textPrimary
+                                        ),
+                                      ),
+                                    Image.asset(BUTTON_IMAGE,height: 25,width: 25,color: TColors.info,)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

@@ -116,7 +116,7 @@ class _BottomNavigationBarWithCardsState
 
                     children: <Widget>[
                       Expanded(
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: (){
                             /*controller.selectedIndex.value = 0;*/
                           },
@@ -151,7 +151,7 @@ class _BottomNavigationBarWithCardsState
                         ),
                       ),
                       Expanded(
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => WalletScreen()));
 
@@ -202,7 +202,7 @@ class _BottomNavigationBarWithCardsState
                         ],
                       ),
                       Expanded(
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: (){
 
                             Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
@@ -241,7 +241,7 @@ class _BottomNavigationBarWithCardsState
                         ),
                       ),
                       Expanded(
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => AccountScreen()));
                             /* controller.selectedIndex.value = 4;*/

@@ -46,7 +46,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: TColors.background,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -178,7 +178,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
+                              GestureDetector(
                                 onTap: () {
                                   controller.status.value = "1";
                                   _showImagePickerBottomSheet(context);
@@ -233,7 +233,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
+                              GestureDetector(
                                 onTap: () {
                                   controller.status.value = "2";
                                   _showImagePickerBottomSheet(context);
@@ -290,7 +290,7 @@ class _SignupScreen2State extends State<SignupScreen2> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
+                              GestureDetector(
                                 onTap: () {
                                   controller.status.value = "3";
                                   _showImagePickerBottomSheet(context);

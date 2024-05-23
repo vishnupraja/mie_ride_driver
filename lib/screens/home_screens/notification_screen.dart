@@ -32,14 +32,40 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: TColors.background,
+          leading: GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              height: 30,
+              width: 30,
+              decoration: TWidget.rShadow,
+              child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 2),
+                    child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                  )
+              ),
+            ),
+          ),
+          title: Text(TTexts.notification,
+            textAlign: TextAlign.center,
+            style: FontsFamily.ExtraBold.copyWith(
+              color: TColors.textPrimary,
+              fontSize: 25,
+            ),
+          ),
+          centerTitle: true,
+        ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 50,),
-              customAppbar(TTexts.notification),
-              SizedBox(height: 20,),
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(bottom: 20),
@@ -55,19 +81,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         padding: EdgeInsets.only(bottom: 10),
                         width: Get.width,
-                        decoration: BoxDecoration(
-                          color: TColors.background,
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: TColors.background),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 2,
-                              offset: Offset(2, 2), // changes position of shadow
-                            ),
-                          ],
-                        ),
+                        decoration: TWidget.rShadow,
                         child: Column(
                           children: [
                             Padding(
@@ -77,11 +91,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 child: Container(
                                   height: 20,
                                   width: 20,
-                                  decoration: BoxDecoration(
-                                    color: TColors.background,
-                                    borderRadius: TWidget.borderRadiusOnly,
-                                    boxShadow: TWidget.boxShadow,
-                                  ),
+                                  decoration: TWidget.rShadow,
                                   child: Center(
                                     child: Icon(
                                         Icons.clear, color: TColors.info,size: 15,),
@@ -91,8 +101,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             ),
                             ListTile(
                               leading: Container(
-                                height: 40,
-                                width: 40,
+                                height: 30,
+                                width: 30,
                                 decoration: TWidget.rShadow,
                                 child: Center(
                                   child: Icon(

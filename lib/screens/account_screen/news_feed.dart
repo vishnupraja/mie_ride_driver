@@ -46,7 +46,7 @@ class _NewsFeedState extends State<NewsFeed> {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: TWidget.bShadow,
+                  decoration: TWidget.rShadow,
                   child: Column(
                     children: [
                       Center(
@@ -67,11 +67,10 @@ class _NewsFeedState extends State<NewsFeed> {
                       SizedBox(height: 20,),
                       Container(
                           height: 180,
-                          width: Get.width / 1.4,
-                          decoration: TWidget.boxDecoration,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius
-                                .circular(70),
+                          width: Get.width / 1.5  ,
+                          decoration: TWidget.lShadow,
+                      child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
                             child: FadeInImage.assetNetwork(
                               placeholder: 'assets/userload.gif',
                               width: double.infinity,

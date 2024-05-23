@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/controllers/single_controller.dart';
-
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
-import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
 import '../../utils/static.dart';
@@ -40,7 +38,7 @@ class _SupportChatState extends State<SupportChat> {
                   children: [
                     SizedBox(height: 20,),
                     Container(
-                      decoration: TWidget.bBoxDecoration,
+                      decoration: TWidget.rShadow,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           padding: EdgeInsets.symmetric(
@@ -97,7 +95,7 @@ class _SupportChatState extends State<SupportChat> {
                     ),
                     SizedBox(height: 50,),
                     Container(
-                      decoration: TWidget.bShadow,
+                      decoration: TWidget.rShadow,
                       child: TextFormField(
                         style: FontsFamily.ExtraBold.copyWith(
                             color: TColors.textPrimary,
@@ -119,14 +117,14 @@ class _SupportChatState extends State<SupportChat> {
                     ),
                     SizedBox(height: 50,),
                     Center(
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: (){
                           validation();
                         },
                         child: Container(
                           height: 50,
                           width: 160,
-                          decoration: TWidget.bShadow,
+                          decoration: TWidget.rShadow,
                           child: Center(
                             child: Text(TTexts.SendMessageText,
                               style: FontsFamily.ExtraBold.copyWith(

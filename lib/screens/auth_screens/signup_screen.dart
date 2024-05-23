@@ -43,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: TColors.background,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: () {
               Get.back();
             },
@@ -194,7 +194,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             textInputType: TextInputType.visiblePassword,
                             textEditingController: passwordCtr,
                             ishide: isHide,
-                            icon: InkWell(
+                            icon: GestureDetector(
                               onTap: () {
                                 setState(() {
                                   isHide = !isHide;
@@ -216,7 +216,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
+                              GestureDetector(
                                 onTap: () {
                                   _showImagePickerBottomSheet(context);
                                 },

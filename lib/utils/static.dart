@@ -13,16 +13,14 @@ Widget customAppbar(String text){
    return Row(
      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        InkWell(
+        GestureDetector(
           onTap: (){
             Get.back();
           },
-          child: Card(
-            color: TColors.background,
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+          child: Container(
+            height: 40,
+           width: 40,
+           decoration: TWidget.rShadow,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Center(
@@ -50,7 +48,7 @@ Widget customAppbar(String text){
     }
 
 Widget customContainer(String text,String image,VoidCallback callback){
-  return InkWell(
+  return GestureDetector(
     onTap: (){
      callback();
     },
@@ -132,8 +130,8 @@ class CustomField extends StatelessWidget {
   }
 }
 
-Widget CustomButton(String text,String image ,VoidCallback callback){
-  return InkWell(
+Widget CustomButton(String text,String image,VoidCallback callback){
+  return GestureDetector(
     onTap: (){
       callback();
     },

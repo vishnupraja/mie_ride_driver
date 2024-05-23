@@ -5,7 +5,7 @@ import 'package:mie_ride_driver/controllers/ride_controller.dart';
 import 'controllers/home_controller.dart';
 import 'controllers/permission_controller.dart';
 import 'controllers/single_controller.dart';
-import 'controllers/wallete_controller.dart';
+import 'controllers/wallet_controller.dart';
 
 class MyBinding extends Bindings {
   @override

@@ -23,7 +23,7 @@ class _SupportServiceState extends State<SupportService> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: TColors.background,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: (){
             Get.back();
           },
@@ -77,14 +77,14 @@ class _SupportServiceState extends State<SupportService> {
             }),
             SizedBox(height: 50 ,),
             Center(
-             child: InkWell(
+             child: GestureDetector(
                onTap: (){
                  show();
                },
                child: Container(
                  height: 50,
                  width: 160,
-                 decoration: TWidget.bShadow,
+                 decoration: TWidget.rShadow,
                  child: Center(
                    child: Text(TTexts.DeleteAccountText,
                    style: FontsFamily.ExtraBold.copyWith(

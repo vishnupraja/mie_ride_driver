@@ -17,7 +17,7 @@ class DealZone extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: TColors.background,
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: (){
             Get.back();
           },

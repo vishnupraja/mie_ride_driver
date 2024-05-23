@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/screens/test_screen.dart';
 
 import '../constant/colors.dart';
 import '../constant/font_family.dart';
@@ -316,18 +317,23 @@ class _AcceptRideState extends State<AcceptRide> {
                   ],
                 ),
               ),
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-                  decoration: TWidget.bShadow,
-                  child: Center(
-                    child: Text("Accept", style: FontsFamily.ExtraBold.copyWith(
-                      fontSize: TSizes.fontSizeMd,
-                      color: TColors.rideCompleteColor,
-                    ),),
-                  )
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TestScreen()));
+                },
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+                    decoration: TWidget.bShadow,
+                    child: Center(
+                      child: Text("Accept", style: FontsFamily.ExtraBold.copyWith(
+                        fontSize: TSizes.fontSizeMd,
+                        color: TColors.rideCompleteColor,
+                      ),),
+                    )
+                ),
               ),
-              InkWell(
+              GestureDetector(
                 onTap: (){
                   Get.back();
                 },

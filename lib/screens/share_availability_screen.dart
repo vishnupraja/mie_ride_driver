@@ -46,7 +46,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
               decoration: TWidget.rShadow,
               child: Column(
                 children: [
-                  InkWell(
+                  GestureDetector(
                     onTap: (){
                       _selectDate(context);
                     },
@@ -140,7 +140,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap:(){
                           status = "1";
                           _selectTime(context);
@@ -163,7 +163,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                         ),
                       ),
                       SizedBox(width: 50,),
-                      InkWell(
+                      GestureDetector(
                         onTap: (){
                           status = "2";
                           _selectTime(context);
@@ -200,9 +200,10 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: TWidget.bBoxDecoration,
+                    decoration: TWidget.rShadow,
+                   /* decoration: TWidget.bBoxDecoration,*/
                     child: PopupMenuButton<List<String>>(
-                      color: Color(0xFFE9E3E3),
+                      color: Colors.white,
                       constraints: BoxConstraints.tightFor(width: Get.width / 1.3),
                       offset: Offset(0, 55), // Shift menu down by 40 pixels (adjust as needed)
                       child: Container(
@@ -235,11 +236,24 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                       itemBuilder: (BuildContext context) {
                         return Get.find<AuthController>().vehicleList.map((value) {
                           return PopupMenuItem<List<String>>(
-                            value: [value['car_id'], value['car_name']],
+                            value: [value['car_id'],
+                              value['car_name']],
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                               width: double.infinity,
-                              decoration: TWidget.rShadow,
+                              decoration: BoxDecoration(
+                                color: TColors.background,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(color: TColors.background),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(2, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -288,7 +302,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                       },
                       onOpened: (){
                         setState(() {
-                          
+
                         });
                       },
                     ),

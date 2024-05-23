@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(width: TSizes.lg,),
                     Flexible(
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: (){
                           Get.toNamed(RouteHelper.getRatingPage());
                         },
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () {
                           Get.toNamed(
                               RouteHelper.getShareAvailabilityPage());
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Flexible(
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () {
                           Get.toNamed(RouteHelper.getShareRoutePage());
                         },

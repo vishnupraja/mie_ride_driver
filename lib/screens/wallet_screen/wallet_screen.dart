@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mie_ride_driver/controllers/wallete_controller.dart';
+import 'package:mie_ride_driver/controllers/wallet_controller.dart';
 import 'package:mie_ride_driver/main.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 
@@ -37,7 +37,7 @@ class _WalletScreenState extends State<WalletScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xfff7f7f7),
-        leading: InkWell(
+        leading: GestureDetector(
           onTap: () {
             Get.back();
           },
@@ -79,7 +79,7 @@ class _WalletScreenState extends State<WalletScreen> {
           children: [
             SizedBox(height: 20,),
             Container(
-              height: Get.height / 2.8,
+              height: Get.height / 2.5,
               width: Get.width / 1,
               decoration: BoxDecoration(
                 image: DecorationImage(image: AssetImage('assets/shadow.png'))
@@ -102,7 +102,7 @@ class _WalletScreenState extends State<WalletScreen> {
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   Get.toNamed(RouteHelper.getAccountDetailPage());
                 },
@@ -145,7 +145,7 @@ class _WalletScreenState extends State<WalletScreen> {
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   Get.toNamed(RouteHelper.getHistoryPage());
                 },

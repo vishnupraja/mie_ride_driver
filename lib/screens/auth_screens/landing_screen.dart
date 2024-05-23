@@ -74,7 +74,7 @@ class _LandingPageState extends State<LandingPage> {
             SizedBox(height: 30,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   Get.toNamed(RouteHelper.getSignupPage());
                 },
@@ -97,7 +97,7 @@ class _LandingPageState extends State<LandingPage> {
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: (){
                   Get.toNamed(RouteHelper.getLoginPage());
                 },

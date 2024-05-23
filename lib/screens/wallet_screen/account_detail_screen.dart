@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mie_ride_driver/controllers/wallete_controller.dart';
+import 'package:mie_ride_driver/controllers/wallet_controller.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
@@ -77,12 +77,12 @@ class _AccountDetailState extends State<AccountDetail> {
                         margin: EdgeInsets.symmetric(horizontal: 5,
                             vertical: 5),
                         width: Get.width,
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Column(
                           children: [
                             Row(
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       email = "Interac_Etransfer";
@@ -90,13 +90,9 @@ class _AccountDetailState extends State<AccountDetail> {
                                     });
                                   },
                                   child: Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      color: TColors.background,
-                                      borderRadius: TWidget.borderRadiusOnly,
-                                      boxShadow: TWidget.boxShadow,
-                                    ),
+                                    height: 30,
+                                    width: 30,
+                                    decoration: TWidget.rShadow,
                                     child: Center(
                                       child: Icon(Icons.check_circle,
                                           color: email == "Interac_Etransfer" ? TColors
@@ -134,12 +130,12 @@ class _AccountDetailState extends State<AccountDetail> {
                         margin: EdgeInsets.symmetric(horizontal: 5,
                             vertical: 5),
                         width: Get.width,
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Column(
                           children: [
                             Row(
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       deposit = "Direct_Deposite";
@@ -147,13 +143,9 @@ class _AccountDetailState extends State<AccountDetail> {
                                     });
                                   },
                                   child: Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      color: TColors.background,
-                                      borderRadius: TWidget.borderRadiusOnly,
-                                      boxShadow: TWidget.boxShadow,
-                                    ),
+                                    height: 30,
+                                    width: 30,
+                                    decoration: TWidget.rShadow,
                                     child: Center(
                                       child: Icon(Icons.check_circle,
                                           color: deposit == "Direct_Deposite"
@@ -206,12 +198,12 @@ class _AccountDetailState extends State<AccountDetail> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     _showImagePickerBottomSheet(context);
                                   },
                                   child: Container(
-                                    decoration: TWidget.bBoxDecoration,
+                                    decoration: TWidget.rShadow,
                                     child: Container(
                                       width: Get.width / 1.6,
                                       child: Padding(
@@ -253,14 +245,14 @@ class _AccountDetailState extends State<AccountDetail> {
                         ),
                       ),
                       SizedBox(height: 20,),
-                      InkWell(
+                      GestureDetector(
                         onTap: (){
                           validation();
                         },
                         child: Container(
                           height: 50,
                           width: Get.width / 2,
-                          decoration: TWidget.bBoxDecoration,
+                          decoration: TWidget.rShadow,
                           child: Center(
                             child: Text(TTexts.SaveChangesText,
                               style: FontsFamily.ExtraBold.copyWith(

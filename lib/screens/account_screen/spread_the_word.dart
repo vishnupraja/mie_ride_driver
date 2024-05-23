@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../constant/colors.dart';
@@ -23,7 +25,7 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: TColors.background,
-          leading: InkWell(
+          leading: GestureDetector(
             onTap: (){
               Get.back();
             },
@@ -81,12 +83,15 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
               child: Row(
                 children: [
                   Text(TTexts.linkText,
+                  softWrap: true,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: FontsFamily.ExtraBold.copyWith(
                     fontSize: 12,
                     color: TColors.textPrimary
                   ),),
-                  SizedBox(width: 5,),
-                  Icon(Icons.copy)
+                 
+                  Expanded(child: Icon(Icons.copy))
                 ],
               ),
             ),

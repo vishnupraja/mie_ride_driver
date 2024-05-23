@@ -18,14 +18,40 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: GestureDetector(
+          onTap: (){
+            Get.back();
+          },
+          child: Container(
+            margin: EdgeInsets.all(10),
+            height: 30,
+            width: 30,
+            decoration: TWidget.rShadow,
+            child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                )
+            ),
+          ),
+        ),
+        title: Text(TTexts.BookingsText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20,),
-            customAppbar(TTexts.BookingsText),
-            SizedBox(height: 10,),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.only(bottom: 50),
@@ -40,7 +66,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         padding: EdgeInsets.symmetric(vertical: 15),
                         width: Get.width,
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
@@ -51,7 +77,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   Expanded(
                                     child: Container(
                                       height: 30,
-                                      decoration: TWidget.bBoxDecoration,
+                                      decoration: TWidget.rShadow,
                                       child: Center(
                                         child: Row(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +103,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(horizontal: 5.0),
                                       height: 30,
-                                      decoration: TWidget.bBoxDecoration,
+                                      decoration: TWidget.rShadow,
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -102,7 +128,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(horizontal: 5),
                                       height: 30,
-                                      decoration: TWidget.bBoxDecoration,
+                                      decoration: TWidget.rShadow,
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -130,7 +156,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   Container(
                                     padding: EdgeInsets.symmetric(horizontal: 5.0),
                                     height: 30,
-                                    decoration: TWidget.bBoxDecoration,
+                                    decoration: TWidget.rShadow,
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -184,7 +210,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               SizedBox(height: 20,),
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 15),
-                                decoration: TWidget.bBoxDecoration,
+                                decoration: TWidget.rShadow,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 30),
                                   child: Row(
@@ -211,7 +237,7 @@ class _BookingScreenState extends State<BookingScreen> {
                               SizedBox(height: 20,),
                               Container(
                                 padding: EdgeInsets.symmetric(vertical: 15),
-                                decoration: TWidget.bBoxDecoration,
+                                decoration: TWidget.rShadow,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 30),
                                   child: Row(
@@ -241,7 +267,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                 child: Container(
                                     height: 40,
                                     width: 150,
-                                    decoration: TWidget.bBoxDecoration  ,
+                                    decoration: TWidget.rShadow  ,
                                     child: Center(
                                       child: Text(TTexts.BPickupText,
                                         style: FontsFamily.ExtraBold.copyWith(

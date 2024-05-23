@@ -41,7 +41,7 @@ class _ContactFormState extends State<ContactForm> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12),
                     height: 50,
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.rShadow,
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +97,7 @@ class _ContactFormState extends State<ContactForm> {
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.rShadow,
                     child: TextFormField(
                       style: FontsFamily.ExtraBold.copyWith(
                         color: TColors.textPrimary,
@@ -119,14 +119,14 @@ class _ContactFormState extends State<ContactForm> {
                   ),
                   SizedBox(height: 30,),
                   Center(
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: (){
                         validation();
                       },
                       child: Container(
                         height: 50,
                         width: 160,
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Center(
                           child: Text(TTexts.SendMessageText,
                             style: FontsFamily.ExtraBold.copyWith(

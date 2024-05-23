@@ -6,7 +6,7 @@ import '../../constant/colors.dart';
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
-import '../../controllers/wallete_controller.dart';
+import '../../controllers/wallet_controller.dart';
 import '../../utils/static.dart';
 class History extends StatefulWidget {
   const History({super.key});
@@ -22,7 +22,10 @@ class _HistoryState extends State<History> {
   @override
   void initState() {
     super.initState();
-    controller.historyFetch();
+    Future.delayed(Duration.zero,(){
+      controller.historyFetch();
+    });
+
   }
 
   @override
@@ -44,7 +47,7 @@ class _HistoryState extends State<History> {
                  return Container(
                    margin: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
                    padding: EdgeInsets.symmetric(vertical: 15,horizontal: 8),
-                   decoration: TWidget.bShadow,
+                   decoration: TWidget.rShadow,
                    child: Row(
                       children: [
                         Container(

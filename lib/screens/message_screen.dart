@@ -38,7 +38,7 @@ class _MessageScreenState extends State<MessageScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            InkWell(
+                            GestureDetector(
                               onTap: () {
                                 Get.back();
                               },
