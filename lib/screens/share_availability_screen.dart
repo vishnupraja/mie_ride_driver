@@ -20,13 +20,15 @@ class ShareAvailability extends StatefulWidget {
 class _ShareAvailabilityState extends State<ShareAvailability> {
 
   List<String> selectCityList = ["Indore", "Ujjain", "Bhopal"];
+  List<String> selectDropCityList = ["Indore", "Ujjain", "Bhopal"];
 
   var selectCity = null;
-  List<String> selectedCarIds = [];
+  var selectDropCity = null;
+ /* List<String> selectedCarIds = [];*/
 
   @override
   void initState() {
-    Get.find<AuthController>().fetchCars();
+    /*Get.find<AuthController>().fetchCars();*/
     super.initState();
   }
 
@@ -193,6 +195,55 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
             SizedBox(height: 20,),
 
             Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: TWidget.rShadow,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  padding: EdgeInsets.symmetric( horizontal: 20),
+                  dropdownColor: TColors.background,
+                  hint: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      TTexts.SelectDropCityText,
+                      style: FontsFamily.ExtraBold.copyWith(
+                          color: TColors.textSecondary, fontSize: 15
+                      ),
+                    ),
+                  ),
+                  value: selectDropCity,
+                  icon: const Icon(
+                    Icons.arrow_drop_down,
+                    size: 30,
+                    color: TColors.textPrimary,
+                  ),
+                  isExpanded: true,
+                  items: selectDropCityList.map(
+                        (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: TColors.textPrimary),
+                          ),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (value) {
+                    setState(
+                          () {
+                        selectDropCity = value;
+                        print("vehicle drop===>$selectDropCity");
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            /*Container(
               padding: EdgeInsets.symmetric(vertical: 20),
               width: Get.width,
               decoration: TWidget.rShadow,
@@ -201,7 +252,6 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     decoration: TWidget.rShadow,
-                   /* decoration: TWidget.bBoxDecoration,*/
                     child: PopupMenuButton<List<String>>(
                       color: Colors.white,
                       constraints: BoxConstraints.tightFor(width: Get.width / 1.3),
@@ -309,7 +359,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
                   ),
                 ],
               ),
-            ),
+            ),*/
             SizedBox(height: 30,),
             CustomButton(TTexts.SubmitText, BUTTON_IMAGE, () { })
           ],
@@ -318,7 +368,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
     );
   }
 
-  String _getCarNames(List<String> carIds) {
+/*  String _getCarNames(List<String> carIds) {
     List<String> carNames = [];
     var vehicleList = Get.find<AuthController>().vehicleList;
 
@@ -334,7 +384,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
       }
     }
     return carNames.join(", ");
-  }
+  }*/
 
 
   var status = "";
@@ -377,7 +427,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? DateTime.now(), // Use DateTime.now() if _selectedDate is null
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mie_ride_driver/controllers/wallet_controller.dart';
+import 'package:photo_view/photo_view.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/image_string/image_string.dart';
@@ -229,14 +230,38 @@ class _AccountDetailState extends State<AccountDetail> {
                                     borderRadius: BorderRadius.circular(50),
                                     child: controller.formImageString.value ==
                                         null ?
-                                    Image.asset(USER_IMAGE, height: 50,
-                                      width: 50,
-                                      fit: BoxFit.cover,) :
-                                    Image.file(File(
-                                        controller.formImageString.value!
-                                            .path), height: 50,
-                                      width: 50,
-                                      fit: BoxFit.cover,),
+                                    InkWell(
+                                      onTap:(){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                                          return DetailScreen(image: controller.depositForm.value,);
+                                        }));
+                                      },
+                                      child: FadeInImage.assetNetwork(
+                                        placeholder: 'assets/userload.gif',
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                        image: controller.depositForm.value,
+                                        imageErrorBuilder: (c, o, s) =>
+                                            Image.asset(
+                                              USER_IMAGE, height: 50,
+                                              width: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                      ),
+                                    ):
+                                    InkWell(
+                                      onTap:(){
+                                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                                          return DetailScreen(image: controller.formImageString.value!.path,);
+                                        }));
+                                      },
+                                      child: Image.file(File(
+                                          controller.formImageString.value!
+                                              .path), height: 50,
+                                        width: 50,
+                                        fit: BoxFit.cover,),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -354,6 +379,34 @@ class _AccountDetailState extends State<AccountDetail> {
       Navigator.pop(context);
     });
   }
+}
+class DetailScreen extends StatefulWidget {
+  String image = "";
+  DetailScreen({super.key,required this.image});
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
 
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Container(
+          width: double.infinity,
+          child: PhotoView(
+            imageProvider: NetworkImage(widget.image),
+            minScale: PhotoViewComputedScale.contained * 1,
+            maxScale: PhotoViewComputedScale.covered * 1,
+            enableRotation: false,
+            initialScale: PhotoViewComputedScale.contained * 1,
 
+          )
+      ),
+    );
+
+    /* DoubleTappableInteractiveViewer(
+        scaleDuration: const Duration(milliseconds: 600),
+    child: Image.network(controller.Image.value,height: double.infinity,width: double.infinity,));*/
+  }
 }

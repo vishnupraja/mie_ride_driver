@@ -23,8 +23,6 @@ class ApiService extends GetxService{
    return await dioClient.get(Urls.baseUrl +url).timeout(Duration(seconds: timeoutInSecond));
  }
 
-
-
  Future<DIO.Response> multiPartFile(String url,DIO.FormData formData)async{
    return await dioClient.post(Urls.baseUrl + url,data: formData);
  }

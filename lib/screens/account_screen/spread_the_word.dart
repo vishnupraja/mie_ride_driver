@@ -82,14 +82,17 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
               decoration: TWidget.bShadow,
               child: Row(
                 children: [
-                  Text(TTexts.linkText,
-                  softWrap: true,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: FontsFamily.ExtraBold.copyWith(
-                    fontSize: 12,
-                    color: TColors.textPrimary
-                  ),),
+                  Container(
+                    width: Get.width/1.3,
+                    child: Text(TTexts.linkText,
+                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: FontsFamily.ExtraBold.copyWith(
+                      fontSize: 12,
+                      color: TColors.textPrimary
+                    ),),
+                  ),
                  
                   Expanded(child: Icon(Icons.copy))
                 ],

@@ -112,7 +112,6 @@ class _HomePageState extends State<HomePage> {
                                 unratedColor: Colors.amber.withAlpha(50),
                                 direction: Axis.horizontal,
                               ),
-      
                             ],
                           ),
                         ),

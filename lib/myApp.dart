@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: TColors.background,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: RouteHelper.getLandingPage(),
+      initialRoute: RouteHelper.getSplashRoute(),
       getPages: RouteHelper.route,
     );
   }

@@ -33,7 +33,7 @@ class _AcceptRideState extends State<AcceptRide> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     padding: EdgeInsets.symmetric(vertical: 15),
                     width: Get.width,
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.rShadow,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
@@ -44,7 +44,7 @@ class _AcceptRideState extends State<AcceptRide> {
                               Expanded(
                                 child: Container(
                                   height: 30,
-                                  decoration: TWidget.bShadow,
+                                  decoration: TWidget.rShadow,
                                   child: Center(
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,7 @@ class _AcceptRideState extends State<AcceptRide> {
                                 child: Container(
                                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                                   height: 30,
-                                  decoration: TWidget.bShadow,
+                                  decoration: TWidget.rShadow,
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,7 +95,7 @@ class _AcceptRideState extends State<AcceptRide> {
                                 child: Container(
                                   padding: EdgeInsets.symmetric(horizontal: 10),
                                   height: 30,
-                                  decoration: TWidget.bShadow,
+                                  decoration: TWidget.rShadow,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -122,7 +122,7 @@ class _AcceptRideState extends State<AcceptRide> {
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 5.0),
                                 height: 30,
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.rShadow,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -176,7 +176,7 @@ class _AcceptRideState extends State<AcceptRide> {
                           SizedBox(height: 20,),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 15),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 30),
                               child: Row(
@@ -203,7 +203,7 @@ class _AcceptRideState extends State<AcceptRide> {
                           SizedBox(height: 20,),
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 15),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 30),
                               child: Row(
@@ -233,7 +233,7 @@ class _AcceptRideState extends State<AcceptRide> {
                             child: Container(
                                 height: 40,
                                 width: 150,
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.rShadow,
                                 child: Center(
                                   child: Text(TTexts.BPickupText,
                                     style: FontsFamily.ExtraBold.copyWith(
@@ -285,7 +285,7 @@ class _AcceptRideState extends State<AcceptRide> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 5,vertical: 20),
                 padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-                decoration: TWidget.bShadow,
+                decoration: TWidget.rShadow,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -324,7 +324,7 @@ class _AcceptRideState extends State<AcceptRide> {
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
                     padding: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.rShadow,
                     child: Center(
                       child: Text("Accept", style: FontsFamily.ExtraBold.copyWith(
                         fontSize: TSizes.fontSizeMd,
@@ -340,7 +340,7 @@ class _AcceptRideState extends State<AcceptRide> {
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
                     padding: EdgeInsets.symmetric(horizontal: 10,vertical: 8),
-                    decoration: TWidget.bShadow,
+                    decoration: TWidget.rShadow,
                     child: Center(
                       child: Text("Decline", style: FontsFamily.ExtraBold.copyWith(
                           fontSize: TSizes.fontSizeMd,

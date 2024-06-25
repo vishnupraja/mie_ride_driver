@@ -33,7 +33,7 @@ class _OngoingRideState extends State<OngoingRide> {
                            margin: EdgeInsets.symmetric(horizontal: 10),
                            padding: EdgeInsets.symmetric(vertical: 15),
                            width: Get.width,
-                           decoration: TWidget.bShadow,
+                           decoration: TWidget.rShadow,
                            child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
@@ -80,14 +80,14 @@ class _OngoingRideState extends State<OngoingRide> {
                                margin: EdgeInsets.symmetric(vertical: 10),
                                height: 40,
                                width: 40,
-                               decoration: TWidget.bShadow,
+                               decoration: TWidget.rShadow,
                                child: Center(
                                  child: Icon(Icons.location_on_outlined,color: TColors.info,size: 20,),
                                ),
                              ),
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.rShadow,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -112,14 +112,14 @@ class _OngoingRideState extends State<OngoingRide> {
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 height: 40,
                                 width: 40,
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.rShadow,
                                 child: Center(
                                   child: Icon(Icons.clear,color: TColors.info,size: 20,),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: TWidget.bShadow,
+                                decoration: TWidget.rShadow,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -143,7 +143,7 @@ class _OngoingRideState extends State<OngoingRide> {
                       SizedBox(height: 20,),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 10),
                           child: Row(
@@ -174,7 +174,7 @@ class _OngoingRideState extends State<OngoingRide> {
                       SizedBox(height: 20,),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        decoration: TWidget.bShadow,
+                        decoration: TWidget.rShadow,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30,right: 10),
                           child: Row(
@@ -208,7 +208,7 @@ class _OngoingRideState extends State<OngoingRide> {
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 10),
                             padding: EdgeInsets.all(10),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Center(
                               child: Image.asset(callImage,height: 20,width: 20,),
                             ),
@@ -216,7 +216,7 @@ class _OngoingRideState extends State<OngoingRide> {
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.all(8),
-                              decoration: TWidget.bShadow,
+                              decoration: TWidget.rShadow,
                               child: Center(
                                 child: Text("Start ride",
                                 style: FontsFamily.ExtraBold.copyWith(
@@ -230,7 +230,7 @@ class _OngoingRideState extends State<OngoingRide> {
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 10),
                             padding: EdgeInsets.all(10),
-                            decoration: TWidget.bShadow,
+                            decoration: TWidget.rShadow,
                             child: Center(
                               child: Image.asset(chatImage,height: 20,width: 20,),
                             ),

@@ -59,7 +59,7 @@ class _MyRideScreenState extends State<MyRideScreen> {
                               letterSpacing: 1,
                             ),),
                           SizedBox(height: TSizes.md,),
-                          Text(controller.totalRide.value,
+                          Text(controller.totalRide.value == ""?"0":controller.totalRide.value,
                             style: FontsFamily.ExtraBold.copyWith(
                                 color: TColors.info,
                                 fontSize: TSizes.fontSizeLg

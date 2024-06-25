@@ -11,6 +11,7 @@ import 'package:mie_ride_driver/services/api_service.dart';
 import 'package:mie_ride_driver/utils/static.dart';
 
 import '../main.dart';
+import '../services/demo.dart';
 import '../services/urls.dart';
 
 class AuthController extends GetxController{
@@ -25,13 +26,13 @@ class AuthController extends GetxController{
 
   var status = "".obs;
 
-  var fNameCtr   = "".obs;
-  var lNameCtr   = "".obs;
-  var emailCtr   = "".obs;
-  var passwordCtr= "".obs;
-  var phoneCtr   = "".obs;
-  var code   = "".obs;
-  var flag   = "".obs;
+  var fNameCtr    = "".obs;
+  var lNameCtr    = "".obs;
+  var emailCtr    = "".obs;
+  var passwordCtr = "".obs;
+  var phoneCtr    = "".obs;
+  var code        = "".obs;
+  var flag        = "".obs;
 
   ApiService apiService = ApiService();
 
@@ -42,6 +43,7 @@ class AuthController extends GetxController{
   var vehicleList = [].obs;
  var  isSelected = false.obs;
   var selectedCarIds = [].obs;
+
   void signup(String vehicleNumber,vehicle,)async{
 
     LoadingDialog.show();
@@ -88,7 +90,6 @@ class AuthController extends GetxController{
     }
 
   }
-
 
   void login(String contact, password , code,)async{
       LoadingDialog.show();
@@ -177,6 +178,7 @@ class AuthController extends GetxController{
     }
 
   }
+
 
 
 }

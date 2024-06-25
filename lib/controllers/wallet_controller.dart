@@ -23,6 +23,7 @@ class WalletController extends GetxController{
   var iNumber  = "".obs;
   var account  = "".obs;
   var type  = "".obs;
+  var depositForm = "".obs;
 
 
   MySharedPreferences sp = MySharedPreferences();
@@ -118,6 +119,7 @@ class WalletController extends GetxController{
         iNumber.value = jsonString['institution_number'];
         account.value = jsonString['account'];
         type.value = jsonString['type'];
+        depositForm.value = jsonString['diposite_image'];
         callback();
       }else{
         LoadingDialog.hide();

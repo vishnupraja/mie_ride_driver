@@ -26,13 +26,6 @@ class _LandingPageState extends State<LandingPage> {
 
   MySharedPreferences sp = MySharedPreferences();
 
-  @override
-  void initState() {
-    getData();
-    Get.find<PermissionController>().permissionHandle();
-    Get.find<PermissionController>().handleLocationPermission();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +48,7 @@ class _LandingPageState extends State<LandingPage> {
             style:FontsFamily.bropames.copyWith(
               color: TColors.textPrimary,
               fontSize: 40,
-            ) ,
+            ),
             ),
             Text(TTexts.appName2,
               style:FontsFamily.bropames.copyWith(
@@ -69,7 +62,7 @@ class _LandingPageState extends State<LandingPage> {
               style: FontsFamily.Extralight.copyWith(
                 color: TColors.textPrimary,
                 fontSize: TSizes.fontSizeMd,
-              ) ,
+              ),
             ),
             SizedBox(height: 30,),
             Padding(
@@ -87,7 +80,7 @@ class _LandingPageState extends State<LandingPage> {
                         style:FontsFamily.ExtraBold.copyWith(
                           color: TColors.textPrimary,
                           fontSize: TSizes.fontSizeLg,
-                        ) ,
+                        ),
                       ),
                     ),
                   ),
@@ -110,7 +103,7 @@ class _LandingPageState extends State<LandingPage> {
                         style:FontsFamily.ExtraBold.copyWith(
                           color: TColors.textPrimary,
                           fontSize: TSizes.fontSizeLg,
-                        ) ,
+                        ),
                       ),
                     ),
                   ),
@@ -123,19 +116,6 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  getData() {
-    Future.delayed(Duration.zero, () async {
-      LoadingDialog.show();
-      if (await sp.getBoolValue(sp.Login_key) != true) {
-        LoadingDialog.hide();
-      } else {
-        Timer(Duration(seconds: 1), () {
-          LoadingDialog.hide();
-          Get.offAllNamed(RouteHelper.getBottomPage());
-        });
-      }
-    });
-  }
 
 }
 

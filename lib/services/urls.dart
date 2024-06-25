@@ -2,7 +2,7 @@
 
 class Urls{
 
-  static String baseUrl = "https://cisswork.com/Android/MieRide/API/";
+  static String baseUrl = "https://mieride.ca/MieAdmin/API/";
 
 
 

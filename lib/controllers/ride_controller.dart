@@ -22,7 +22,7 @@ class RideController extends GetxController{
   void fetchMieRideEarning()async{
 
     Map<String,dynamic> map = {
-      'driver_id' : /*await sp.getStringValue(sp.USER_ID)??*/"44"
+      'driver_id' : await sp.getStringValue(sp.USER_ID)??""/*"44"*/
     };
     try{
 
@@ -48,7 +48,7 @@ class RideController extends GetxController{
   void driverHistory()async{
     LoadingDialog.show();
     Map<String,dynamic> map = {
-      'driver_id' : /*await sp.getStringValue(sp.USER_ID)??*/"44"
+      'driver_id' : await sp.getStringValue(sp.USER_ID)??""
     };
     
     try{
