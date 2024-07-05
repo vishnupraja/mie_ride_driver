@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/constant/sizes.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constant/colors.dart';
 
@@ -313,31 +314,33 @@ class TWidget{
     border: Border.all(color: TColors.background),
     boxShadow: [
       BoxShadow(
-        color: Colors.grey.withOpacity(0.3),
-        spreadRadius: 2,
+        color: Colors.white, // White shadow on left and top
+        offset: Offset(-3, -3),
+        blurRadius: 8,
+      ),
+      BoxShadow(
+        color: Colors.grey.shade300, // Black shadow on bottom and right
+        offset: Offset(3 ,3),
         blurRadius: 2,
-        offset: Offset(2, 2), // changes position of shadow
       ),
     ],
   );
 
 
   static final lShadow = BoxDecoration(
-      color: TColors.background,
-      borderRadius: BorderRadius.circular(15),
+    color: TColors.background,
+    borderRadius: BorderRadius.circular(15),
 
     boxShadow: [
       BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 2,
+        color: Colors.grey.withOpacity(0.3), // White shadow on left and top
+        offset: Offset(1, 1),
         blurRadius: 2,
-        offset: Offset(-2, 2), // Adjust these values
       ),
       BoxShadow(
-        color: TColors.background.withOpacity(0.5),
-        spreadRadius: 2,
+        color:Colors.grey.shade300, // Black shadow on bottom and right
+        offset: Offset(-3 ,3),
         blurRadius: 2,
-        offset: Offset(2, -2), // Adjust these values
       ),
     ],
   );
@@ -350,6 +353,39 @@ class TWidget{
 class ImageHelper {
   static Future<void> pickImage(ImageSource source, Function(File) setImageFile) async {
     final picker = ImagePicker();
+
+
+
+    Future<bool> _requestPermission(Permission permission) async {
+      var status = await permission.request();
+      if (status.isDenied) {
+        // Ask for permission again
+        status = await permission.request();
+        if (status.isDenied) {
+          // If still denied, open app settings
+          await openAppSettings();
+          return false;
+        }
+      } else if (status.isPermanentlyDenied) {
+        // If permanently denied, open app settings
+        await openAppSettings();
+        return false;
+      }
+      return status.isGranted;
+    }
+
+    bool permissionGranted = false;
+    if (source == ImageSource.camera) {
+      permissionGranted = await _requestPermission(Permission.camera);
+    } else if (source == ImageSource.gallery) {
+      permissionGranted = await _requestPermission(Permission.photos);
+    }
+
+    if (!permissionGranted) {
+      customSnackBar('Permission denied. Please enable permission from settings.');
+      return;
+    }
+
     final pickedFile = await picker.pickImage(source: source,);
 
     if (pickedFile != null) {
@@ -436,11 +472,7 @@ bool isValidEmail(String email) {
   return regex.hasMatch(email);
 }
 
-Widget loader(){
-  return Center(
-    child: Image.asset("assets/mierideloader.gif",height: 50,width: 50,),
-  );
-}
+
 
 
 

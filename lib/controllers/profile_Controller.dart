@@ -38,9 +38,10 @@ var profileLoad = false.obs;
 var term = "".obs;
 var privacy = "".obs;
 
+var profileImage = "".obs;
+
   Future<String> fetchProfile()async{
     profileLoad.value = true;
-    LoadingDialog.show();
     Map<String,dynamic>map = {
       'driver_id' : await sp.getStringValue(sp.USER_ID)??""
     };
@@ -49,6 +50,8 @@ var privacy = "".obs;
       final response = await apiService.postData(Urls.profile, map);
 
       var jsonString = jsonDecode(response.data);
+
+      print("response ------$jsonString");
 
       if(jsonString['result'] == "successfully"){
         TTexts.name = jsonString['first_name'];
@@ -60,21 +63,21 @@ var privacy = "".obs;
         LImage = jsonString['licence_image'];
         IImage = jsonString['insurance_image'];
         OImage = jsonString['ownership_image'];
-        profileImage = jsonString['Image'];
+        profileImage.value = jsonString['Image'];
         term.value = jsonString['terms'];
         TTexts.countryFlag = jsonString['flag'];
         TTexts.countryCode = jsonString['country_code'];
         privacy.value = jsonString['privacy_policy'];
       }
       else{
-        customSnackBar("Something went wrong");
+
       }
-      LoadingDialog.hide();
+     /* LoadingDialog.hide();*/
       profileLoad.value = false;
       return jsonString['result'];
     }catch(e){
+    /*  LoadingDialog.hide();*/
       profileLoad.value = false;
-      LoadingDialog.hide();
       log("Exception ----",error: e.toString());
       return e.toString();
     }

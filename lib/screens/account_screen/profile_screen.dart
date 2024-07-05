@@ -8,6 +8,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mie_ride_driver/constant/colors.dart';
 import 'package:mie_ride_driver/constant/font_family.dart';
 import 'package:mie_ride_driver/controllers/auth_controller.dart';
+import 'package:mie_ride_driver/screens/loader.dart';
 
 import '../../constant/image_string/image_string.dart';
 import '../../constant/sizes.dart';
@@ -49,8 +50,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
+      LoadingDialog.show();
       Get.find<AuthController>().fetchCars();
       controller.fetchProfile().then((value) {
+        LoadingDialog.hide();
         if (value == "successfully") {
           fNameCtr.text = TTexts.name;
           lNameCtr.text = TTexts.lastN;
@@ -61,6 +64,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           countryCode = TTexts.countryCode;
           countryFlag = TTexts.countryFlag;
         }
+      });
+      setState(() {
+
       });
     });
   }
@@ -114,6 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
             children: [
+
               Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: 10, vertical: 20),
@@ -126,53 +133,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+
                         GestureDetector(
-                          onTap: () {
+                          onTap: (){
                             controller.changeScreen.value = TTexts.PersonalText;
                           },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            decoration: TWidget.rShadow,
-                            child: Center(
-                              child: Obx(() {
-                                return Text(TTexts.PersonalText,
-                                  style: FontsFamily.ExtraBold.copyWith(
-                                      fontSize: 13,
-                                      color: controller.changeScreen.value !=
-                                          TTexts.PersonalText ? TColors
-                                          .textPrimary : TColors.info
-                                  ),);
-                              }),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              //margin: EdgeInsets.symmetric(vertical: 15),
+                              //padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              decoration: BoxDecoration(
+                                color: controller.changeScreen.value == TTexts.PersonalText?TColors.rideCompleteColor:TColors.background,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(color: TColors.background),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white, // White shadow on left and top
+                                    offset: Offset(-3, -3),
+                                    blurRadius: 8,
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.grey.shade300, // Black shadow on bottom and right
+                                    offset: Offset(3 ,3),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Obx(() {
+                                  return Text(TTexts.PersonalText,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        fontSize: 13,
+                                        color: controller.changeScreen.value ==
+                                            TTexts.PersonalText ? TColors
+                                            .white : TColors.info
+                                    ),);
+                                }),
+                              ),
                             ),
                           ),
                         ),
 
                         GestureDetector(
-                          onTap: () {
-                            controller.changeScreen.value =
-                                TTexts.CarDetailsText;
+                          onTap: (){
+                            controller.changeScreen.value = TTexts.CarDetailsText;
                           },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 15),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            decoration: TWidget.rShadow,
-                            child: Center(
-                              child: Obx(() {
-                                return Text(TTexts.CarDetailsText,
-                                  style: FontsFamily.ExtraBold.copyWith(
-                                      fontSize: 13,
-                                      color: controller.changeScreen.value !=
-                                          TTexts.CarDetailsText
-                                          ? TColors.textPrimary
-                                          : TColors.info
-                                  ),);
-                              }),
+                          child: Center(
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              //margin: EdgeInsets.symmetric(vertical: 15),
+                              //padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              decoration: BoxDecoration(
+                                color: controller.changeScreen.value == TTexts.CarDetailsText?TColors.rideCompleteColor:TColors.background,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(color: TColors.background),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white, // White shadow on left and top
+                                    offset: Offset(-3, -3),
+                                    blurRadius: 8,
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.grey.shade300, // Black shadow on bottom and right
+                                    offset: Offset(3 ,3),
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Obx(() {
+                                  return Text(TTexts.CarDetailsText,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        fontSize: 13,
+                                        color: controller.changeScreen.value ==
+                                            TTexts.CarDetailsText
+                                            ? TColors.white
+                                            : TColors.info
+                                    ),);
+                                }),
+                              ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(height: 20,),
@@ -204,15 +249,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           child: ClipRRect(
                                               borderRadius: BorderRadius
                                                   .circular(30),
-                                              child: controller
-                                                  .profileImageString.value ==
+                                              child: controller.profileImageString.value ==
                                                   null ?
                                               FadeInImage.assetNetwork(
                                                 placeholder: 'assets/userload.gif',
                                                 width: 50,
                                                 height: 50,
                                                 fit: BoxFit.cover,
-                                                image: profileImage,
+                                                image: controller.profileImage.value,
                                                 imageErrorBuilder: (c, o,
                                                     s) =>
                                                     Image.asset(
@@ -273,6 +317,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   decoration: TWidget.rShadow,
                                   child: Center(
                                     child: IntlPhoneField(
+                                      flagsButtonMargin: EdgeInsets.only(bottom: 7.0),
                                       style: FontsFamily.ExtraBold.copyWith(
                                           color: TColors.textPrimary,
                                           fontSize: TSizes.fontSizeMd
@@ -427,10 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 50,
                               decoration: TWidget.rShadow,
                               child: Obx(() {
-                                if (Get
-                                    .find<AuthController>()
-                                    .vehicleLoading
-                                    .value) {
+                                if (Get.find<AuthController>().vehicleLoading.value) {
                                   return Center(
                                     child: CircularProgressIndicator(),);
                                 } else {

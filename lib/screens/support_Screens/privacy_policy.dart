@@ -3,7 +3,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/controllers/profile_Controller.dart';
 import 'package:mie_ride_driver/utils/static.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 

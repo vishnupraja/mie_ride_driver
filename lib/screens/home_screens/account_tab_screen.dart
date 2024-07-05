@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/image_string/image_string.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
+import 'package:mie_ride_driver/screens/accept_ride.dart';
+import 'package:mie_ride_driver/screens/home_screens/notification_screen.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
+import '../../constant/sizes.dart';
 import '../../constant/text_strings.dart';
+import '../../controllers/booking_controller.dart';
 import '../../utils/static.dart';
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -79,12 +83,33 @@ class _AccountScreenState extends State<AccountScreen> {
                       customContainer(TTexts.RideSupportText, chatImage,(){
                         Get.toNamed(RouteHelper.getSupportChatPage());
                       }),
-                      customContainer("Message", chatImage,(){
-                        Get.toNamed(RouteHelper.getMessageScreenPage());
-                      }),
-                      customContainer("Accept Ride", chatImage,(){
-                        Get.toNamed(RouteHelper.getAcceptRidePage());
-                      }),
+                      GestureDetector(
+                        onTap: (){
+                          Get.to(AcceptRide());
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 12),
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          height: 50,
+                          decoration: TWidget.rShadow,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Accept Ride",
+                                  style: FontsFamily.ExtraBold.copyWith(
+                                      color: TColors.textPrimary,
+                                      fontSize: TSizes.fontSizeMd,
+                                      letterSpacing: 1
+                                  ),
+                                ),
+                                Icon(Icons.bike_scooter_outlined,color: TColors.info,)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                       customContainer("Ongoing Ride", chatImage,(){
                         Get.toNamed(RouteHelper.getOngoingRidePage());
                       }),
@@ -147,6 +172,7 @@ class _AccountScreenState extends State<AccountScreen> {
             ),
             TextButton(
               onPressed: () {
+                Get.find<BookingController>().timers!.cancel();
                 MySharedPreferences sp = MySharedPreferences();
                 sp.clearData();
                  Get.offAllNamed(RouteHelper.getLoginPage());

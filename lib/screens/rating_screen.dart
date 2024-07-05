@@ -118,15 +118,15 @@ class _RatingScreenState extends State<RatingScreen> {
                 decoration: TWidget.rShadow,
                 child: Column(
                   children: [
-                    chartRow(context, '5 star', double.parse(list.star5RatedPer), Colors.green),
+                    chartRow(context, '5 star', list.star5RatedPer ==""?0.0:double.parse(list.star5RatedPer), Colors.green),
                     chartRow(
-                        context, '4 star', double.parse(list.star4RatedPer), Colors.green),
+                        context, '4 star', list.star4RatedPer == ""?0.0:double.parse(list.star4RatedPer), Colors.green),
                     chartRow(
-                        context, '3 star', double.parse(list.star3RatedPer), Colors.green),
+                        context, '3 star',list.star3RatedPer == ""?0.0: double.parse(list.star3RatedPer), Colors.green),
                     chartRow(
-                        context, '2 star', double.parse(list.star2RatedPer), Colors.green),
+                        context, '2 star',list.star2RatedPer == ""?0.0: double.parse(list.star2RatedPer), Colors.green),
                     chartRow(
-                        context, '1 star', double.parse(list.star1RatedPer), Colors.green),
+                        context, '1 star', list.star1RatedPer == ""?0.0: double.parse(list.star1RatedPer), Colors.green),
                   ],
                 ),
               ),
@@ -302,8 +302,24 @@ class _RatingScreenState extends State<RatingScreen> {
               children: [
                 Container(
                   width: Get.width * 0.50,
-                  height: 12,
-                  decoration: TWidget.rShadow,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: TColors.background,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: TColors.background),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white, // White shadow on left and top
+                        offset: Offset(-3, -3),
+                        blurRadius: 8,
+                      ),
+                      BoxShadow(
+                        color: Colors.grey.shade300, // Black shadow on bottom and right
+                        offset: Offset(3 ,3),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: LinearProgressIndicator(
@@ -314,15 +330,29 @@ class _RatingScreenState extends State<RatingScreen> {
                   ),
                 ),
                 Positioned(
-                  left: (Get.width * 0.50) * (pct / 100) - 10,
+                  left: controller.ratingList.value!.overallRating == "0"?0: (Get.width * 0.50) * (pct / 100) - 10,
                   // Adjusting circle position based on progress
-                  top: 0,
+
+
                   child: Container(
                     width: 20, // Width of the circle
-                    height: 12, // Height of the circle
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                    height: 20, // Height of the circle
+                    decoration:BoxDecoration(
+                      color: TColors.buttonPrimary,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: TColors.background),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white, // White shadow on left and top
+                          offset: Offset(-3, -3),
+                          blurRadius: 8,
+                        ),
+                        BoxShadow(
+                          color: Colors.grey.shade300, // Black shadow on bottom and right
+                          offset: Offset(3 ,3),
+                          blurRadius: 2,
+                        ),
+                      ],
                     ),
                   ),
                 ),

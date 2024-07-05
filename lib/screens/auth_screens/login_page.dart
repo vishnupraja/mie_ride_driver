@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: TColors.textPrimary,
                         fontSize: TSizes.fontSizeMd
                     ),
-                    flagsButtonMargin: EdgeInsets.only(top: 3.0),
+                    flagsButtonMargin: EdgeInsets.only(bottom: 7.0),
                     controller: phoneCtr,
                     textInputAction: TextInputAction.next,
                     showDropdownIcon: false,

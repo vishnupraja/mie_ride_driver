@@ -8,8 +8,22 @@ import 'package:mie_ride_driver/utils/static.dart';
 
 import '../../constant/colors.dart';
 
-class DealZone extends StatelessWidget {
+class DealZone extends StatefulWidget {
   const DealZone({super.key});
+
+  @override
+  State<DealZone> createState() => _DealZoneState();
+}
+
+class _DealZoneState extends State<DealZone> {
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero,(){
+      Get.find<SingleController>().fetchCoupon();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +65,8 @@ class DealZone extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(child: ListView.builder(
+           Expanded(
+              child: ListView.builder(
             shrinkWrap: true,
               itemCount: Get.find<SingleController>().couponList.length,
               itemBuilder: (context, index) {
@@ -62,20 +77,43 @@ class DealZone extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Column(
+
                       children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                          width: Get.width,
-                          height: 100,
-                          decoration: TWidget.rShadow,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(list["title"],
-                            textAlign: TextAlign.center,
-                            style: FontsFamily.ExtraBold.copyWith(
-                              fontSize: TSizes.fontSizeMd,
-                              color: TColors.buttonPrimary
-                            ),),
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                            width: Get.width,
+                            height: 100,
+                            decoration: TWidget.rShadow,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Load amount ${list["load_amount"]}",
+                                  textAlign: TextAlign.center,
+                                  style: FontsFamily.ExtraBold.copyWith(
+                                    fontSize: TSizes.fontSizeMd,
+                                    color: TColors.buttonPrimary
+                                  ),),
+                                  SizedBox(width: 5,),
+                                  Text("To",
+                                    textAlign: TextAlign.center,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        fontSize: TSizes.fontSizeMd,
+                                        color: TColors.buttonPrimary
+                                    ),),
+                                  SizedBox(width: 5,),
+                                  Text("${list["get_amount"]}",
+                                    textAlign: TextAlign.center,
+                                    style: FontsFamily.ExtraBold.copyWith(
+                                        fontSize: TSizes.fontSizeMd,
+                                        color: TColors.buttonPrimary
+                                    ),),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(height: 20,),

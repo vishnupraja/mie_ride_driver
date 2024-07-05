@@ -24,13 +24,41 @@ class _SupportChatState extends State<SupportChat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Container(
+            margin: EdgeInsets.all(10),
+            height: 30,
+            width: 30,
+            decoration: TWidget.rShadow,
+            child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Icon(Icons.arrow_back_ios, color: TColors.textPrimary,
+                    size: 20,),
+                )
+            ),
+          ),
+        ),
+        title: Text("Ride support chat",
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 50,),
-            customAppbar("Ride support\nchat"),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 15),

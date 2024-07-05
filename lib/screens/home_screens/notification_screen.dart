@@ -63,7 +63,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-          child: Column(
+          child: controller.notificationList.length == 0?
+          Center(child: Text("No Data Found"),):Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(

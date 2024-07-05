@@ -127,7 +127,7 @@ class WalletController extends GetxController{
       }
 
     }catch(e){
-
+      LoadingDialog.hide();
     }
   }
 

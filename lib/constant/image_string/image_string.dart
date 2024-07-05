@@ -29,6 +29,7 @@
   String callImage = "assets/call.png";
   String homeImage = "assets/home.png";
   String walletImage = "assets/wallet.png";
+  String logo = "assets/logo.png";
 
 
   String profileImage = "";

@@ -1,6 +1,3 @@
-
-
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -20,7 +17,12 @@ class PermissionController extends GetxController{
 
     if(statuses[Permission.location]!.isDenied){ //check each permission status after.
       print("Location permission is denied.");
+      await Permission.location.request();
     }
+    if(statuses[Permission.location]!.isPermanentlyDenied){
+      await openAppSettings();
+    }
+
     if(statuses[Permission.storage]!.isDenied){
       await Permission.storage.request();//check each permission status after.
       print("storage permission is denied.");
@@ -31,7 +33,7 @@ class PermissionController extends GetxController{
   }
 
 
-  Future<bool> handleLocationPermission() async {
+ /* Future<bool> handleLocationPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -53,7 +55,7 @@ class PermissionController extends GetxController{
       return false;
     }
     return true;
-  }
+  }*/
 
 
 }

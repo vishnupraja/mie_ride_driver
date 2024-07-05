@@ -31,13 +31,39 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: TColors.background,
+        leading: GestureDetector(
+          onTap: (){
+            Get.back();
+          },
+          child: Container(
+            margin: EdgeInsets.all(10),
+            height: 30,
+            width: 30,
+            decoration: TWidget.rShadow,
+            child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Icon(Icons.arrow_back_ios,color: TColors.textPrimary,size: 20,),
+                )
+            ),
+          ),
+        ),
+        title: Text(TTexts.HistoryText,
+          textAlign: TextAlign.center,
+          style: FontsFamily.ExtraBold.copyWith(
+            color: TColors.textPrimary,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
           children: [
-            SizedBox(height: 30,),
-            customAppbar(TTexts.HistoryText),
-            SizedBox(height: 10,),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,

@@ -141,13 +141,14 @@ class _SignupScreenState extends State<SignupScreen> {
                               decoration: TWidget.rShadow,
                               child: Center(
                                 child: IntlPhoneField(
-                                  flagsButtonMargin: EdgeInsets.only(top: 3.0),
+                                  flagsButtonMargin: EdgeInsets.only(bottom: 7.0),
                                   controller: phoneCtr,
                                   textInputAction: TextInputAction.next,
                                   showDropdownIcon: false,
                                   autovalidateMode: AutovalidateMode.disabled,
                                   /*disableLengthCheck: true,*/
                                   initialCountryCode: TTexts.countryFlag,
+
                                   decoration: InputDecoration(
                                       counterText: "",
                                       hintStyle:
@@ -155,6 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           color: TColors.textSecondary,
                                           fontSize: 15),
                                       hintText: TTexts.phoneNo,
+
                                       focusedBorder: InputBorder.none,
                                       border: InputBorder.none,
                                       enabledBorder: InputBorder.none),

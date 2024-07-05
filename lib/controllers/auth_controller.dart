@@ -5,6 +5,8 @@ import 'package:dio/dio.dart'as DIO;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/controllers/single_controller.dart';
+import 'package:mie_ride_driver/models/banner_model.dart';
+import 'package:mie_ride_driver/models/city_fetch_model.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 import 'package:mie_ride_driver/screens/loader.dart';
 import 'package:mie_ride_driver/services/api_service.dart';
@@ -17,7 +19,15 @@ import '../services/urls.dart';
 class AuthController extends GetxController{
 
 
+
   MySharedPreferences sp = MySharedPreferences();
+  ApiService apiService = ApiService();
+
+  @override
+  void onInit() {
+    super.onInit();
+    banner();
+  }
 
   var licenceImageString   = Rxn<File>();
   var ownerImageString1    = Rxn<File>();
@@ -34,15 +44,18 @@ class AuthController extends GetxController{
   var code        = "".obs;
   var flag        = "".obs;
 
-  ApiService apiService = ApiService();
+
 
   var signupLoading = false.obs;
   var loginLoading = false.obs;
   var vehicleLoading = false.obs;
+  var cityLoading = false.obs;
 
   var vehicleList = [].obs;
  var  isSelected = false.obs;
   var selectedCarIds = [].obs;
+  var cityList = <FetchCityModel>[].obs;
+  var bannerList = <BannerModel>[].obs;
 
   void signup(String vehicleNumber,vehicle,)async{
 
@@ -175,6 +188,33 @@ class AuthController extends GetxController{
     }catch(e){
       vehicleLoading.value = false;
       log("vehicle Exception ----",error: e.toString());
+    }
+
+  }
+
+  void fetchCities()async{
+    cityLoading.value = true;
+    try {
+      final response =  await apiService.getData(Urls.fetch_cities,);
+
+      log("city response ----$response");
+
+      cityList.value = fetchCityModelFromJson(response.data);
+      cityLoading.value = false;
+
+    } on Exception catch (e) {
+      cityLoading.value = false;
+    log("exception -----",error: e.toString());
+    }
+  }
+
+  void banner() async {
+    try{
+      final response = await apiService.getData(Urls.driver_ads_banner);
+      print("response banner ----${response.data}");
+      bannerList.value = bannerModelFromJson(response.data);
+    }catch(e){
+      log("banner Exception ----",error: e.toString());
     }
 
   }

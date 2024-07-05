@@ -5,6 +5,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:mie_ride_driver/models/rating_model.dart';
+import 'package:mie_ride_driver/screens/message_screen.dart';
 import 'package:mie_ride_driver/services/api_service.dart';
 import 'package:mie_ride_driver/utils/static.dart';
 
@@ -91,7 +92,7 @@ class SingleController extends GetxController{
       LoadingDialog.show();
     }
     Map<String,dynamic> map = {
-      'driver_id' : /*await sp.getStringValue(sp.USER_ID)??*/"53"
+      'driver_id' : await sp.getStringValue(sp.USER_ID)??"53"
     };
 
     try{
@@ -130,7 +131,7 @@ if(status == "hello"){
 
       if(data['result'] == "successfully"){
         LoadingDialog.hide();
-        Get.back();
+        Get.to(MessageScreen());
         customSnackBar("Message sent successfully");
       }else{
         LoadingDialog.hide();

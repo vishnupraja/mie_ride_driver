@@ -124,7 +124,9 @@ class TTexts {
   static const String   StartTimeText = "Start time";
   static const String   ReachTimeText = "Reach time";
   static const String   SelectTimeText = "Select time";
+  static const String   SelectReachTimeText = "Reach time";
   static const String   SelectDateText = "Select date";
+  static const String   SelectReachDateText = "Reach date";
   static const String   SeatsAvailableText = "Seats available";
 
 //====================shareAvailabilityScreen text --------------------

@@ -19,7 +19,7 @@ class TColors {
   static const Color black = Color(0xFF232323);
   static const Color white = Color(0xFFFFFFFF);
 
-  static const Color rideCompleteColor = Color(0xFF189104);
+  static const Color rideCompleteColor = Color(0xFF1687c2);
   static const Color rideArriveColor = Color(0xFFceb409);
   static const Color acceptColor = Color(0xFFe71656);
 

@@ -33,10 +33,9 @@ class SplashController extends GetxController {
 
   void videoPlay(){
     Get.find<PermissionController>().permissionHandle();
-    Get.find<PermissionController>().handleLocationPermission();
     _controller!.play();
     update();
-      Future.delayed(Duration(seconds: 5), () async {
+      Future.delayed(Duration(seconds: 2), () async {
         if (await sp.getBoolValue(sp.Login_key) != true) {
           Get.offAllNamed(RouteHelper.getLandingPage());
         } else {
