@@ -483,7 +483,48 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
     return carNames.join(", ");
   }*/
 
+  DateTime? _selectedDate; // Make _selectedDate nullable
 
+  Future<void> _selectDate(BuildContext context) async {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builder) => Container(
+        height: 300,
+        color: Color.fromARGB(255, 255, 255, 255),
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CupertinoButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Get.back();  // Close the modal
+                    },
+                  ),
+                ],
+              ),
+              Container(
+                height: MediaQuery.of(context).size.width / 1.8,
+                child: CupertinoDatePicker(
+                  initialDateTime: _selectedDate ?? DateTime.now(),
+                  onDateTimeChanged: (DateTime newDate) {
+                    setState(() {
+                      _selectedDate = newDate;
+                    });
+                  },
+                  mode: CupertinoDatePickerMode.date,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   var status = "";
 
   TimeOfDay? _selectedTime, _selectedTime2; // Make _selectedTime nullable
@@ -553,47 +594,7 @@ class _ShareAvailabilityState extends State<ShareAvailability> {
 
 
 
-  DateTime? _selectedDate; // Make _selectedDate nullable
 
-  Future<void> _selectDate(BuildContext context) async {
-    // Show the CupertinoDatePicker in a modal popup
-    showCupertinoModalPopup(
-      context: context,
-      builder: (_) => Container(
-        height: 300,
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: SafeArea(
-          top: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CupertinoButton(
-                    child: Text('OK'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ],
-              ),
-              Container(
-                height: Get.width/1.8,
-                child: CupertinoDatePicker(
-                  initialDateTime: _selectedDate ?? DateTime.now(),
-                  onDateTimeChanged: (DateTime newDate) {
-                    setState(() {
-                      _selectedDate = newDate;
-                    });
-                  },
-                  mode: CupertinoDatePickerMode.date,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
 
   void validation()async{

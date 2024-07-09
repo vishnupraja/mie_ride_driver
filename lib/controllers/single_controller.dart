@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/models/booking_id_model.dart';
 import 'package:mie_ride_driver/models/rating_model.dart';
 import 'package:mie_ride_driver/screens/message_screen.dart';
 import 'package:mie_ride_driver/services/api_service.dart';
@@ -21,6 +22,7 @@ class SingleController extends GetxController{
   var notificationList = <NotificationModel>[].obs;
   var newsList = [].obs;
   var ratingList = Rxn<RatingModel>();
+  var bookingIdList = <BookingIdModel>[].obs;
 
   @override
   void onInit() {
@@ -145,5 +147,29 @@ if(status == "hello"){
     
   }
 
+  var loader = false.obs;
+
+  void fetchBookingId()async{
+    loader.value = true;
+    Map<String,dynamic> map ={
+      'driver_id': await sp.getStringValue(sp.USER_ID)
+    };
+    
+    try{
+
+      final response = await apiService.postData(Urls.driver_fetch_booking_ids, map);
+
+      log("response id ----${response.data}");
+
+      bookingIdList.value = bookingIdModelFromJson(response.data);
+
+      loader.value = false;
+
+    }catch(e){
+      loader.value = false;
+
+      log("Exception ---",error: e.toString());
+    }
+    }
 
 }

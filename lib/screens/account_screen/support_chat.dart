@@ -21,6 +21,14 @@ class _SupportChatState extends State<SupportChat> {
   List<String> vehicleList = ["hero", "honda", "Bullet"];
   var vehicle = null;
 
+  final controller = Get.find<SingleController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.fetchBookingId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,58 +69,65 @@ class _SupportChatState extends State<SupportChat> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 15),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 40, horizontal: 15),
                 child: Column(
                   children: [
                     SizedBox(height: 20,),
                     Container(
                       decoration: TWidget.rShadow,
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20),
-                          dropdownColor: TColors.background,
-                          hint: Text(
-                            TTexts.selectRideText,
-                            style: FontsFamily.ExtraBold
-                                .copyWith(
-                              color: TColors.info,
-                              fontSize: TSizes.fontSizeMd,
-                            ),
-                          ),
-                          value: vehicle,
-                          icon: const Icon(
-                            Icons.arrow_drop_down,
-                            size: 30,
-                            color: TColors.info,
-                          ),
-                          isExpanded: true,
-                          items: vehicleList.map(
-                                (String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(
-                                        color: TColors
-                                            .textPrimary),
-                                  ),
+                      child: Obx(() {
+                        if(controller.loader.value){
+                          return Center(child: CircularProgressIndicator());
+                        }else{
+                          return DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20),
+                              dropdownColor: TColors.background,
+                              hint: Text(
+                                TTexts.selectRideText,
+                                style: FontsFamily.ExtraBold
+                                    .copyWith(
+                                  color: TColors.info,
+                                  fontSize: TSizes.fontSizeMd,
                                 ),
-                              );
-                            },
-                          ).toList(),
-                          onChanged: (value) {
-                            setState(
-                                  () {
-                                vehicle = value;
-                                print("vehicle===>$vehicle");
+                              ),
+                              value: vehicle,
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                size: 30,
+                                color: TColors.info,
+                              ),
+                              isExpanded: true,
+                              items: controller.bookingIdList.map(
+                                    (value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value.bookingId,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        value.bookingId,
+                                        style: TextStyle(
+                                            color: TColors
+                                                .textPrimary),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).toList(),
+                              onChanged: (value) {
+                                setState(
+                                      () {
+                                    vehicle = value;
+                                    print("vehicle===>$vehicle");
+                                  },
+                                );
                               },
-                            );
-                          },
-                        ),
-                      ),
+                            ),
+                          );
+                        }
+                      }),
                     ),
                     SizedBox(height: 10,),
                     CustomField(
@@ -130,7 +145,7 @@ class _SupportChatState extends State<SupportChat> {
                             fontSize: TSizes.fontSizeMd
                         ),
                         controller: msgCtr,
-                        textInputAction:TextInputAction.done,
+                        textInputAction: TextInputAction.done,
                         maxLines: 15,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -139,14 +154,14 @@ class _SupportChatState extends State<SupportChat> {
                               fontSize: TSizes.fontSizeMd,
                               color: TColors.textSecondary,
                             ),
-                            contentPadding: EdgeInsets.only(left: 12,top: 5)
+                            contentPadding: EdgeInsets.only(left: 12, top: 5)
                         ),
                       ),
                     ),
                     SizedBox(height: 50,),
                     Center(
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           validation();
                         },
                         child: Container(
@@ -173,15 +188,16 @@ class _SupportChatState extends State<SupportChat> {
     );
   }
 
-  void validation(){
-    if(vehicle == null){
+  void validation() {
+    if (vehicle == null) {
       customSnackBar("Please select ride");
-    }else if(subCtr.text.isEmpty){
+    } else if (subCtr.text.isEmpty) {
       customSnackBar("Please enter your subject");
-    }else if(msgCtr.text.isEmpty){
+    } else if (msgCtr.text.isEmpty) {
       customSnackBar("Please enter your message");
-    }else{
-      Get.find<SingleController>().rideSupportChat(subCtr.text, msgCtr.text, vehicle);
+    } else {
+      Get.find<SingleController>().rideSupportChat(
+          subCtr.text, msgCtr.text, vehicle);
     }
   }
 

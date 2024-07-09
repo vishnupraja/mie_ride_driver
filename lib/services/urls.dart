@@ -57,6 +57,7 @@ class Urls{
 
 
   static String driver_ride_support_chat = "driver_ride_support_chat.php";
+  static String driver_fetch_booking_ids = "driver_fetch_booking_ids.php";
 
 
 
