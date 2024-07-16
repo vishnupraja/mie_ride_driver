@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:mie_ride_driver/utils/toast.dart';
 
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
@@ -83,7 +85,7 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
               child: Row(
                 children: [
                   Container(
-                    width: Get.width/1.3,
+                    width: Get.width/1.4,
                     child: Text(TTexts.linkText,
                     softWrap: true,
                     maxLines: 1,
@@ -94,7 +96,11 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
                     ),),
                   ),
                  
-                  Expanded(child: Icon(Icons.copy))
+                  Expanded(child: GestureDetector(
+                    onTap:(){
+                      _copyToClipboard(context, TTexts.linkText);
+                    },
+                      child: Icon(Icons.copy)))
                 ],
               ),
             ),
@@ -112,4 +118,10 @@ class _SpreadWordScreenState extends State<SpreadWordScreen> {
       )
     );
   }
+
+  void _copyToClipboard(BuildContext context,String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    showToast(message: "Copied to clipboard");
+  }
+
 }

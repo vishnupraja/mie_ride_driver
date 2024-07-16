@@ -22,19 +22,20 @@ class MyApp extends StatelessWidget {
       initialRoute: RouteHelper.getSplashRoute(),
       getPages: RouteHelper.route,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            scaffoldBackgroundColor: TColors.background,
-          ),
-          home: Scaffold(
-            body: Stack(
-              children: [
-                child!,
-                FloatingWindow(),
+        return  Scaffold(
+        body: Stack(
+          children: [
+            if(child != null)
+            child,
+            Overlay(
+              initialEntries: [
+                OverlayEntry(
+                  builder: (context) => FloatingWindow(),
+                ),
               ],
             ),
-          ),
+          ],
+        ),
         );
       },
     );

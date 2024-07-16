@@ -65,9 +65,10 @@ class BookingController extends GetxController{
   void onInit() {
     super.onInit();
     ongoingRide("");
-    timers  = Timer.periodic(Duration(seconds: 5), (_){
+    arriveBooking();
+    /*timers  = Timer.periodic(Duration(seconds: 5), (_){
       arriveBooking();
-    });
+    });*/
   }
 
   void arriveBooking()async{

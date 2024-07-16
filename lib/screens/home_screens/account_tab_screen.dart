@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:mie_ride_driver/constant/image_string/image_string.dart';
 import 'package:mie_ride_driver/route_helper/Route_Helper.dart';
 import 'package:mie_ride_driver/screens/accept_ride.dart';
-import 'package:mie_ride_driver/screens/home_screens/notification_screen.dart';
 import '../../constant/colors.dart';
 import '../../constant/font_family.dart';
 import '../../constant/sizes.dart';
@@ -110,9 +109,9 @@ class _AccountScreenState extends State<AccountScreen> {
                           ),
                         ),
                       ),
-                      customContainer("Ongoing Ride", chatImage,(){
-                        Get.toNamed(RouteHelper.getOngoingRidePage());
-                      }),
+                      // customContainer("Ongoing Ride", chatImage,(){
+                      //   Get.toNamed(RouteHelper.getOngoingRidePage());
+                      // }),
                       SizedBox(height: 10,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 20),
